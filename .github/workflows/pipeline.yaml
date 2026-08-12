@@ -1,0 +1,34 @@
+name: ci/cd pipeline backend
+  
+on:
+  push:
+    branches:
+      - beta
+  pull_request:
+    branches:
+      - beta
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: '24'
+
+      - name: Install dependencies
+        run: npm install
+        working-directory: ./backend
+
+      - name: Deploy
+        uses: nexterias/actions-vercel@v2
+        with:
+          token: ${{ secrets.YOUR_VERCEL_TOKEN }}
+          org-id: ${{ secrets.YOUR_VERCEL_ORG_ID }}
+          project-id: ${{ secrets.YOUR_VERCEL_PROJECT_ID }}
+          production: ${{ github.ref == 'refs/heads/main' }}
+          prebuilt: true # If set to true, build will be performed using GitHub Actions.
