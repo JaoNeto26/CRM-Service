@@ -1,0 +1,613 @@
+// ============================================================
+// CRM-SERVICE / SISTEMA DE GESTÃO PARA PEQUENOS NEGÓCIOS
+// MVP — SALÃO DE BELEZA
+//
+// Escopo atual:
+// - 1 usuário administrativo por empresa
+// - 1 empresa por usuário
+// - Cliente acessa via Google Auth
+// - Cliente pode realizar agendamentos
+// - Um agendamento pode conter vários serviços
+// - Não existem profissionais/funcionários no MVP
+// - Marketing, IA, fidelidade e avaliações estão fora do MVP
+// - Pagamentos e assinaturas fazem parte do sistema,
+//   mas sua implementação ocorrerá posteriormente
+// ============================================================
+
+
+
+// ============================================================
+// ENUMS
+// ============================================================
+
+enum subscription_status {
+  active
+  inactive
+  trial
+  cancelled
+  expired
+}
+
+enum appointment_status {
+  scheduled
+  confirmed
+  in_progress
+  completed
+  cancelled
+  no_show
+  waiting
+}
+
+enum payment_method {
+  cash
+  credit_card
+  debit_card
+  pix
+  bank_transfer
+}
+
+enum payment_status {
+  pending
+  paid
+  failed
+  refunded
+  partially_refunded
+}
+
+enum transaction_type {
+  income
+  expense
+}
+
+enum day_of_week {
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
+  saturday
+  sunday
+}
+
+
+
+// ============================================================
+// USUÁRIO ADMINISTRATIVO
+// Dono/responsável pela empresa e usuário administrativo
+// da plataforma.
+// ============================================================
+
+Table usuarios {
+  id uuid [primary key]
+
+  nome varchar(255) [not null]
+  email varchar(255) [unique, not null]
+  cpf varchar(14) [unique]
+  telefone varchar(20)
+
+  ativo boolean [default: true]
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  note: '''
+  Usuário administrativo da plataforma.
+  Cada usuário possui exatamente uma empresa.
+  '''
+}
+
+
+
+// ============================================================
+// EMPRESA
+// No MVP representa o salão/negócio administrado pelo usuário.
+// ============================================================
+
+Table empresas {
+  id uuid [primary key]
+
+  usuario_id uuid [not null, unique]
+
+  nome varchar(255) [not null]
+
+  endereco text
+  bairro varchar(100)
+  cidade varchar(100)
+  estado varchar(2)
+  cep varchar(10)
+
+  telefone varchar(20)
+  email varchar(255)
+  instagram varchar(255)
+  logo_url varchar(255)
+
+  ativo boolean [default: true]
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  note: '''
+  Empresa administrada pelo usuário.
+  Cada empresa possui exatamente um usuário administrativo
+  e cada usuário possui exatamente uma empresa.
+  '''
+}
+
+
+
+// ============================================================
+// SERVIÇO
+// Serviço oferecido pela empresa e disponibilizado para
+// agendamento pelos clientes.
+// ============================================================
+
+Table servicos {
+  id uuid [primary key]
+
+  empresa_id uuid [not null]
+
+  nome varchar(255) [not null]
+  preco decimal(10,2) [not null]
+  duracao integer [not null]
+
+  ativo boolean [default: true]
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  note: '''
+  Serviços oferecidos pela empresa.
+  duracao é armazenada em minutos.
+  '''
+}
+
+
+
+// ============================================================
+// CLIENTE
+// Cliente final que utiliza o sistema para realizar
+// agendamentos.
+//
+// O acesso será realizado por Google Auth.
+// ============================================================
+
+Table clientes {
+  id uuid [primary key]
+
+  empresa_id uuid [not null]
+
+  nome varchar(255) [not null]
+  email varchar(255) [not null]
+  google_id varchar(255) [not null]
+
+  ativo boolean [default: true]
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  indexes {
+    (empresa_id, google_id) [unique]
+    (empresa_id, email) [unique]
+  }
+
+  note: '''
+  Cliente final da empresa.
+
+  O cliente acessa o sistema utilizando sua conta Google.
+  Um mesmo cliente pode utilizar o sistema de empresas
+  diferentes, portanto a unicidade é definida em conjunto
+  com a empresa.
+  '''
+}
+
+
+
+// ============================================================
+// AGENDAMENTO
+//
+// Representa a reserva realizada pelo cliente.
+//
+// Fluxo:
+//
+// Cliente
+//   ↓
+// seleciona data/hora
+//   ↓
+// seleciona serviço(s)
+//   ↓
+// backend verifica regras
+//   ↓
+// agendamento salvo
+// ============================================================
+
+Table agendamentos {
+  id uuid [primary key]
+
+  empresa_id uuid [not null]
+  cliente_id uuid [not null]
+
+  data_inicio timestamp [not null]
+  data_fim timestamp [not null]
+
+  status appointment_status [default: 'scheduled']
+
+  valor_total decimal(10,2)
+
+  motivo_cancelamento text
+
+  lembrete_enviado boolean [default: false]
+  lembrete_enviado_em timestamp
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  note: '''
+  Agendamento realizado pelo cliente.
+
+  Um agendamento pertence a um único cliente e pode
+  possuir um ou vários serviços.
+  '''
+}
+
+
+
+// ============================================================
+// AGENDAMENTO x SERVIÇO
+//
+// Relacionamento N:N.
+// Permite que um agendamento contenha múltiplos serviços.
+// ============================================================
+
+Table agendamento_servicos {
+  id uuid [primary key]
+
+  agendamento_id uuid [not null]
+  servico_id uuid [not null]
+
+  preco_no_momento decimal(10,2) [not null]
+  duracao_no_momento integer [not null]
+
+  created_at timestamp [default: `now()`]
+
+  indexes {
+    (agendamento_id, servico_id) [unique]
+  }
+
+  note: '''
+  Serviços pertencentes a um agendamento.
+
+  preco_no_momento e duracao_no_momento preservam o valor
+  e a duração existentes no momento da reserva, mesmo que
+  o serviço seja alterado posteriormente.
+  '''
+}
+
+
+
+// ============================================================
+// PAGAMENTO
+//
+// Pagamento realizado pelo cliente ao utilizar os serviços
+// da empresa.
+//
+// Será implementado posteriormente junto da autenticação
+// e das funcionalidades finais do sistema.
+// ============================================================
+
+Table pagamentos {
+  id uuid [primary key]
+
+  agendamento_id uuid [unique, not null]
+  empresa_id uuid [not null]
+
+  valor decimal(10,2) [not null]
+
+  metodo payment_method [not null]
+
+  bandeira_cartao varchar(50)
+  parcelas integer [default: 1]
+
+  status payment_status [default: 'pending']
+
+  id_transacao varchar(255)
+  data_pagamento timestamp
+
+  processado_por uuid [not null]
+
+  observacoes text
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  note: '''
+  Pagamento realizado pelo cliente referente ao atendimento.
+
+  No modelo atual:
+  1 agendamento pode gerar no máximo 1 pagamento.
+  '''
+}
+
+
+
+// ============================================================
+// TRANSAÇÃO FINANCEIRA
+//
+// Histórico financeiro da empresa.
+//
+// Um pagamento pode gerar uma transação de entrada.
+// Outras despesas poderão ser registradas diretamente
+// nesta tabela no futuro.
+// ============================================================
+
+Table transacoes_financeiras {
+  id uuid [primary key]
+
+  empresa_id uuid [not null]
+
+  pagamento_id uuid
+
+  tipo transaction_type [not null]
+
+  categoria varchar(100) [not null]
+
+  descricao text
+
+  valor decimal(10,2) [not null]
+
+  data date [not null]
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  note: '''
+  Histórico financeiro da empresa.
+
+  income representa entradas.
+  expense representa saídas.
+
+  Uma entrada pode estar vinculada a um pagamento.
+  '''
+}
+
+
+
+// ============================================================
+// PLANOS DE ASSINATURA
+//
+// Assinatura da nossa plataforma.
+// Não representa pagamento de clientes do salão.
+// ============================================================
+
+Table planos_assinatura {
+  id uuid [primary key]
+
+  nome varchar(100) [not null]
+  descricao text
+
+  preco_mensal decimal(10,2) [not null]
+  preco_anual decimal(10,2)
+
+  max_clientes integer
+  max_agendamentos_mes integer
+
+  recursos json
+
+  ativo boolean [default: true]
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  note: '''
+  Planos oferecidos pela plataforma CRM-Service.
+  Exemplo: Básico, Premium, Enterprise.
+
+  Estes planos dizem respeito à assinatura do usuário
+  para utilizar nossa plataforma.
+  '''
+}
+
+
+
+// ============================================================
+// ASSINATURA
+//
+// Assinatura da plataforma utilizada pelo usuário
+// administrativo.
+// ============================================================
+
+Table assinaturas {
+  id uuid [primary key]
+
+  usuario_id uuid [not null]
+  plano_id uuid [not null]
+
+  status subscription_status [default: 'trial']
+
+  data_inicio date [not null]
+  data_fim date
+
+  trial_termina_em timestamp
+
+  id_metodo_pagamento varchar(255)
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  note: '''
+  Histórico de assinaturas do usuário administrativo
+  para utilização da plataforma.
+
+  Não representa pagamentos realizados por clientes
+  do salão.
+  '''
+}
+
+
+
+// ============================================================
+// HORÁRIO DE FUNCIONAMENTO
+//
+// Define os horários em que a empresa aceita agendamentos.
+// ============================================================
+
+Table horarios_funcionamento {
+  id uuid [primary key]
+
+  empresa_id uuid [not null]
+
+  dia_semana day_of_week [not null]
+
+  hora_abre time
+  hora_fecha time
+
+  fechado boolean [default: false]
+
+  created_at timestamp [default: `now()`]
+  updated_at timestamp [default: `now()`]
+
+  indexes {
+    (empresa_id, dia_semana) [unique]
+  }
+
+  note: '''
+  Define os horários de funcionamento da empresa.
+
+  O sistema utilizará essas informações para determinar
+  os horários disponíveis para agendamento.
+  '''
+}
+
+
+
+// ============================================================
+// RELACIONAMENTOS
+// ============================================================
+
+
+// ------------------------------------------------------------
+// USUÁRIO <-> EMPRESA
+// 1 usuário = exatamente 1 empresa
+// 1 empresa = exatamente 1 usuário
+// ------------------------------------------------------------
+
+Ref: empresas.usuario_id - usuarios.id
+
+
+
+// ------------------------------------------------------------
+// EMPRESA -> SERVIÇOS
+// Uma empresa possui vários serviços.
+// ------------------------------------------------------------
+
+Ref: servicos.empresa_id > empresas.id
+
+
+
+// ------------------------------------------------------------
+// EMPRESA -> CLIENTES
+// Uma empresa possui vários clientes.
+// ------------------------------------------------------------
+
+Ref: clientes.empresa_id > empresas.id
+
+
+
+// ------------------------------------------------------------
+// EMPRESA -> AGENDAMENTOS
+// ------------------------------------------------------------
+
+Ref: agendamentos.empresa_id > empresas.id
+
+
+
+// ------------------------------------------------------------
+// CLIENTE -> AGENDAMENTOS
+// Um cliente pode possuir vários agendamentos.
+// Um agendamento pertence a um único cliente.
+// ------------------------------------------------------------
+
+Ref: agendamentos.cliente_id > clientes.id
+
+
+
+// ------------------------------------------------------------
+// AGENDAMENTO -> AGENDAMENTO_SERVICOS
+// ------------------------------------------------------------
+
+Ref: agendamento_servicos.agendamento_id > agendamentos.id
+
+
+
+// ------------------------------------------------------------
+// SERVIÇO -> AGENDAMENTO_SERVICOS
+// ------------------------------------------------------------
+
+Ref: agendamento_servicos.servico_id > servicos.id
+
+
+
+// ------------------------------------------------------------
+// AGENDAMENTO -> PAGAMENTO
+// Um agendamento pode gerar no máximo um pagamento.
+// ------------------------------------------------------------
+
+Ref: pagamentos.agendamento_id - agendamentos.id
+
+
+
+// ------------------------------------------------------------
+// EMPRESA -> PAGAMENTOS
+// ------------------------------------------------------------
+
+Ref: pagamentos.empresa_id > empresas.id
+
+
+
+// ------------------------------------------------------------
+// USUÁRIO -> PAGAMENTOS
+// Quem registrou/processou o pagamento.
+// ------------------------------------------------------------
+
+Ref: pagamentos.processado_por > usuarios.id
+
+
+
+// ------------------------------------------------------------
+// EMPRESA -> TRANSAÇÕES FINANCEIRAS
+// ------------------------------------------------------------
+
+Ref: transacoes_financeiras.empresa_id > empresas.id
+
+
+
+// ------------------------------------------------------------
+// PAGAMENTO -> TRANSAÇÃO FINANCEIRA
+// Um pagamento pode gerar uma transação financeira.
+// ------------------------------------------------------------
+
+Ref: transacoes_financeiras.pagamento_id > pagamentos.id
+
+
+
+// ------------------------------------------------------------
+// USUÁRIO -> ASSINATURAS
+// O usuário assina a nossa plataforma.
+// ------------------------------------------------------------
+
+Ref: assinaturas.usuario_id > usuarios.id
+
+
+
+// ------------------------------------------------------------
+// PLANO -> ASSINATURAS
+// ------------------------------------------------------------
+
+Ref: assinaturas.plano_id > planos_assinatura.id
+
+
+
+// ------------------------------------------------------------
+// EMPRESA -> HORÁRIOS DE FUNCIONAMENTO
+// ------------------------------------------------------------
+
+Ref: horarios_funcionamento.empresa_id > empresas.id
