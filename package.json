@@ -1,0 +1,26 @@
+{
+  "name": "crm-system",
+  "version": "1.0.0",
+  "description": "API para Workspaces, visando facilitar o desenvolvimento.",
+  "private": true,
+  "workspaces": [
+    "crm-system/frontend",
+    "crm-system/backend"
+  ],
+  "homepage": "https://github.com/AxiomP/CRM-Service#readme",
+  "bugs": {
+    "url": "https://github.com/AxiomP/CRM-Service/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AxiomP/CRM-Service.git"
+  },
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "npm run dev --workspaces"
+  }
+}

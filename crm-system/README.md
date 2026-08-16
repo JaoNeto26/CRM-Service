@@ -6,7 +6,7 @@ CRM-Service
 │   ├── TypeScript
 │   ├── React
 │   ├── Vite
-│   ├── Tailwind CSS
+│   ├── CSS
 │   ├── shadcn/ui
 │   ├── TanStack Query
 │   ├── React Hook Form
@@ -14,7 +14,7 @@ CRM-Service
 │
 ├── Backend
 │   ├── TypeScript
-│   ├── NestJS
+│   ├── ExpressJS
 │   ├── Prisma
 │   ├── Passport
 │   └── Swagger / OpenAPI
