@@ -33,8 +33,6 @@ services:
       - .env
     environment:
       DATABASE_URL: ${DATABASE_URL}
-      NODE_ENV: ${NODE_ENV:-production}
-      NODE_OPTIONS: "--max-old-space-size=512"
     ports:
       - "${BACKEND_PORT}:3001"
     depends_on:
@@ -43,15 +41,8 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
-      - /app/dist
     networks:
       - crm_network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3001/api/health || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
 
   frontend:
     build:
@@ -61,8 +52,6 @@ services:
     restart: unless-stopped
     env_file:
       - .env
-    environment:
-      NODE_ENV: ${NODE_ENV:-production}
     ports:
       - "${FRONTEND_PORT}:3000"
     depends_on:
@@ -70,15 +59,8 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
-      - /app/build
     networks:
       - crm_network
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000 || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
 
 volumes:
   postgres_data:

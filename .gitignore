@@ -1,0 +1,17 @@
+node_modules
+
+build/
+dist/
+
+crm-system/backend/prisma/generated/
+
+config/
+
+.env
+
+.nvmrc
+
+
+
+crm-system/.docs/VITE_MIGRATION.md
+crm-system/.docs/UPGRADE_PLAN.md
