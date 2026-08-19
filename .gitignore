@@ -3,15 +3,16 @@ node_modules
 build/
 dist/
 
-crm-system/backend/prisma/generated/
-
 config/
 
 .env
 
 .nvmrc
-
-
+.agents
+.Claude
+.windsurf
 
 crm-system/.docs/VITE_MIGRATION.md
 crm-system/.docs/UPGRADE_PLAN.md
+
+/generated/prisma

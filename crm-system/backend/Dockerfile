@@ -1,13 +1,17 @@
 FROM dhi.io/node:26-alpine
 
+RUN apk add --no-cache curl
+
 WORKDIR /app
 
 COPY package*.json ./
-RUN npm install
+COPY prisma ./prisma
 
-COPY . .
+RUN npm ci
 
 RUN npx prisma generate
+
+COPY . .
 
 EXPOSE 3001
 
