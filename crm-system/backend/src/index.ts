@@ -1,7 +1,29 @@
-import app from "./app";
+import express from "express";
+import { PrismaClient } from "../prisma/generated/prisma_client/client";
+import { PrismaPg } from "@prisma/adapter-pg";
 
-const PORT = process.env.PORT || 3001;
+const adapter = new PrismaPg({
+  connectionString: process.env.DATABASE_URL,
+});
 
+const app = express();
+const prisma = new PrismaClient({
+  adapter,
+});
+
+app.use(express.json());
+
+// Get all users
+app.get("/", async (req, res) => {
+  const userCount = await prisma.usuario.count();
+  res.json(
+    userCount == 0
+      ? "No users have been added yet."
+      : "Some users have been added to the database.",
+  );
+});
+
+const PORT = 3000;
 app.listen(PORT, () => {
-  console.log(`🚀 Backend rodando na porta ${PORT}`);
+  console.log(`Server is running on http://localhost:${PORT}`);
 });
