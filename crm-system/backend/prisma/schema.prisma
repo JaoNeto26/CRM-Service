@@ -1,6 +1,6 @@
 generator client {
-  provider = "prisma-client-js"
-  output = "./generated/prisma_client"
+  provider = "prisma-client"
+  output   = "./generated/prisma_client"
 }
 
 datasource db {
@@ -13,7 +13,7 @@ model usuario {
   email     String   @unique
   senha     String
   criadoEm  DateTime @default(now())
-  clientes  Cliente[]
+  clientes  cliente[]
 }
 
 model cliente {
@@ -22,26 +22,26 @@ model cliente {
   email       String?
   telefone    String?
   empresa     String?
-  status      StatusCliente @default(LEAD)
-  responsavel Usuario?      @relation(fields: [responsavelId], references: [id])
+  status      statusCliente @default(LEAD)
+  responsavel usuario?      @relation(fields: [responsavelId], references: [id])
   responsavelId String?
-  negociacoes Negociacao[]
+  negociacoes negociacao[]
   criadoEm    DateTime      @default(now())
   atualizadoEm DateTime     @updatedAt
 }
 
-model Negociacao {
+model negociacao {
   id          String   @id @default(uuid())
   titulo      String
   valor       Decimal  @default(0)
   etapa       EtapaNegociacao @default(PROSPECCAO)
-  cliente     Cliente  @relation(fields: [clienteId], references: [id])
+  cliente     cliente  @relation(fields: [clienteId], references: [id])
   clienteId   String
   criadoEm    DateTime @default(now())
   fechadoEm   DateTime?
 }
 
-enum StatusCliente {
+enum statusCliente {
   LEAD
   ATIVO
   INATIVO

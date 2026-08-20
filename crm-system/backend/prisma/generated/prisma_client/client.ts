@@ -42,17 +42,17 @@ export type PrismaClient<LogOpts extends Prisma.LogLevel = never, OmitOpts exten
 export { Prisma }
 
 /**
- * Model Usuario
+ * Model usuario
  * 
  */
-export type Usuario = Prisma.UsuarioModel
+export type usuario = Prisma.usuarioModel
 /**
- * Model Cliente
+ * Model cliente
  * 
  */
-export type Cliente = Prisma.ClienteModel
+export type cliente = Prisma.clienteModel
 /**
- * Model Negociacao
+ * Model negociacao
  * 
  */
-export type Negociacao = Prisma.NegociacaoModel
+export type negociacao = Prisma.negociacaoModel

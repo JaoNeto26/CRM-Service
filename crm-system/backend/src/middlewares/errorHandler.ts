@@ -1,3 +1,5 @@
+import type { NextFunction, Request, Response } from "express";
+
 export function errorHandler(err: any, req: Request, res: Response, _next: NextFunction) {
   console.error(`[${new Date().toISOString()}] ${req.method} ${req.path}`, err);
   const status = err.status || 500;

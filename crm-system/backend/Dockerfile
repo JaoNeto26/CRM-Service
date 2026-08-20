@@ -1,13 +1,13 @@
-FROM dhi.io/node:26-alpine
+FROM node:22-alpine
 
-RUN apk add --no-cache curl
+RUN apk add --no-cache curl openssl
 
 WORKDIR /app
 
 COPY package*.json ./
 COPY prisma ./prisma
 
-RUN npm ci
+RUN npm install
 
 RUN npx prisma generate
 

@@ -9,13 +9,13 @@
 * 🟢 You can import this file directly.
 */
 
-export const StatusCliente = {
+export const statusCliente = {
   LEAD: 'LEAD',
   ATIVO: 'ATIVO',
   INATIVO: 'INATIVO'
 } as const
 
-export type StatusCliente = (typeof StatusCliente)[keyof typeof StatusCliente]
+export type statusCliente = (typeof statusCliente)[keyof typeof statusCliente]
 
 
 export const EtapaNegociacao = {

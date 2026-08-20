@@ -4,7 +4,7 @@
 // biome-ignore-all lint: generated file
 // @ts-nocheck 
 /*
- * This file exports the `Negociacao` model and its related types.
+ * This file exports the `negociacao` model and its related types.
  *
  * 🟢 You can import this file directly.
  */
@@ -13,10 +13,10 @@ import type * as $Enums from "../enums"
 import type * as Prisma from "../internal/prismaNamespace"
 
 /**
- * Model Negociacao
+ * Model negociacao
  * 
  */
-export type NegociacaoModel = runtime.Types.Result.DefaultSelection<Prisma.$NegociacaoPayload>
+export type negociacaoModel = runtime.Types.Result.DefaultSelection<Prisma.$negociacaoPayload>
 
 export type AggregateNegociacao = {
   _count: NegociacaoCountAggregateOutputType | null
@@ -107,37 +107,37 @@ export type NegociacaoCountAggregateInputType = {
 
 export type NegociacaoAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which Negociacao to aggregate.
+   * Filter which negociacao to aggregate.
    */
-  where?: Prisma.NegociacaoWhereInput
+  where?: Prisma.negociacaoWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Negociacaos to fetch.
+   * Determine the order of negociacaos to fetch.
    */
-  orderBy?: Prisma.NegociacaoOrderByWithRelationInput | Prisma.NegociacaoOrderByWithRelationInput[]
+  orderBy?: Prisma.negociacaoOrderByWithRelationInput | Prisma.negociacaoOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
    * Sets the start position
    */
-  cursor?: Prisma.NegociacaoWhereUniqueInput
+  cursor?: Prisma.negociacaoWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Negociacaos from the position of the cursor.
+   * Take `±n` negociacaos from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Negociacaos.
+   * Skip the first `n` negociacaos.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
-   * Count returned Negociacaos
+   * Count returned negociacaos
   **/
   _count?: true | NegociacaoCountAggregateInputType
   /**
@@ -177,11 +177,11 @@ export type GetNegociacaoAggregateType<T extends NegociacaoAggregateArgs> = {
 
 
 
-export type NegociacaoGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.NegociacaoWhereInput
-  orderBy?: Prisma.NegociacaoOrderByWithAggregationInput | Prisma.NegociacaoOrderByWithAggregationInput[]
+export type negociacaoGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.negociacaoWhereInput
+  orderBy?: Prisma.negociacaoOrderByWithAggregationInput | Prisma.negociacaoOrderByWithAggregationInput[]
   by: Prisma.NegociacaoScalarFieldEnum[] | Prisma.NegociacaoScalarFieldEnum
-  having?: Prisma.NegociacaoScalarWhereWithAggregatesInput
+  having?: Prisma.negociacaoScalarWhereWithAggregatesInput
   take?: number
   skip?: number
   _count?: NegociacaoCountAggregateInputType | true
@@ -206,7 +206,7 @@ export type NegociacaoGroupByOutputType = {
   _max: NegociacaoMaxAggregateOutputType | null
 }
 
-export type GetNegociacaoGroupByPayload<T extends NegociacaoGroupByArgs> = Prisma.PrismaPromise<
+export type GetNegociacaoGroupByPayload<T extends negociacaoGroupByArgs> = Prisma.PrismaPromise<
   Array<
     Prisma.PickEnumerable<NegociacaoGroupByOutputType, T['by']> &
       {
@@ -221,21 +221,21 @@ export type GetNegociacaoGroupByPayload<T extends NegociacaoGroupByArgs> = Prism
 
 
 
-export type NegociacaoWhereInput = {
-  AND?: Prisma.NegociacaoWhereInput | Prisma.NegociacaoWhereInput[]
-  OR?: Prisma.NegociacaoWhereInput[]
-  NOT?: Prisma.NegociacaoWhereInput | Prisma.NegociacaoWhereInput[]
-  id?: Prisma.StringFilter<"Negociacao"> | string
-  titulo?: Prisma.StringFilter<"Negociacao"> | string
-  valor?: Prisma.DecimalFilter<"Negociacao"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  etapa?: Prisma.EnumEtapaNegociacaoFilter<"Negociacao"> | $Enums.EtapaNegociacao
-  clienteId?: Prisma.StringFilter<"Negociacao"> | string
-  criadoEm?: Prisma.DateTimeFilter<"Negociacao"> | Date | string
-  fechadoEm?: Prisma.DateTimeNullableFilter<"Negociacao"> | Date | string | null
-  cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.ClienteWhereInput>
+export type negociacaoWhereInput = {
+  AND?: Prisma.negociacaoWhereInput | Prisma.negociacaoWhereInput[]
+  OR?: Prisma.negociacaoWhereInput[]
+  NOT?: Prisma.negociacaoWhereInput | Prisma.negociacaoWhereInput[]
+  id?: Prisma.StringFilter<"negociacao"> | string
+  titulo?: Prisma.StringFilter<"negociacao"> | string
+  valor?: Prisma.DecimalFilter<"negociacao"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  etapa?: Prisma.EnumEtapaNegociacaoFilter<"negociacao"> | $Enums.EtapaNegociacao
+  clienteId?: Prisma.StringFilter<"negociacao"> | string
+  criadoEm?: Prisma.DateTimeFilter<"negociacao"> | Date | string
+  fechadoEm?: Prisma.DateTimeNullableFilter<"negociacao"> | Date | string | null
+  cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.clienteWhereInput>
 }
 
-export type NegociacaoOrderByWithRelationInput = {
+export type negociacaoOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   valor?: Prisma.SortOrder
@@ -243,24 +243,24 @@ export type NegociacaoOrderByWithRelationInput = {
   clienteId?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   fechadoEm?: Prisma.SortOrderInput | Prisma.SortOrder
-  cliente?: Prisma.ClienteOrderByWithRelationInput
+  cliente?: Prisma.clienteOrderByWithRelationInput
 }
 
-export type NegociacaoWhereUniqueInput = Prisma.AtLeast<{
+export type negociacaoWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  AND?: Prisma.NegociacaoWhereInput | Prisma.NegociacaoWhereInput[]
-  OR?: Prisma.NegociacaoWhereInput[]
-  NOT?: Prisma.NegociacaoWhereInput | Prisma.NegociacaoWhereInput[]
-  titulo?: Prisma.StringFilter<"Negociacao"> | string
-  valor?: Prisma.DecimalFilter<"Negociacao"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  etapa?: Prisma.EnumEtapaNegociacaoFilter<"Negociacao"> | $Enums.EtapaNegociacao
-  clienteId?: Prisma.StringFilter<"Negociacao"> | string
-  criadoEm?: Prisma.DateTimeFilter<"Negociacao"> | Date | string
-  fechadoEm?: Prisma.DateTimeNullableFilter<"Negociacao"> | Date | string | null
-  cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.ClienteWhereInput>
+  AND?: Prisma.negociacaoWhereInput | Prisma.negociacaoWhereInput[]
+  OR?: Prisma.negociacaoWhereInput[]
+  NOT?: Prisma.negociacaoWhereInput | Prisma.negociacaoWhereInput[]
+  titulo?: Prisma.StringFilter<"negociacao"> | string
+  valor?: Prisma.DecimalFilter<"negociacao"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  etapa?: Prisma.EnumEtapaNegociacaoFilter<"negociacao"> | $Enums.EtapaNegociacao
+  clienteId?: Prisma.StringFilter<"negociacao"> | string
+  criadoEm?: Prisma.DateTimeFilter<"negociacao"> | Date | string
+  fechadoEm?: Prisma.DateTimeNullableFilter<"negociacao"> | Date | string | null
+  cliente?: Prisma.XOR<Prisma.ClienteScalarRelationFilter, Prisma.clienteWhereInput>
 }, "id">
 
-export type NegociacaoOrderByWithAggregationInput = {
+export type negociacaoOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   valor?: Prisma.SortOrder
@@ -268,37 +268,37 @@ export type NegociacaoOrderByWithAggregationInput = {
   clienteId?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   fechadoEm?: Prisma.SortOrderInput | Prisma.SortOrder
-  _count?: Prisma.NegociacaoCountOrderByAggregateInput
-  _avg?: Prisma.NegociacaoAvgOrderByAggregateInput
-  _max?: Prisma.NegociacaoMaxOrderByAggregateInput
-  _min?: Prisma.NegociacaoMinOrderByAggregateInput
-  _sum?: Prisma.NegociacaoSumOrderByAggregateInput
+  _count?: Prisma.negociacaoCountOrderByAggregateInput
+  _avg?: Prisma.negociacaoAvgOrderByAggregateInput
+  _max?: Prisma.negociacaoMaxOrderByAggregateInput
+  _min?: Prisma.negociacaoMinOrderByAggregateInput
+  _sum?: Prisma.negociacaoSumOrderByAggregateInput
 }
 
-export type NegociacaoScalarWhereWithAggregatesInput = {
-  AND?: Prisma.NegociacaoScalarWhereWithAggregatesInput | Prisma.NegociacaoScalarWhereWithAggregatesInput[]
-  OR?: Prisma.NegociacaoScalarWhereWithAggregatesInput[]
-  NOT?: Prisma.NegociacaoScalarWhereWithAggregatesInput | Prisma.NegociacaoScalarWhereWithAggregatesInput[]
-  id?: Prisma.StringWithAggregatesFilter<"Negociacao"> | string
-  titulo?: Prisma.StringWithAggregatesFilter<"Negociacao"> | string
-  valor?: Prisma.DecimalWithAggregatesFilter<"Negociacao"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  etapa?: Prisma.EnumEtapaNegociacaoWithAggregatesFilter<"Negociacao"> | $Enums.EtapaNegociacao
-  clienteId?: Prisma.StringWithAggregatesFilter<"Negociacao"> | string
-  criadoEm?: Prisma.DateTimeWithAggregatesFilter<"Negociacao"> | Date | string
-  fechadoEm?: Prisma.DateTimeNullableWithAggregatesFilter<"Negociacao"> | Date | string | null
+export type negociacaoScalarWhereWithAggregatesInput = {
+  AND?: Prisma.negociacaoScalarWhereWithAggregatesInput | Prisma.negociacaoScalarWhereWithAggregatesInput[]
+  OR?: Prisma.negociacaoScalarWhereWithAggregatesInput[]
+  NOT?: Prisma.negociacaoScalarWhereWithAggregatesInput | Prisma.negociacaoScalarWhereWithAggregatesInput[]
+  id?: Prisma.StringWithAggregatesFilter<"negociacao"> | string
+  titulo?: Prisma.StringWithAggregatesFilter<"negociacao"> | string
+  valor?: Prisma.DecimalWithAggregatesFilter<"negociacao"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  etapa?: Prisma.EnumEtapaNegociacaoWithAggregatesFilter<"negociacao"> | $Enums.EtapaNegociacao
+  clienteId?: Prisma.StringWithAggregatesFilter<"negociacao"> | string
+  criadoEm?: Prisma.DateTimeWithAggregatesFilter<"negociacao"> | Date | string
+  fechadoEm?: Prisma.DateTimeNullableWithAggregatesFilter<"negociacao"> | Date | string | null
 }
 
-export type NegociacaoCreateInput = {
+export type negociacaoCreateInput = {
   id?: string
   titulo: string
   valor?: runtime.Decimal | runtime.DecimalJsLike | number | string
   etapa?: $Enums.EtapaNegociacao
   criadoEm?: Date | string
   fechadoEm?: Date | string | null
-  cliente: Prisma.ClienteCreateNestedOneWithoutNegociacoesInput
+  cliente: Prisma.clienteCreateNestedOneWithoutNegociacoesInput
 }
 
-export type NegociacaoUncheckedCreateInput = {
+export type negociacaoUncheckedCreateInput = {
   id?: string
   titulo: string
   valor?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -308,17 +308,17 @@ export type NegociacaoUncheckedCreateInput = {
   fechadoEm?: Date | string | null
 }
 
-export type NegociacaoUpdateInput = {
+export type negociacaoUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   valor?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
   etapa?: Prisma.EnumEtapaNegociacaoFieldUpdateOperationsInput | $Enums.EtapaNegociacao
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   fechadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  cliente?: Prisma.ClienteUpdateOneRequiredWithoutNegociacoesNestedInput
+  cliente?: Prisma.clienteUpdateOneRequiredWithoutNegociacoesNestedInput
 }
 
-export type NegociacaoUncheckedUpdateInput = {
+export type negociacaoUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   valor?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -328,7 +328,7 @@ export type NegociacaoUncheckedUpdateInput = {
   fechadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type NegociacaoCreateManyInput = {
+export type negociacaoCreateManyInput = {
   id?: string
   titulo: string
   valor?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -338,7 +338,7 @@ export type NegociacaoCreateManyInput = {
   fechadoEm?: Date | string | null
 }
 
-export type NegociacaoUpdateManyMutationInput = {
+export type negociacaoUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   valor?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -347,7 +347,7 @@ export type NegociacaoUpdateManyMutationInput = {
   fechadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type NegociacaoUncheckedUpdateManyInput = {
+export type negociacaoUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   valor?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -358,16 +358,16 @@ export type NegociacaoUncheckedUpdateManyInput = {
 }
 
 export type NegociacaoListRelationFilter = {
-  every?: Prisma.NegociacaoWhereInput
-  some?: Prisma.NegociacaoWhereInput
-  none?: Prisma.NegociacaoWhereInput
+  every?: Prisma.negociacaoWhereInput
+  some?: Prisma.negociacaoWhereInput
+  none?: Prisma.negociacaoWhereInput
 }
 
-export type NegociacaoOrderByRelationAggregateInput = {
+export type negociacaoOrderByRelationAggregateInput = {
   _count?: Prisma.SortOrder
 }
 
-export type NegociacaoCountOrderByAggregateInput = {
+export type negociacaoCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   valor?: Prisma.SortOrder
@@ -377,11 +377,11 @@ export type NegociacaoCountOrderByAggregateInput = {
   fechadoEm?: Prisma.SortOrder
 }
 
-export type NegociacaoAvgOrderByAggregateInput = {
+export type negociacaoAvgOrderByAggregateInput = {
   valor?: Prisma.SortOrder
 }
 
-export type NegociacaoMaxOrderByAggregateInput = {
+export type negociacaoMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   valor?: Prisma.SortOrder
@@ -391,7 +391,7 @@ export type NegociacaoMaxOrderByAggregateInput = {
   fechadoEm?: Prisma.SortOrder
 }
 
-export type NegociacaoMinOrderByAggregateInput = {
+export type negociacaoMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   titulo?: Prisma.SortOrder
   valor?: Prisma.SortOrder
@@ -401,50 +401,50 @@ export type NegociacaoMinOrderByAggregateInput = {
   fechadoEm?: Prisma.SortOrder
 }
 
-export type NegociacaoSumOrderByAggregateInput = {
+export type negociacaoSumOrderByAggregateInput = {
   valor?: Prisma.SortOrder
 }
 
-export type NegociacaoCreateNestedManyWithoutClienteInput = {
-  create?: Prisma.XOR<Prisma.NegociacaoCreateWithoutClienteInput, Prisma.NegociacaoUncheckedCreateWithoutClienteInput> | Prisma.NegociacaoCreateWithoutClienteInput[] | Prisma.NegociacaoUncheckedCreateWithoutClienteInput[]
-  connectOrCreate?: Prisma.NegociacaoCreateOrConnectWithoutClienteInput | Prisma.NegociacaoCreateOrConnectWithoutClienteInput[]
-  createMany?: Prisma.NegociacaoCreateManyClienteInputEnvelope
-  connect?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
+export type negociacaoCreateNestedManyWithoutClienteInput = {
+  create?: Prisma.XOR<Prisma.negociacaoCreateWithoutClienteInput, Prisma.negociacaoUncheckedCreateWithoutClienteInput> | Prisma.negociacaoCreateWithoutClienteInput[] | Prisma.negociacaoUncheckedCreateWithoutClienteInput[]
+  connectOrCreate?: Prisma.negociacaoCreateOrConnectWithoutClienteInput | Prisma.negociacaoCreateOrConnectWithoutClienteInput[]
+  createMany?: Prisma.negociacaoCreateManyClienteInputEnvelope
+  connect?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
 }
 
-export type NegociacaoUncheckedCreateNestedManyWithoutClienteInput = {
-  create?: Prisma.XOR<Prisma.NegociacaoCreateWithoutClienteInput, Prisma.NegociacaoUncheckedCreateWithoutClienteInput> | Prisma.NegociacaoCreateWithoutClienteInput[] | Prisma.NegociacaoUncheckedCreateWithoutClienteInput[]
-  connectOrCreate?: Prisma.NegociacaoCreateOrConnectWithoutClienteInput | Prisma.NegociacaoCreateOrConnectWithoutClienteInput[]
-  createMany?: Prisma.NegociacaoCreateManyClienteInputEnvelope
-  connect?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
+export type negociacaoUncheckedCreateNestedManyWithoutClienteInput = {
+  create?: Prisma.XOR<Prisma.negociacaoCreateWithoutClienteInput, Prisma.negociacaoUncheckedCreateWithoutClienteInput> | Prisma.negociacaoCreateWithoutClienteInput[] | Prisma.negociacaoUncheckedCreateWithoutClienteInput[]
+  connectOrCreate?: Prisma.negociacaoCreateOrConnectWithoutClienteInput | Prisma.negociacaoCreateOrConnectWithoutClienteInput[]
+  createMany?: Prisma.negociacaoCreateManyClienteInputEnvelope
+  connect?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
 }
 
-export type NegociacaoUpdateManyWithoutClienteNestedInput = {
-  create?: Prisma.XOR<Prisma.NegociacaoCreateWithoutClienteInput, Prisma.NegociacaoUncheckedCreateWithoutClienteInput> | Prisma.NegociacaoCreateWithoutClienteInput[] | Prisma.NegociacaoUncheckedCreateWithoutClienteInput[]
-  connectOrCreate?: Prisma.NegociacaoCreateOrConnectWithoutClienteInput | Prisma.NegociacaoCreateOrConnectWithoutClienteInput[]
-  upsert?: Prisma.NegociacaoUpsertWithWhereUniqueWithoutClienteInput | Prisma.NegociacaoUpsertWithWhereUniqueWithoutClienteInput[]
-  createMany?: Prisma.NegociacaoCreateManyClienteInputEnvelope
-  set?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
-  disconnect?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
-  delete?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
-  connect?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
-  update?: Prisma.NegociacaoUpdateWithWhereUniqueWithoutClienteInput | Prisma.NegociacaoUpdateWithWhereUniqueWithoutClienteInput[]
-  updateMany?: Prisma.NegociacaoUpdateManyWithWhereWithoutClienteInput | Prisma.NegociacaoUpdateManyWithWhereWithoutClienteInput[]
-  deleteMany?: Prisma.NegociacaoScalarWhereInput | Prisma.NegociacaoScalarWhereInput[]
+export type negociacaoUpdateManyWithoutClienteNestedInput = {
+  create?: Prisma.XOR<Prisma.negociacaoCreateWithoutClienteInput, Prisma.negociacaoUncheckedCreateWithoutClienteInput> | Prisma.negociacaoCreateWithoutClienteInput[] | Prisma.negociacaoUncheckedCreateWithoutClienteInput[]
+  connectOrCreate?: Prisma.negociacaoCreateOrConnectWithoutClienteInput | Prisma.negociacaoCreateOrConnectWithoutClienteInput[]
+  upsert?: Prisma.negociacaoUpsertWithWhereUniqueWithoutClienteInput | Prisma.negociacaoUpsertWithWhereUniqueWithoutClienteInput[]
+  createMany?: Prisma.negociacaoCreateManyClienteInputEnvelope
+  set?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
+  disconnect?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
+  delete?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
+  connect?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
+  update?: Prisma.negociacaoUpdateWithWhereUniqueWithoutClienteInput | Prisma.negociacaoUpdateWithWhereUniqueWithoutClienteInput[]
+  updateMany?: Prisma.negociacaoUpdateManyWithWhereWithoutClienteInput | Prisma.negociacaoUpdateManyWithWhereWithoutClienteInput[]
+  deleteMany?: Prisma.negociacaoScalarWhereInput | Prisma.negociacaoScalarWhereInput[]
 }
 
-export type NegociacaoUncheckedUpdateManyWithoutClienteNestedInput = {
-  create?: Prisma.XOR<Prisma.NegociacaoCreateWithoutClienteInput, Prisma.NegociacaoUncheckedCreateWithoutClienteInput> | Prisma.NegociacaoCreateWithoutClienteInput[] | Prisma.NegociacaoUncheckedCreateWithoutClienteInput[]
-  connectOrCreate?: Prisma.NegociacaoCreateOrConnectWithoutClienteInput | Prisma.NegociacaoCreateOrConnectWithoutClienteInput[]
-  upsert?: Prisma.NegociacaoUpsertWithWhereUniqueWithoutClienteInput | Prisma.NegociacaoUpsertWithWhereUniqueWithoutClienteInput[]
-  createMany?: Prisma.NegociacaoCreateManyClienteInputEnvelope
-  set?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
-  disconnect?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
-  delete?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
-  connect?: Prisma.NegociacaoWhereUniqueInput | Prisma.NegociacaoWhereUniqueInput[]
-  update?: Prisma.NegociacaoUpdateWithWhereUniqueWithoutClienteInput | Prisma.NegociacaoUpdateWithWhereUniqueWithoutClienteInput[]
-  updateMany?: Prisma.NegociacaoUpdateManyWithWhereWithoutClienteInput | Prisma.NegociacaoUpdateManyWithWhereWithoutClienteInput[]
-  deleteMany?: Prisma.NegociacaoScalarWhereInput | Prisma.NegociacaoScalarWhereInput[]
+export type negociacaoUncheckedUpdateManyWithoutClienteNestedInput = {
+  create?: Prisma.XOR<Prisma.negociacaoCreateWithoutClienteInput, Prisma.negociacaoUncheckedCreateWithoutClienteInput> | Prisma.negociacaoCreateWithoutClienteInput[] | Prisma.negociacaoUncheckedCreateWithoutClienteInput[]
+  connectOrCreate?: Prisma.negociacaoCreateOrConnectWithoutClienteInput | Prisma.negociacaoCreateOrConnectWithoutClienteInput[]
+  upsert?: Prisma.negociacaoUpsertWithWhereUniqueWithoutClienteInput | Prisma.negociacaoUpsertWithWhereUniqueWithoutClienteInput[]
+  createMany?: Prisma.negociacaoCreateManyClienteInputEnvelope
+  set?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
+  disconnect?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
+  delete?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
+  connect?: Prisma.negociacaoWhereUniqueInput | Prisma.negociacaoWhereUniqueInput[]
+  update?: Prisma.negociacaoUpdateWithWhereUniqueWithoutClienteInput | Prisma.negociacaoUpdateWithWhereUniqueWithoutClienteInput[]
+  updateMany?: Prisma.negociacaoUpdateManyWithWhereWithoutClienteInput | Prisma.negociacaoUpdateManyWithWhereWithoutClienteInput[]
+  deleteMany?: Prisma.negociacaoScalarWhereInput | Prisma.negociacaoScalarWhereInput[]
 }
 
 export type DecimalFieldUpdateOperationsInput = {
@@ -463,7 +463,7 @@ export type NullableDateTimeFieldUpdateOperationsInput = {
   set?: Date | string | null
 }
 
-export type NegociacaoCreateWithoutClienteInput = {
+export type negociacaoCreateWithoutClienteInput = {
   id?: string
   titulo: string
   valor?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -472,7 +472,7 @@ export type NegociacaoCreateWithoutClienteInput = {
   fechadoEm?: Date | string | null
 }
 
-export type NegociacaoUncheckedCreateWithoutClienteInput = {
+export type negociacaoUncheckedCreateWithoutClienteInput = {
   id?: string
   titulo: string
   valor?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -481,46 +481,46 @@ export type NegociacaoUncheckedCreateWithoutClienteInput = {
   fechadoEm?: Date | string | null
 }
 
-export type NegociacaoCreateOrConnectWithoutClienteInput = {
-  where: Prisma.NegociacaoWhereUniqueInput
-  create: Prisma.XOR<Prisma.NegociacaoCreateWithoutClienteInput, Prisma.NegociacaoUncheckedCreateWithoutClienteInput>
+export type negociacaoCreateOrConnectWithoutClienteInput = {
+  where: Prisma.negociacaoWhereUniqueInput
+  create: Prisma.XOR<Prisma.negociacaoCreateWithoutClienteInput, Prisma.negociacaoUncheckedCreateWithoutClienteInput>
 }
 
-export type NegociacaoCreateManyClienteInputEnvelope = {
-  data: Prisma.NegociacaoCreateManyClienteInput | Prisma.NegociacaoCreateManyClienteInput[]
+export type negociacaoCreateManyClienteInputEnvelope = {
+  data: Prisma.negociacaoCreateManyClienteInput | Prisma.negociacaoCreateManyClienteInput[]
   skipDuplicates?: boolean
 }
 
-export type NegociacaoUpsertWithWhereUniqueWithoutClienteInput = {
-  where: Prisma.NegociacaoWhereUniqueInput
-  update: Prisma.XOR<Prisma.NegociacaoUpdateWithoutClienteInput, Prisma.NegociacaoUncheckedUpdateWithoutClienteInput>
-  create: Prisma.XOR<Prisma.NegociacaoCreateWithoutClienteInput, Prisma.NegociacaoUncheckedCreateWithoutClienteInput>
+export type negociacaoUpsertWithWhereUniqueWithoutClienteInput = {
+  where: Prisma.negociacaoWhereUniqueInput
+  update: Prisma.XOR<Prisma.negociacaoUpdateWithoutClienteInput, Prisma.negociacaoUncheckedUpdateWithoutClienteInput>
+  create: Prisma.XOR<Prisma.negociacaoCreateWithoutClienteInput, Prisma.negociacaoUncheckedCreateWithoutClienteInput>
 }
 
-export type NegociacaoUpdateWithWhereUniqueWithoutClienteInput = {
-  where: Prisma.NegociacaoWhereUniqueInput
-  data: Prisma.XOR<Prisma.NegociacaoUpdateWithoutClienteInput, Prisma.NegociacaoUncheckedUpdateWithoutClienteInput>
+export type negociacaoUpdateWithWhereUniqueWithoutClienteInput = {
+  where: Prisma.negociacaoWhereUniqueInput
+  data: Prisma.XOR<Prisma.negociacaoUpdateWithoutClienteInput, Prisma.negociacaoUncheckedUpdateWithoutClienteInput>
 }
 
-export type NegociacaoUpdateManyWithWhereWithoutClienteInput = {
-  where: Prisma.NegociacaoScalarWhereInput
-  data: Prisma.XOR<Prisma.NegociacaoUpdateManyMutationInput, Prisma.NegociacaoUncheckedUpdateManyWithoutClienteInput>
+export type negociacaoUpdateManyWithWhereWithoutClienteInput = {
+  where: Prisma.negociacaoScalarWhereInput
+  data: Prisma.XOR<Prisma.negociacaoUpdateManyMutationInput, Prisma.negociacaoUncheckedUpdateManyWithoutClienteInput>
 }
 
-export type NegociacaoScalarWhereInput = {
-  AND?: Prisma.NegociacaoScalarWhereInput | Prisma.NegociacaoScalarWhereInput[]
-  OR?: Prisma.NegociacaoScalarWhereInput[]
-  NOT?: Prisma.NegociacaoScalarWhereInput | Prisma.NegociacaoScalarWhereInput[]
-  id?: Prisma.StringFilter<"Negociacao"> | string
-  titulo?: Prisma.StringFilter<"Negociacao"> | string
-  valor?: Prisma.DecimalFilter<"Negociacao"> | runtime.Decimal | runtime.DecimalJsLike | number | string
-  etapa?: Prisma.EnumEtapaNegociacaoFilter<"Negociacao"> | $Enums.EtapaNegociacao
-  clienteId?: Prisma.StringFilter<"Negociacao"> | string
-  criadoEm?: Prisma.DateTimeFilter<"Negociacao"> | Date | string
-  fechadoEm?: Prisma.DateTimeNullableFilter<"Negociacao"> | Date | string | null
+export type negociacaoScalarWhereInput = {
+  AND?: Prisma.negociacaoScalarWhereInput | Prisma.negociacaoScalarWhereInput[]
+  OR?: Prisma.negociacaoScalarWhereInput[]
+  NOT?: Prisma.negociacaoScalarWhereInput | Prisma.negociacaoScalarWhereInput[]
+  id?: Prisma.StringFilter<"negociacao"> | string
+  titulo?: Prisma.StringFilter<"negociacao"> | string
+  valor?: Prisma.DecimalFilter<"negociacao"> | runtime.Decimal | runtime.DecimalJsLike | number | string
+  etapa?: Prisma.EnumEtapaNegociacaoFilter<"negociacao"> | $Enums.EtapaNegociacao
+  clienteId?: Prisma.StringFilter<"negociacao"> | string
+  criadoEm?: Prisma.DateTimeFilter<"negociacao"> | Date | string
+  fechadoEm?: Prisma.DateTimeNullableFilter<"negociacao"> | Date | string | null
 }
 
-export type NegociacaoCreateManyClienteInput = {
+export type negociacaoCreateManyClienteInput = {
   id?: string
   titulo: string
   valor?: runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -529,7 +529,7 @@ export type NegociacaoCreateManyClienteInput = {
   fechadoEm?: Date | string | null
 }
 
-export type NegociacaoUpdateWithoutClienteInput = {
+export type negociacaoUpdateWithoutClienteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   valor?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -538,7 +538,7 @@ export type NegociacaoUpdateWithoutClienteInput = {
   fechadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type NegociacaoUncheckedUpdateWithoutClienteInput = {
+export type negociacaoUncheckedUpdateWithoutClienteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   valor?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -547,7 +547,7 @@ export type NegociacaoUncheckedUpdateWithoutClienteInput = {
   fechadoEm?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
 }
 
-export type NegociacaoUncheckedUpdateManyWithoutClienteInput = {
+export type negociacaoUncheckedUpdateManyWithoutClienteInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   titulo?: Prisma.StringFieldUpdateOperationsInput | string
   valor?: Prisma.DecimalFieldUpdateOperationsInput | runtime.Decimal | runtime.DecimalJsLike | number | string
@@ -558,7 +558,7 @@ export type NegociacaoUncheckedUpdateManyWithoutClienteInput = {
 
 
 
-export type NegociacaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type negociacaoSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   titulo?: boolean
   valor?: boolean
@@ -566,10 +566,10 @@ export type NegociacaoSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   clienteId?: boolean
   criadoEm?: boolean
   fechadoEm?: boolean
-  cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.clienteDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["negociacao"]>
 
-export type NegociacaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type negociacaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   titulo?: boolean
   valor?: boolean
@@ -577,10 +577,10 @@ export type NegociacaoSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   clienteId?: boolean
   criadoEm?: boolean
   fechadoEm?: boolean
-  cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.clienteDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["negociacao"]>
 
-export type NegociacaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
+export type negociacaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   titulo?: boolean
   valor?: boolean
@@ -588,10 +588,10 @@ export type NegociacaoSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   clienteId?: boolean
   criadoEm?: boolean
   fechadoEm?: boolean
-  cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
+  cliente?: boolean | Prisma.clienteDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["negociacao"]>
 
-export type NegociacaoSelectScalar = {
+export type negociacaoSelectScalar = {
   id?: boolean
   titulo?: boolean
   valor?: boolean
@@ -601,21 +601,21 @@ export type NegociacaoSelectScalar = {
   fechadoEm?: boolean
 }
 
-export type NegociacaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "valor" | "etapa" | "clienteId" | "criadoEm" | "fechadoEm", ExtArgs["result"]["negociacao"]>
-export type NegociacaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
+export type negociacaoOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "titulo" | "valor" | "etapa" | "clienteId" | "criadoEm" | "fechadoEm", ExtArgs["result"]["negociacao"]>
+export type negociacaoInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  cliente?: boolean | Prisma.clienteDefaultArgs<ExtArgs>
 }
-export type NegociacaoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
+export type negociacaoIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  cliente?: boolean | Prisma.clienteDefaultArgs<ExtArgs>
 }
-export type NegociacaoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  cliente?: boolean | Prisma.ClienteDefaultArgs<ExtArgs>
+export type negociacaoIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  cliente?: boolean | Prisma.clienteDefaultArgs<ExtArgs>
 }
 
-export type $NegociacaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  name: "Negociacao"
+export type $negociacaoPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  name: "negociacao"
   objects: {
-    cliente: Prisma.$ClientePayload<ExtArgs>
+    cliente: Prisma.$clientePayload<ExtArgs>
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -629,18 +629,18 @@ export type $NegociacaoPayload<ExtArgs extends runtime.Types.Extensions.Internal
   composites: {}
 }
 
-export type NegociacaoGetPayload<S extends boolean | null | undefined | NegociacaoDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload, S>
+export type negociacaoGetPayload<S extends boolean | null | undefined | negociacaoDefaultArgs> = runtime.Types.Result.GetResult<Prisma.$negociacaoPayload, S>
 
-export type NegociacaoCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
-  Omit<NegociacaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+export type negociacaoCountArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> =
+  Omit<negociacaoFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
     select?: NegociacaoCountAggregateInputType | true
   }
 
-export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Negociacao'], meta: { name: 'Negociacao' } }
+export interface negociacaoDelegate<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+  [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['negociacao'], meta: { name: 'negociacao' } }
   /**
    * Find zero or one Negociacao that matches the filter.
-   * @param {NegociacaoFindUniqueArgs} args - Arguments to find a Negociacao
+   * @param {negociacaoFindUniqueArgs} args - Arguments to find a Negociacao
    * @example
    * // Get one Negociacao
    * const negociacao = await prisma.negociacao.findUnique({
@@ -649,12 +649,12 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   }
    * })
    */
-  findUnique<T extends NegociacaoFindUniqueArgs>(args: Prisma.SelectSubset<T, NegociacaoFindUniqueArgs<ExtArgs>>): Prisma.Prisma__NegociacaoClient<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findUnique<T extends negociacaoFindUniqueArgs>(args: Prisma.SelectSubset<T, negociacaoFindUniqueArgs<ExtArgs>>): Prisma.Prisma__negociacaoClient<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find one Negociacao that matches the filter or throw an error with `error.code='P2025'`
    * if no matches were found.
-   * @param {NegociacaoFindUniqueOrThrowArgs} args - Arguments to find a Negociacao
+   * @param {negociacaoFindUniqueOrThrowArgs} args - Arguments to find a Negociacao
    * @example
    * // Get one Negociacao
    * const negociacao = await prisma.negociacao.findUniqueOrThrow({
@@ -663,13 +663,13 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   }
    * })
    */
-  findUniqueOrThrow<T extends NegociacaoFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, NegociacaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__NegociacaoClient<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findUniqueOrThrow<T extends negociacaoFindUniqueOrThrowArgs>(args: Prisma.SelectSubset<T, negociacaoFindUniqueOrThrowArgs<ExtArgs>>): Prisma.Prisma__negociacaoClient<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first Negociacao that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {NegociacaoFindFirstArgs} args - Arguments to find a Negociacao
+   * @param {negociacaoFindFirstArgs} args - Arguments to find a Negociacao
    * @example
    * // Get one Negociacao
    * const negociacao = await prisma.negociacao.findFirst({
@@ -678,14 +678,14 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   }
    * })
    */
-  findFirst<T extends NegociacaoFindFirstArgs>(args?: Prisma.SelectSubset<T, NegociacaoFindFirstArgs<ExtArgs>>): Prisma.Prisma__NegociacaoClient<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  findFirst<T extends negociacaoFindFirstArgs>(args?: Prisma.SelectSubset<T, negociacaoFindFirstArgs<ExtArgs>>): Prisma.Prisma__negociacaoClient<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find the first Negociacao that matches the filter or
    * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {NegociacaoFindFirstOrThrowArgs} args - Arguments to find a Negociacao
+   * @param {negociacaoFindFirstOrThrowArgs} args - Arguments to find a Negociacao
    * @example
    * // Get one Negociacao
    * const negociacao = await prisma.negociacao.findFirstOrThrow({
@@ -694,13 +694,13 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   }
    * })
    */
-  findFirstOrThrow<T extends NegociacaoFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, NegociacaoFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__NegociacaoClient<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  findFirstOrThrow<T extends negociacaoFindFirstOrThrowArgs>(args?: Prisma.SelectSubset<T, negociacaoFindFirstOrThrowArgs<ExtArgs>>): Prisma.Prisma__negociacaoClient<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Find zero or more Negociacaos that matches the filter.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {NegociacaoFindManyArgs} args - Arguments to filter and select certain fields only.
+   * @param {negociacaoFindManyArgs} args - Arguments to filter and select certain fields only.
    * @example
    * // Get all Negociacaos
    * const negociacaos = await prisma.negociacao.findMany()
@@ -712,11 +712,11 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * const negociacaoWithIdOnly = await prisma.negociacao.findMany({ select: { id: true } })
    * 
    */
-  findMany<T extends NegociacaoFindManyArgs>(args?: Prisma.SelectSubset<T, NegociacaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+  findMany<T extends negociacaoFindManyArgs>(args?: Prisma.SelectSubset<T, negociacaoFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
   /**
    * Create a Negociacao.
-   * @param {NegociacaoCreateArgs} args - Arguments to create a Negociacao.
+   * @param {negociacaoCreateArgs} args - Arguments to create a Negociacao.
    * @example
    * // Create one Negociacao
    * const Negociacao = await prisma.negociacao.create({
@@ -726,11 +726,11 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * })
    * 
    */
-  create<T extends NegociacaoCreateArgs>(args: Prisma.SelectSubset<T, NegociacaoCreateArgs<ExtArgs>>): Prisma.Prisma__NegociacaoClient<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  create<T extends negociacaoCreateArgs>(args: Prisma.SelectSubset<T, negociacaoCreateArgs<ExtArgs>>): Prisma.Prisma__negociacaoClient<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Create many Negociacaos.
-   * @param {NegociacaoCreateManyArgs} args - Arguments to create many Negociacaos.
+   * @param {negociacaoCreateManyArgs} args - Arguments to create many Negociacaos.
    * @example
    * // Create many Negociacaos
    * const negociacao = await prisma.negociacao.createMany({
@@ -740,11 +740,11 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * })
    *     
    */
-  createMany<T extends NegociacaoCreateManyArgs>(args?: Prisma.SelectSubset<T, NegociacaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  createMany<T extends negociacaoCreateManyArgs>(args?: Prisma.SelectSubset<T, negociacaoCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Create many Negociacaos and returns the data saved in the database.
-   * @param {NegociacaoCreateManyAndReturnArgs} args - Arguments to create many Negociacaos.
+   * @param {negociacaoCreateManyAndReturnArgs} args - Arguments to create many Negociacaos.
    * @example
    * // Create many Negociacaos
    * const negociacao = await prisma.negociacao.createManyAndReturn({
@@ -764,11 +764,11 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  createManyAndReturn<T extends NegociacaoCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, NegociacaoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+  createManyAndReturn<T extends negociacaoCreateManyAndReturnArgs>(args?: Prisma.SelectSubset<T, negociacaoCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Delete a Negociacao.
-   * @param {NegociacaoDeleteArgs} args - Arguments to delete one Negociacao.
+   * @param {negociacaoDeleteArgs} args - Arguments to delete one Negociacao.
    * @example
    * // Delete one Negociacao
    * const Negociacao = await prisma.negociacao.delete({
@@ -778,11 +778,11 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * })
    * 
    */
-  delete<T extends NegociacaoDeleteArgs>(args: Prisma.SelectSubset<T, NegociacaoDeleteArgs<ExtArgs>>): Prisma.Prisma__NegociacaoClient<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  delete<T extends negociacaoDeleteArgs>(args: Prisma.SelectSubset<T, negociacaoDeleteArgs<ExtArgs>>): Prisma.Prisma__negociacaoClient<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Update one Negociacao.
-   * @param {NegociacaoUpdateArgs} args - Arguments to update one Negociacao.
+   * @param {negociacaoUpdateArgs} args - Arguments to update one Negociacao.
    * @example
    * // Update one Negociacao
    * const negociacao = await prisma.negociacao.update({
@@ -795,11 +795,11 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * })
    * 
    */
-  update<T extends NegociacaoUpdateArgs>(args: Prisma.SelectSubset<T, NegociacaoUpdateArgs<ExtArgs>>): Prisma.Prisma__NegociacaoClient<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  update<T extends negociacaoUpdateArgs>(args: Prisma.SelectSubset<T, negociacaoUpdateArgs<ExtArgs>>): Prisma.Prisma__negociacaoClient<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
   /**
    * Delete zero or more Negociacaos.
-   * @param {NegociacaoDeleteManyArgs} args - Arguments to filter Negociacaos to delete.
+   * @param {negociacaoDeleteManyArgs} args - Arguments to filter Negociacaos to delete.
    * @example
    * // Delete a few Negociacaos
    * const { count } = await prisma.negociacao.deleteMany({
@@ -809,13 +809,13 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * })
    * 
    */
-  deleteMany<T extends NegociacaoDeleteManyArgs>(args?: Prisma.SelectSubset<T, NegociacaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  deleteMany<T extends negociacaoDeleteManyArgs>(args?: Prisma.SelectSubset<T, negociacaoDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more Negociacaos.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {NegociacaoUpdateManyArgs} args - Arguments to update one or more rows.
+   * @param {negociacaoUpdateManyArgs} args - Arguments to update one or more rows.
    * @example
    * // Update many Negociacaos
    * const negociacao = await prisma.negociacao.updateMany({
@@ -828,11 +828,11 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * })
    * 
    */
-  updateMany<T extends NegociacaoUpdateManyArgs>(args: Prisma.SelectSubset<T, NegociacaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
+  updateMany<T extends negociacaoUpdateManyArgs>(args: Prisma.SelectSubset<T, negociacaoUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<Prisma.BatchPayload>
 
   /**
    * Update zero or more Negociacaos and returns the data updated in the database.
-   * @param {NegociacaoUpdateManyAndReturnArgs} args - Arguments to update many Negociacaos.
+   * @param {negociacaoUpdateManyAndReturnArgs} args - Arguments to update many Negociacaos.
    * @example
    * // Update many Negociacaos
    * const negociacao = await prisma.negociacao.updateManyAndReturn({
@@ -858,11 +858,11 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * Read more here: https://pris.ly/d/null-undefined
    * 
    */
-  updateManyAndReturn<T extends NegociacaoUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, NegociacaoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+  updateManyAndReturn<T extends negociacaoUpdateManyAndReturnArgs>(args: Prisma.SelectSubset<T, negociacaoUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
   /**
    * Create or update one Negociacao.
-   * @param {NegociacaoUpsertArgs} args - Arguments to update or create a Negociacao.
+   * @param {negociacaoUpsertArgs} args - Arguments to update or create a Negociacao.
    * @example
    * // Update or create a Negociacao
    * const negociacao = await prisma.negociacao.upsert({
@@ -877,14 +877,14 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   }
    * })
    */
-  upsert<T extends NegociacaoUpsertArgs>(args: Prisma.SelectSubset<T, NegociacaoUpsertArgs<ExtArgs>>): Prisma.Prisma__NegociacaoClient<runtime.Types.Result.GetResult<Prisma.$NegociacaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+  upsert<T extends negociacaoUpsertArgs>(args: Prisma.SelectSubset<T, negociacaoUpsertArgs<ExtArgs>>): Prisma.Prisma__negociacaoClient<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
   /**
    * Count the number of Negociacaos.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {NegociacaoCountArgs} args - Arguments to filter Negociacaos to count.
+   * @param {negociacaoCountArgs} args - Arguments to filter Negociacaos to count.
    * @example
    * // Count the number of Negociacaos
    * const count = await prisma.negociacao.count({
@@ -893,8 +893,8 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    *   }
    * })
   **/
-  count<T extends NegociacaoCountArgs>(
-    args?: Prisma.Subset<T, NegociacaoCountArgs>,
+  count<T extends negociacaoCountArgs>(
+    args?: Prisma.Subset<T, negociacaoCountArgs>,
   ): Prisma.PrismaPromise<
     T extends runtime.Types.Utils.Record<'select', any>
       ? T['select'] extends true
@@ -933,7 +933,7 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * Group by Negociacao.
    * Note, that providing `undefined` is treated as the value not being there.
    * Read more here: https://pris.ly/d/null-undefined
-   * @param {NegociacaoGroupByArgs} args - Group by arguments.
+   * @param {negociacaoGroupByArgs} args - Group by arguments.
    * @example
    * // Group by city, order by createdAt, get count
    * const result = await prisma.user.groupBy({
@@ -948,14 +948,14 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
    * 
   **/
   groupBy<
-    T extends NegociacaoGroupByArgs,
+    T extends negociacaoGroupByArgs,
     HasSelectOrTake extends Prisma.Or<
       Prisma.Extends<'skip', Prisma.Keys<T>>,
       Prisma.Extends<'take', Prisma.Keys<T>>
     >,
     OrderByArg extends Prisma.True extends HasSelectOrTake
-      ? { orderBy: NegociacaoGroupByArgs['orderBy'] }
-      : { orderBy?: NegociacaoGroupByArgs['orderBy'] },
+      ? { orderBy: negociacaoGroupByArgs['orderBy'] }
+      : { orderBy?: negociacaoGroupByArgs['orderBy'] },
     OrderFields extends Prisma.ExcludeUnderscoreKeys<Prisma.Keys<Prisma.MaybeTupleToUnion<T['orderBy']>>>,
     ByFields extends Prisma.MaybeTupleToUnion<T['by']>,
     ByValid extends Prisma.Has<ByFields, OrderFields>,
@@ -1004,22 +1004,22 @@ export interface NegociacaoDelegate<ExtArgs extends runtime.Types.Extensions.Int
           ? never
           : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
       }[OrderFields]
-  >(args: Prisma.SubsetIntersection<T, NegociacaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNegociacaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  >(args: Prisma.SubsetIntersection<T, negociacaoGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetNegociacaoGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
 /**
- * Fields of the Negociacao model
+ * Fields of the negociacao model
  */
-readonly fields: NegociacaoFieldRefs;
+readonly fields: negociacaoFieldRefs;
 }
 
 /**
- * The delegate class that acts as a "Promise-like" for Negociacao.
+ * The delegate class that acts as a "Promise-like" for negociacao.
  * Why is this prefixed with `Prisma__`?
  * Because we want to prevent naming conflicts as mentioned in
  * https://github.com/prisma/prisma-client-js/issues/707
  */
-export interface Prisma__NegociacaoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+export interface Prisma__negociacaoClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-  cliente<T extends Prisma.ClienteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ClienteDefaultArgs<ExtArgs>>): Prisma.Prisma__ClienteClient<runtime.Types.Result.GetResult<Prisma.$ClientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  cliente<T extends Prisma.clienteDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.clienteDefaultArgs<ExtArgs>>): Prisma.Prisma__clienteClient<runtime.Types.Result.GetResult<Prisma.$clientePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1046,430 +1046,430 @@ export interface Prisma__NegociacaoClient<T, Null = never, ExtArgs extends runti
 
 
 /**
- * Fields of the Negociacao model
+ * Fields of the negociacao model
  */
-export interface NegociacaoFieldRefs {
-  readonly id: Prisma.FieldRef<"Negociacao", 'String'>
-  readonly titulo: Prisma.FieldRef<"Negociacao", 'String'>
-  readonly valor: Prisma.FieldRef<"Negociacao", 'Decimal'>
-  readonly etapa: Prisma.FieldRef<"Negociacao", 'EtapaNegociacao'>
-  readonly clienteId: Prisma.FieldRef<"Negociacao", 'String'>
-  readonly criadoEm: Prisma.FieldRef<"Negociacao", 'DateTime'>
-  readonly fechadoEm: Prisma.FieldRef<"Negociacao", 'DateTime'>
+export interface negociacaoFieldRefs {
+  readonly id: Prisma.FieldRef<"negociacao", 'String'>
+  readonly titulo: Prisma.FieldRef<"negociacao", 'String'>
+  readonly valor: Prisma.FieldRef<"negociacao", 'Decimal'>
+  readonly etapa: Prisma.FieldRef<"negociacao", 'EtapaNegociacao'>
+  readonly clienteId: Prisma.FieldRef<"negociacao", 'String'>
+  readonly criadoEm: Prisma.FieldRef<"negociacao", 'DateTime'>
+  readonly fechadoEm: Prisma.FieldRef<"negociacao", 'DateTime'>
 }
     
 
 // Custom InputTypes
 /**
- * Negociacao findUnique
+ * negociacao findUnique
  */
-export type NegociacaoFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * Filter, which Negociacao to fetch.
+   * Filter, which negociacao to fetch.
    */
-  where: Prisma.NegociacaoWhereUniqueInput
+  where: Prisma.negociacaoWhereUniqueInput
 }
 
 /**
- * Negociacao findUniqueOrThrow
+ * negociacao findUniqueOrThrow
  */
-export type NegociacaoFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * Filter, which Negociacao to fetch.
+   * Filter, which negociacao to fetch.
    */
-  where: Prisma.NegociacaoWhereUniqueInput
+  where: Prisma.negociacaoWhereUniqueInput
 }
 
 /**
- * Negociacao findFirst
+ * negociacao findFirst
  */
-export type NegociacaoFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoFindFirstArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * Filter, which Negociacao to fetch.
+   * Filter, which negociacao to fetch.
    */
-  where?: Prisma.NegociacaoWhereInput
+  where?: Prisma.negociacaoWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Negociacaos to fetch.
+   * Determine the order of negociacaos to fetch.
    */
-  orderBy?: Prisma.NegociacaoOrderByWithRelationInput | Prisma.NegociacaoOrderByWithRelationInput[]
+  orderBy?: Prisma.negociacaoOrderByWithRelationInput | Prisma.negociacaoOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for Negociacaos.
+   * Sets the position for searching for negociacaos.
    */
-  cursor?: Prisma.NegociacaoWhereUniqueInput
+  cursor?: Prisma.negociacaoWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Negociacaos from the position of the cursor.
+   * Take `±n` negociacaos from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Negociacaos.
+   * Skip the first `n` negociacaos.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of Negociacaos.
+   * Filter by unique combinations of negociacaos.
    */
   distinct?: Prisma.NegociacaoScalarFieldEnum | Prisma.NegociacaoScalarFieldEnum[]
 }
 
 /**
- * Negociacao findFirstOrThrow
+ * negociacao findFirstOrThrow
  */
-export type NegociacaoFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * Filter, which Negociacao to fetch.
+   * Filter, which negociacao to fetch.
    */
-  where?: Prisma.NegociacaoWhereInput
+  where?: Prisma.negociacaoWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Negociacaos to fetch.
+   * Determine the order of negociacaos to fetch.
    */
-  orderBy?: Prisma.NegociacaoOrderByWithRelationInput | Prisma.NegociacaoOrderByWithRelationInput[]
+  orderBy?: Prisma.negociacaoOrderByWithRelationInput | Prisma.negociacaoOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for searching for Negociacaos.
+   * Sets the position for searching for negociacaos.
    */
-  cursor?: Prisma.NegociacaoWhereUniqueInput
+  cursor?: Prisma.negociacaoWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Negociacaos from the position of the cursor.
+   * Take `±n` negociacaos from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Negociacaos.
+   * Skip the first `n` negociacaos.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of Negociacaos.
+   * Filter by unique combinations of negociacaos.
    */
   distinct?: Prisma.NegociacaoScalarFieldEnum | Prisma.NegociacaoScalarFieldEnum[]
 }
 
 /**
- * Negociacao findMany
+ * negociacao findMany
  */
-export type NegociacaoFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoFindManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * Filter, which Negociacaos to fetch.
+   * Filter, which negociacaos to fetch.
    */
-  where?: Prisma.NegociacaoWhereInput
+  where?: Prisma.negociacaoWhereInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
    * 
-   * Determine the order of Negociacaos to fetch.
+   * Determine the order of negociacaos to fetch.
    */
-  orderBy?: Prisma.NegociacaoOrderByWithRelationInput | Prisma.NegociacaoOrderByWithRelationInput[]
+  orderBy?: Prisma.negociacaoOrderByWithRelationInput | Prisma.negociacaoOrderByWithRelationInput[]
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
    * 
-   * Sets the position for listing Negociacaos.
+   * Sets the position for listing negociacaos.
    */
-  cursor?: Prisma.NegociacaoWhereUniqueInput
+  cursor?: Prisma.negociacaoWhereUniqueInput
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Take `±n` Negociacaos from the position of the cursor.
+   * Take `±n` negociacaos from the position of the cursor.
    */
   take?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
    * 
-   * Skip the first `n` Negociacaos.
+   * Skip the first `n` negociacaos.
    */
   skip?: number
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
    * 
-   * Filter by unique combinations of Negociacaos.
+   * Filter by unique combinations of negociacaos.
    */
   distinct?: Prisma.NegociacaoScalarFieldEnum | Prisma.NegociacaoScalarFieldEnum[]
 }
 
 /**
- * Negociacao create
+ * negociacao create
  */
-export type NegociacaoCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * The data needed to create a Negociacao.
+   * The data needed to create a negociacao.
    */
-  data: Prisma.XOR<Prisma.NegociacaoCreateInput, Prisma.NegociacaoUncheckedCreateInput>
+  data: Prisma.XOR<Prisma.negociacaoCreateInput, Prisma.negociacaoUncheckedCreateInput>
 }
 
 /**
- * Negociacao createMany
+ * negociacao createMany
  */
-export type NegociacaoCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoCreateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to create many Negociacaos.
+   * The data used to create many negociacaos.
    */
-  data: Prisma.NegociacaoCreateManyInput | Prisma.NegociacaoCreateManyInput[]
+  data: Prisma.negociacaoCreateManyInput | Prisma.negociacaoCreateManyInput[]
   skipDuplicates?: boolean
 }
 
 /**
- * Negociacao createManyAndReturn
+ * negociacao createManyAndReturn
  */
-export type NegociacaoCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelectCreateManyAndReturn<ExtArgs> | null
+  select?: Prisma.negociacaoSelectCreateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
-   * The data used to create many Negociacaos.
+   * The data used to create many negociacaos.
    */
-  data: Prisma.NegociacaoCreateManyInput | Prisma.NegociacaoCreateManyInput[]
+  data: Prisma.negociacaoCreateManyInput | Prisma.negociacaoCreateManyInput[]
   skipDuplicates?: boolean
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoIncludeCreateManyAndReturn<ExtArgs> | null
+  include?: Prisma.negociacaoIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
- * Negociacao update
+ * negociacao update
  */
-export type NegociacaoUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * The data needed to update a Negociacao.
+   * The data needed to update a negociacao.
    */
-  data: Prisma.XOR<Prisma.NegociacaoUpdateInput, Prisma.NegociacaoUncheckedUpdateInput>
+  data: Prisma.XOR<Prisma.negociacaoUpdateInput, Prisma.negociacaoUncheckedUpdateInput>
   /**
-   * Choose, which Negociacao to update.
+   * Choose, which negociacao to update.
    */
-  where: Prisma.NegociacaoWhereUniqueInput
+  where: Prisma.negociacaoWhereUniqueInput
 }
 
 /**
- * Negociacao updateMany
+ * negociacao updateMany
  */
-export type NegociacaoUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoUpdateManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * The data used to update Negociacaos.
+   * The data used to update negociacaos.
    */
-  data: Prisma.XOR<Prisma.NegociacaoUpdateManyMutationInput, Prisma.NegociacaoUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.negociacaoUpdateManyMutationInput, Prisma.negociacaoUncheckedUpdateManyInput>
   /**
-   * Filter which Negociacaos to update
+   * Filter which negociacaos to update
    */
-  where?: Prisma.NegociacaoWhereInput
+  where?: Prisma.negociacaoWhereInput
   /**
-   * Limit how many Negociacaos to update.
+   * Limit how many negociacaos to update.
    */
   limit?: number
 }
 
 /**
- * Negociacao updateManyAndReturn
+ * negociacao updateManyAndReturn
  */
-export type NegociacaoUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelectUpdateManyAndReturn<ExtArgs> | null
+  select?: Prisma.negociacaoSelectUpdateManyAndReturn<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
-   * The data used to update Negociacaos.
+   * The data used to update negociacaos.
    */
-  data: Prisma.XOR<Prisma.NegociacaoUpdateManyMutationInput, Prisma.NegociacaoUncheckedUpdateManyInput>
+  data: Prisma.XOR<Prisma.negociacaoUpdateManyMutationInput, Prisma.negociacaoUncheckedUpdateManyInput>
   /**
-   * Filter which Negociacaos to update
+   * Filter which negociacaos to update
    */
-  where?: Prisma.NegociacaoWhereInput
+  where?: Prisma.negociacaoWhereInput
   /**
-   * Limit how many Negociacaos to update.
+   * Limit how many negociacaos to update.
    */
   limit?: number
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoIncludeUpdateManyAndReturn<ExtArgs> | null
+  include?: Prisma.negociacaoIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
- * Negociacao upsert
+ * negociacao upsert
  */
-export type NegociacaoUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * The filter to search for the Negociacao to update in case it exists.
+   * The filter to search for the negociacao to update in case it exists.
    */
-  where: Prisma.NegociacaoWhereUniqueInput
+  where: Prisma.negociacaoWhereUniqueInput
   /**
-   * In case the Negociacao found by the `where` argument doesn't exist, create a new Negociacao with this data.
+   * In case the negociacao found by the `where` argument doesn't exist, create a new negociacao with this data.
    */
-  create: Prisma.XOR<Prisma.NegociacaoCreateInput, Prisma.NegociacaoUncheckedCreateInput>
+  create: Prisma.XOR<Prisma.negociacaoCreateInput, Prisma.negociacaoUncheckedCreateInput>
   /**
-   * In case the Negociacao was found with the provided `where` argument, update it with this data.
+   * In case the negociacao was found with the provided `where` argument, update it with this data.
    */
-  update: Prisma.XOR<Prisma.NegociacaoUpdateInput, Prisma.NegociacaoUncheckedUpdateInput>
+  update: Prisma.XOR<Prisma.negociacaoUpdateInput, Prisma.negociacaoUncheckedUpdateInput>
 }
 
 /**
- * Negociacao delete
+ * negociacao delete
  */
-export type NegociacaoDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
   /**
-   * Filter which Negociacao to delete.
+   * Filter which negociacao to delete.
    */
-  where: Prisma.NegociacaoWhereUniqueInput
+  where: Prisma.negociacaoWhereUniqueInput
 }
 
 /**
- * Negociacao deleteMany
+ * negociacao deleteMany
  */
-export type NegociacaoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Filter which Negociacaos to delete
+   * Filter which negociacaos to delete
    */
-  where?: Prisma.NegociacaoWhereInput
+  where?: Prisma.negociacaoWhereInput
   /**
-   * Limit how many Negociacaos to delete.
+   * Limit how many negociacaos to delete.
    */
   limit?: number
 }
 
 /**
- * Negociacao without action
+ * negociacao without action
  */
-export type NegociacaoDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type negociacaoDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Negociacao
+   * Select specific fields to fetch from the negociacao
    */
-  select?: Prisma.NegociacaoSelect<ExtArgs> | null
+  select?: Prisma.negociacaoSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Negociacao
+   * Omit specific fields from the negociacao
    */
-  omit?: Prisma.NegociacaoOmit<ExtArgs> | null
+  omit?: Prisma.negociacaoOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.NegociacaoInclude<ExtArgs> | null
+  include?: Prisma.negociacaoInclude<ExtArgs> | null
 }

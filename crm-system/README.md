@@ -1,5 +1,10 @@
 Stack completa do projeto
 
+## Setup local
+
+Para preparar o PostgreSQL, o backend e o Prisma 7, siga o tutorial em
+`.docs/database/setup.md`.
+
 CRM-Service
 │
 ├── Frontend
