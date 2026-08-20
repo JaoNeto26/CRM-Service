@@ -51,9 +51,9 @@ export const AnyNull = runtime.AnyNull
 
 
 export const ModelName = {
-  Usuario: 'Usuario',
-  Cliente: 'Cliente',
-  Negociacao: 'Negociacao'
+  usuario: 'usuario',
+  cliente: 'cliente',
+  negociacao: 'negociacao'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
