@@ -7,24 +7,25 @@
     "crm-system/frontend",
     "crm-system/backend"
   ],
-  "homepage": "https://github.com/AxiomP/CRM-Service#readme",
+  "homepage": "https://github.com/JaoNeto26/CRM-Service#readme",
   "bugs": {
-    "url": "https://github.com/AxiomP/CRM-Service/issues"
+    "url": "https://github.com/JaoNeto26/CRM-Service/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AxiomP/CRM-Service.git"
+    "url": "git+https://github.com/JaoNeto26/CRM-Service.git"
   },
   "license": "ISC",
   "author": "",
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "build": "npm run build --workspaces",
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm run lint --workspaces",
-    "dev": "npm run dev --workspaces"
-  },
-  "devDependencies": {
-    "@types/node": "^26.2.0"
+    "dev": "npm run dev --workspaces",
+    "docker:up": "docker compose -f crm-system/docker-compose.yml up -d",
+    "docker:down": "docker compose -f crm-system/docker-compose.yml down",
+    "docker:logs": "docker compose -f crm-system/docker-compose.yml logs -f"
   }
 }

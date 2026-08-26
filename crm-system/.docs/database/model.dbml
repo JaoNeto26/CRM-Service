@@ -1,17 +1,17 @@
 // ============================================================
-// CRM-SERVICE / SISTEMA DE GESTÃO PARA PEQUENOS NEGÓCIOS
-// MVP — SALÃO DE BELEZA
+// CRM-SERVICE / BUSINESS MANAGEMENT SYSTEM FOR SMALL BUSINESSES
+// MVP — BEAUTY SALON
 //
-// Escopo atual:
-// - 1 usuário administrativo por empresa
-// - 1 empresa por usuário
-// - Cliente acessa via Google Auth
-// - Cliente pode realizar agendamentos
-// - Um agendamento pode conter vários serviços
-// - Não existem profissionais/funcionários no MVP
-// - Marketing, IA, fidelidade e avaliações estão fora do MVP
-// - Pagamentos e assinaturas fazem parte do sistema,
-//   mas sua implementação ocorrerá posteriormente
+// Current scope:
+// - 1 administrative user per company
+// - 1 company per user
+// - Customer access through Google Auth
+// - Customers can make appointments
+// - An appointment can contain multiple services
+// - There are no professionals/employees in the MVP
+// - Marketing, AI, loyalty, and reviews are outside the MVP
+// - Payments and subscriptions are part of the system,
+//   but will be implemented later
 // ============================================================
 
 
@@ -72,542 +72,540 @@ enum day_of_week {
 
 
 // ============================================================
-// USUÁRIO ADMINISTRATIVO
-// Dono/responsável pela empresa e usuário administrativo
-// da plataforma.
+// ADMINISTRATIVE USER
+// Owner/person responsible for the company and administrative
+// user of the platform.
 // ============================================================
 
-Table usuarios {
+Table users {
   id uuid [primary key]
 
-  nome varchar(255) [not null]
+  name varchar(255) [not null]
   email varchar(255) [unique, not null]
-  cpf varchar(14) [unique]
-  telefone varchar(20)
+  tax_id varchar(14) [unique]
+  phone varchar(20)
 
-  ativo boolean [default: true]
+  active boolean [default: true]
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   note: '''
-  Usuário administrativo da plataforma.
-  Cada usuário possui exatamente uma empresa.
+  Administrative user of the platform.
+  Each user has exactly one company.
   '''
 }
 
 
 
 // ============================================================
-// EMPRESA
-// No MVP representa o salão/negócio administrado pelo usuário.
+// COMPANY
+// In the MVP, represents the salon/business managed by the user.
 // ============================================================
 
-Table empresas {
+Table companies {
   id uuid [primary key]
 
-  usuario_id uuid [not null, unique]
+  user_id uuid [not null, unique]
 
-  nome varchar(255) [not null]
+  name varchar(255) [not null]
 
-  endereco text
-  bairro varchar(100)
-  cidade varchar(100)
-  estado varchar(2)
-  cep varchar(10)
+  address text
+  district varchar(100)
+  city varchar(100)
+  state varchar(2)
+  postal_code varchar(10)
 
-  telefone varchar(20)
+  phone varchar(20)
   email varchar(255)
   instagram varchar(255)
   logo_url varchar(255)
 
-  ativo boolean [default: true]
+  active boolean [default: true]
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   note: '''
-  Empresa administrada pelo usuário.
-  Cada empresa possui exatamente um usuário administrativo
-  e cada usuário possui exatamente uma empresa.
+  Company managed by the user.
+  Each company has exactly one administrative user,
+  and each user has exactly one company.
   '''
 }
 
 
 
 // ============================================================
-// SERVIÇO
-// Serviço oferecido pela empresa e disponibilizado para
-// agendamento pelos clientes.
+// SERVICE
+// Service offered by the company and made available for
+// customer appointments.
 // ============================================================
 
-Table servicos {
+Table services {
   id uuid [primary key]
 
-  empresa_id uuid [not null]
+  company_id uuid [not null]
 
-  nome varchar(255) [not null]
-  preco decimal(10,2) [not null]
-  duracao integer [not null]
+  name varchar(255) [not null]
+  price decimal(10,2) [not null]
+  duration integer [not null]
 
-  ativo boolean [default: true]
+  active boolean [default: true]
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   note: '''
-  Serviços oferecidos pela empresa.
-  duracao é armazenada em minutos.
+  Services offered by the company.
+  duration is stored in minutes.
   '''
 }
 
 
 
 // ============================================================
-// CLIENTE
-// Cliente final que utiliza o sistema para realizar
-// agendamentos.
+// CUSTOMER
+// End customer who uses the system to make
+// appointments.
 //
-// O acesso será realizado por Google Auth.
+// Access is provided through Google Auth.
 // ============================================================
 
-Table clientes {
+Table customers {
   id uuid [primary key]
 
-  empresa_id uuid [not null]
+  company_id uuid [not null]
 
-  nome varchar(255) [not null]
+  name varchar(255) [not null]
   email varchar(255) [not null]
   google_id varchar(255) [not null]
 
-  ativo boolean [default: true]
+  active boolean [default: true]
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   indexes {
-    (empresa_id, google_id) [unique]
-    (empresa_id, email) [unique]
+    (company_id, google_id) [unique]
+    (company_id, email) [unique]
   }
 
   note: '''
-  Cliente final da empresa.
+  End customer of the company.
 
-  O cliente acessa o sistema utilizando sua conta Google.
-  Um mesmo cliente pode utilizar o sistema de empresas
-  diferentes, portanto a unicidade é definida em conjunto
-  com a empresa.
+  The customer accesses the system using their Google account.
+  The same customer can use the system for different companies,
+  so uniqueness is defined together with the company.
   '''
 }
 
 
 
 // ============================================================
-// AGENDAMENTO
+// APPOINTMENT
 //
-// Representa a reserva realizada pelo cliente.
+// Represents a reservation made by the customer.
 //
-// Fluxo:
+// Flow:
 //
-// Cliente
+// Customer
 //   ↓
-// seleciona data/hora
+// selects date/time
 //   ↓
-// seleciona serviço(s)
+// selects service(s)
 //   ↓
-// backend verifica regras
+// backend validates rules
 //   ↓
-// agendamento salvo
+// appointment saved
 // ============================================================
 
-Table agendamentos {
+Table appointments {
   id uuid [primary key]
 
-  empresa_id uuid [not null]
-  cliente_id uuid [not null]
+  company_id uuid [not null]
+  customer_id uuid [not null]
 
-  data_inicio timestamp [not null]
-  data_fim timestamp [not null]
+  start_at timestamp [not null]
+  end_at timestamp [not null]
 
   status appointment_status [default: 'scheduled']
 
-  valor_total decimal(10,2)
+  total_amount decimal(10,2)
 
-  motivo_cancelamento text
+  cancellation_reason text
 
-  lembrete_enviado boolean [default: false]
-  lembrete_enviado_em timestamp
+  reminder_sent boolean [default: false]
+  reminder_sent_at timestamp
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   note: '''
-  Agendamento realizado pelo cliente.
+  Appointment made by the customer.
 
-  Um agendamento pertence a um único cliente e pode
-  possuir um ou vários serviços.
+  An appointment belongs to one customer and can
+  contain one or more services.
   '''
 }
 
 
 
 // ============================================================
-// AGENDAMENTO x SERVIÇO
+// APPOINTMENT x SERVICE
 //
-// Relacionamento N:N.
-// Permite que um agendamento contenha múltiplos serviços.
+// N:N relationship.
+// Allows an appointment to contain multiple services.
 // ============================================================
 
-Table agendamento_servicos {
+Table appointment_services {
   id uuid [primary key]
 
-  agendamento_id uuid [not null]
-  servico_id uuid [not null]
+  appointment_id uuid [not null]
+  service_id uuid [not null]
 
-  preco_no_momento decimal(10,2) [not null]
-  duracao_no_momento integer [not null]
+  price_at_booking decimal(10,2) [not null]
+  duration_at_booking integer [not null]
 
   created_at timestamp [default: `now()`]
 
   indexes {
-    (agendamento_id, servico_id) [unique]
+    (appointment_id, service_id) [unique]
   }
 
   note: '''
-  Serviços pertencentes a um agendamento.
+  Services belonging to an appointment.
 
-  preco_no_momento e duracao_no_momento preservam o valor
-  e a duração existentes no momento da reserva, mesmo que
-  o serviço seja alterado posteriormente.
+  price_at_booking and duration_at_booking preserve the value
+  and duration at the time of reservation, even if the
+  service is changed later.
   '''
 }
 
 
 
 // ============================================================
-// PAGAMENTO
+// PAYMENT
 //
-// Pagamento realizado pelo cliente ao utilizar os serviços
-// da empresa.
+// Payment made by the customer when using the company's
+// services.
 //
-// Será implementado posteriormente junto da autenticação
-// e das funcionalidades finais do sistema.
+// Will be implemented later together with authentication
+// and the system's final features.
 // ============================================================
 
-Table pagamentos {
+Table payments {
   id uuid [primary key]
 
-  agendamento_id uuid [unique, not null]
-  empresa_id uuid [not null]
+  appointment_id uuid [unique, not null]
+  company_id uuid [not null]
 
-  valor decimal(10,2) [not null]
+  amount decimal(10,2) [not null]
 
-  metodo payment_method [not null]
+  method payment_method [not null]
 
-  bandeira_cartao varchar(50)
-  parcelas integer [default: 1]
+  card_brand varchar(50)
+  installments integer [default: 1]
 
   status payment_status [default: 'pending']
 
-  id_transacao varchar(255)
-  data_pagamento timestamp
+  transaction_id varchar(255)
+  paid_at timestamp
 
-  processado_por uuid [not null]
+  processed_by uuid [not null]
 
-  observacoes text
+  notes text
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   note: '''
-  Pagamento realizado pelo cliente referente ao atendimento.
+  Payment made by the customer for the appointment.
 
-  No modelo atual:
-  1 agendamento pode gerar no máximo 1 pagamento.
+  In the current model:
+  1 appointment can generate at most 1 payment.
   '''
 }
 
 
 
 // ============================================================
-// TRANSAÇÃO FINANCEIRA
+// FINANCIAL TRANSACTION
 //
-// Histórico financeiro da empresa.
+// Company's financial history.
 //
-// Um pagamento pode gerar uma transação de entrada.
-// Outras despesas poderão ser registradas diretamente
-// nesta tabela no futuro.
+// A payment can generate an income transaction.
+// Other expenses may be recorded directly
+// in this table in the future.
 // ============================================================
 
-Table transacoes_financeiras {
+Table financial_transactions {
   id uuid [primary key]
 
-  empresa_id uuid [not null]
+  company_id uuid [not null]
 
-  pagamento_id uuid
+  payment_id uuid
 
-  tipo transaction_type [not null]
+  type transaction_type [not null]
 
-  categoria varchar(100) [not null]
+  category varchar(100) [not null]
 
-  descricao text
+  description text
 
-  valor decimal(10,2) [not null]
+  amount decimal(10,2) [not null]
 
-  data date [not null]
+  transaction_date date [not null]
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   note: '''
-  Histórico financeiro da empresa.
+  Company's financial history.
 
-  income representa entradas.
-  expense representa saídas.
+  income represents revenue.
+  expense represents costs.
 
-  Uma entrada pode estar vinculada a um pagamento.
+  Revenue can be linked to a payment.
   '''
 }
 
 
 
 // ============================================================
-// PLANOS DE ASSINATURA
+// SUBSCRIPTION PLANS
 //
-// Assinatura da nossa plataforma.
-// Não representa pagamento de clientes do salão.
+// Subscription to our platform.
+// Does not represent payments from salon customers.
 // ============================================================
 
-Table planos_assinatura {
+Table subscription_plans {
   id uuid [primary key]
 
-  nome varchar(100) [not null]
-  descricao text
+  name varchar(100) [not null]
+  description text
 
-  preco_mensal decimal(10,2) [not null]
-  preco_anual decimal(10,2)
+  monthly_price decimal(10,2) [not null]
+  annual_price decimal(10,2)
 
-  max_clientes integer
-  max_agendamentos_mes integer
+  max_customers integer
+  max_appointments_per_month integer
 
-  recursos json
+  features json
 
-  ativo boolean [default: true]
+  active boolean [default: true]
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   note: '''
-  Planos oferecidos pela plataforma CRM-Service.
-  Exemplo: Básico, Premium, Enterprise.
+  Plans offered by the CRM-Service platform.
+  Example: Basic, Premium, Enterprise.
 
-  Estes planos dizem respeito à assinatura do usuário
-  para utilizar nossa plataforma.
+  These plans refer to the user's subscription
+  to use our platform.
   '''
 }
 
 
 
 // ============================================================
-// ASSINATURA
+// SUBSCRIPTION
 //
-// Assinatura da plataforma utilizada pelo usuário
-// administrativo.
+// Platform subscription used by the
+// administrative user.
 // ============================================================
 
-Table assinaturas {
+Table subscriptions {
   id uuid [primary key]
 
-  usuario_id uuid [not null]
-  plano_id uuid [not null]
+  user_id uuid [not null]
+  plan_id uuid [not null]
 
   status subscription_status [default: 'trial']
 
-  data_inicio date [not null]
-  data_fim date
+  start_date date [not null]
+  end_date date
 
-  trial_termina_em timestamp
+  trial_ends_at timestamp
 
-  id_metodo_pagamento varchar(255)
+  payment_method_id varchar(255)
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   note: '''
-  Histórico de assinaturas do usuário administrativo
-  para utilização da plataforma.
+  Subscription history of the administrative user
+  for use of the platform.
 
-  Não representa pagamentos realizados por clientes
-  do salão.
+  Does not represent payments made by salon customers.
   '''
 }
 
 
 
 // ============================================================
-// HORÁRIO DE FUNCIONAMENTO
+// BUSINESS HOURS
 //
-// Define os horários em que a empresa aceita agendamentos.
+// Defines the hours during which the company accepts appointments.
 // ============================================================
 
-Table horarios_funcionamento {
+Table business_hours {
   id uuid [primary key]
 
-  empresa_id uuid [not null]
+  company_id uuid [not null]
 
-  dia_semana day_of_week [not null]
+  weekday day_of_week [not null]
 
-  hora_abre time
-  hora_fecha time
+  opens_at time
+  closes_at time
 
-  fechado boolean [default: false]
+  closed boolean [default: false]
 
   created_at timestamp [default: `now()`]
   updated_at timestamp [default: `now()`]
 
   indexes {
-    (empresa_id, dia_semana) [unique]
+    (company_id, weekday) [unique]
   }
 
   note: '''
-  Define os horários de funcionamento da empresa.
+  Defines the company's business hours.
 
-  O sistema utilizará essas informações para determinar
-  os horários disponíveis para agendamento.
+  The system will use this information to determine
+  available appointment times.
   '''
 }
 
 
 
 // ============================================================
-// RELACIONAMENTOS
+// RELATIONSHIPS
 // ============================================================
 
 
 // ------------------------------------------------------------
-// USUÁRIO <-> EMPRESA
-// 1 usuário = exatamente 1 empresa
-// 1 empresa = exatamente 1 usuário
+// USER <-> COMPANY
+// 1 user = exactly 1 company
+// 1 company = exactly 1 user
 // ------------------------------------------------------------
 
-Ref: empresas.usuario_id - usuarios.id
-
-
-
-// ------------------------------------------------------------
-// EMPRESA -> SERVIÇOS
-// Uma empresa possui vários serviços.
-// ------------------------------------------------------------
-
-Ref: servicos.empresa_id > empresas.id
+Ref: companies.user_id - users.id
 
 
 
 // ------------------------------------------------------------
-// EMPRESA -> CLIENTES
-// Uma empresa possui vários clientes.
+// COMPANY -> SERVICES
+// A company has multiple services.
 // ------------------------------------------------------------
 
-Ref: clientes.empresa_id > empresas.id
-
-
-
-// ------------------------------------------------------------
-// EMPRESA -> AGENDAMENTOS
-// ------------------------------------------------------------
-
-Ref: agendamentos.empresa_id > empresas.id
+Ref: services.company_id > companies.id
 
 
 
 // ------------------------------------------------------------
-// CLIENTE -> AGENDAMENTOS
-// Um cliente pode possuir vários agendamentos.
-// Um agendamento pertence a um único cliente.
+// COMPANY -> CUSTOMERS
+// A company has multiple customers.
 // ------------------------------------------------------------
 
-Ref: agendamentos.cliente_id > clientes.id
-
-
-
-// ------------------------------------------------------------
-// AGENDAMENTO -> AGENDAMENTO_SERVICOS
-// ------------------------------------------------------------
-
-Ref: agendamento_servicos.agendamento_id > agendamentos.id
+Ref: customers.company_id > companies.id
 
 
 
 // ------------------------------------------------------------
-// SERVIÇO -> AGENDAMENTO_SERVICOS
+// COMPANY -> APPOINTMENTS
 // ------------------------------------------------------------
 
-Ref: agendamento_servicos.servico_id > servicos.id
-
-
-
-// ------------------------------------------------------------
-// AGENDAMENTO -> PAGAMENTO
-// Um agendamento pode gerar no máximo um pagamento.
-// ------------------------------------------------------------
-
-Ref: pagamentos.agendamento_id - agendamentos.id
+Ref: appointments.company_id > companies.id
 
 
 
 // ------------------------------------------------------------
-// EMPRESA -> PAGAMENTOS
+// CUSTOMER -> APPOINTMENTS
+// A customer can have multiple appointments.
+// An appointment belongs to one customer.
 // ------------------------------------------------------------
 
-Ref: pagamentos.empresa_id > empresas.id
-
-
-
-// ------------------------------------------------------------
-// USUÁRIO -> PAGAMENTOS
-// Quem registrou/processou o pagamento.
-// ------------------------------------------------------------
-
-Ref: pagamentos.processado_por > usuarios.id
+Ref: appointments.customer_id > customers.id
 
 
 
 // ------------------------------------------------------------
-// EMPRESA -> TRANSAÇÕES FINANCEIRAS
+// APPOINTMENT -> APPOINTMENT_SERVICES
 // ------------------------------------------------------------
 
-Ref: transacoes_financeiras.empresa_id > empresas.id
-
-
-
-// ------------------------------------------------------------
-// PAGAMENTO -> TRANSAÇÃO FINANCEIRA
-// Um pagamento pode gerar uma transação financeira.
-// ------------------------------------------------------------
-
-Ref: transacoes_financeiras.pagamento_id > pagamentos.id
+Ref: appointment_services.appointment_id > appointments.id
 
 
 
 // ------------------------------------------------------------
-// USUÁRIO -> ASSINATURAS
-// O usuário assina a nossa plataforma.
+// SERVICE -> APPOINTMENT_SERVICES
 // ------------------------------------------------------------
 
-Ref: assinaturas.usuario_id > usuarios.id
-
-
-
-// ------------------------------------------------------------
-// PLANO -> ASSINATURAS
-// ------------------------------------------------------------
-
-Ref: assinaturas.plano_id > planos_assinatura.id
+Ref: appointment_services.service_id > services.id
 
 
 
 // ------------------------------------------------------------
-// EMPRESA -> HORÁRIOS DE FUNCIONAMENTO
+// APPOINTMENT -> PAYMENT
+// An appointment can generate at most one payment.
 // ------------------------------------------------------------
 
-Ref: horarios_funcionamento.empresa_id > empresas.id
+Ref: payments.appointment_id - appointments.id
+
+
+
+// ------------------------------------------------------------
+// COMPANY -> PAYMENTS
+// ------------------------------------------------------------
+
+Ref: payments.company_id > companies.id
+
+
+
+// ------------------------------------------------------------
+// USER -> PAYMENTS
+// User who recorded/processed the payment.
+// ------------------------------------------------------------
+
+Ref: payments.processed_by > users.id
+
+
+
+// ------------------------------------------------------------
+// COMPANY -> FINANCIAL TRANSACTIONS
+// ------------------------------------------------------------
+
+Ref: financial_transactions.company_id > companies.id
+
+
+
+// ------------------------------------------------------------
+// PAYMENT -> FINANCIAL TRANSACTION
+// A payment can generate a financial transaction.
+// ------------------------------------------------------------
+
+Ref: financial_transactions.payment_id > payments.id
+
+
+
+// ------------------------------------------------------------
+// USER -> SUBSCRIPTIONS
+// The user subscribes to our platform.
+// ------------------------------------------------------------
+
+Ref: subscriptions.user_id > users.id
+
+
+
+// ------------------------------------------------------------
+// PLAN -> SUBSCRIPTIONS
+// ------------------------------------------------------------
+
+Ref: subscriptions.plan_id > subscription_plans.id
+
+
+
+// ------------------------------------------------------------
+// COMPANY -> BUSINESS HOURS
+// ------------------------------------------------------------
+
+Ref: business_hours.company_id > companies.id
