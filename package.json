@@ -23,5 +23,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "npm run lint --workspaces",
     "dev": "npm run dev --workspaces"
+  },
+  "devDependencies": {
+    "@types/node": "^26.2.0"
   }
 }
