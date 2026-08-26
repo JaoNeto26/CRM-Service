@@ -1,0 +1,131 @@
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.calendar-notes {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.calendar {
+    max-width: 700px;
+    background-color: #f6f4e8;
+    border-radius: 25px;
+    box-shadow: 4px 4px 64px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+}
+
+.notes {
+    width: 400px;
+    background-color: #f6f4e8;
+    border-radius: 25px;
+    box-shadow: 4px 4px 64px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+}
+
+.calendar-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    & .month {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100%;
+        padding: 20px;
+        font-size: 36px;
+    }
+}
+.calendar-header_days {
+    display: flex;
+    align-items: space-between;
+    justify-content: space-between;
+    text-align: center;
+    /* background-color: #e4e1cc; */
+    border-radius: 35px;
+    margin: 10px 0;
+}
+.calendar-header_day {
+    flex: 1;
+    text-align: center;
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 24px;
+    font-weight: normal;
+
+    &.weekend {
+        color: #525965;
+        font-weight: bolder;
+    }
+}
+
+.calendar-body {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 10px;
+    gap: 10px;
+}
+
+.calendar-body_day {
+    background-color: rgba(0, 0, 0, 0);
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    font-size: 24px;
+    font-weight: normal;
+    color: #525965;
+
+    &.empty {
+        opacity: 0.5;
+    }
+
+    &:hover {
+        background-color: #e4e1cc;
+        border-radius: 100px;
+        cursor: pointer;
+    }
+
+    &.selected {
+        background-color: #e4e1cc;
+        border-radius: 100px;
+    }
+
+    &.today {
+        background-color: #525965;
+        border-radius: 100px;
+        color: #f6f4e8;
+    }
+
+    &.weekend {
+        font-weight: bolder;
+    }
+}
+
+.calendar-header_button {
+    background-color: #f6f4e8;
+    border: none;
+    border-radius: 100px;
+    padding: 10px 25px;
+    font-size: 40px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    color: #525965;
+
+    &:hover {
+        background-color: #e4e1cc;
+    }
+}
