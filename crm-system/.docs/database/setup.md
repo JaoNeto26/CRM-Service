@@ -314,9 +314,9 @@ do banco antes de uma mudanca estrutural.
 
 - Prefira adicionar colunas opcionais antes de torna-las obrigatorias.
 - Ao renomear ou remover uma coluna, verifique se a migration nao vai apagar
-	dados silenciosamente.
+  dados silenciosamente.
 - Para valores historicos, como preco no momento do agendamento, mantenha uma
-	coluna de snapshot em vez de depender do valor atual do servico.
+  coluna de snapshot em vez de depender do valor atual do servico.
 - IDs novos devem continuar usando `cuid()` conforme o schema atual.
 - Nao altere uma migration ja aplicada em outro ambiente; crie uma nova.
 - Nao faca `db push` para corrigir um banco compartilhado.
