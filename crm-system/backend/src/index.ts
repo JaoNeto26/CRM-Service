@@ -1,5 +1,6 @@
 import express from "express";
-import { PrismaClient } from "../prisma/generated/prisma_client/client";
+import cors from "cors";
+import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
 const adapter = new PrismaPg({
@@ -11,9 +12,9 @@ const prisma = new PrismaClient({
   adapter,
 });
 
+app.use(cors());
 app.use(express.json());
 
-// Get all users
 app.get("/", async (req, res) => {
   const userCount = await prisma.usuario.count();
   res.json(
