@@ -7,51 +7,239 @@ datasource db {
   provider = "postgresql"
 }
 
+enum SubscriptionStatus {
+  active
+  inactive
+  trial
+  cancelled
+  expired
+}
+
+enum AppointmentStatus {
+  scheduled
+  confirmed
+  in_progress
+  completed
+  cancelled
+  no_show
+  waiting
+}
+
+enum PaymentMethod {
+  cash
+  credit_card
+  debit_card
+  pix
+  bank_transfer
+}
+
+enum PaymentStatus {
+  pending
+  paid
+  failed
+  refunded
+  partially_refunded
+}
+
+enum TransactionType {
+  income
+  expense
+}
+
+enum DayOfWeek {
+  monday
+  tuesday
+  wednesday
+  thursday
+  friday
+  saturday
+  sunday
+}
+
 model usuario {
-  id        String   @id @default(uuid())
-  nome      String
-  email     String   @unique
-  senha     String
-  criadoEm  DateTime @default(now())
-  clientes  cliente[]
+  id             String         @id @default(cuid())
+  name           String         @db.VarChar(255)
+  email          String         @unique @db.VarChar(255)
+  taxId          String?        @unique @map("tax_id") @db.VarChar(14)
+  phone          String?        @db.VarChar(20)
+  active         Boolean        @default(true)
+  createdAt      DateTime       @default(now()) @map("created_at")
+  updatedAt      DateTime       @updatedAt @map("updated_at")
+  company        Company?
+  subscriptions Subscription[]
+  payments       Payment[]
+  @@map("users")
 }
 
-model cliente {
-  id          String       @id @default(uuid())
-  nome        String
-  email       String?
-  telefone    String?
-  empresa     String?
-  status      statusCliente @default(LEAD)
-  responsavel usuario?      @relation(fields: [responsavelId], references: [id])
-  responsavelId String?
-  negociacoes negociacao[]
-  criadoEm    DateTime      @default(now())
-  atualizadoEm DateTime     @updatedAt
+model Company {
+  id           String                 @id @default(cuid())
+  userId       String                 @unique @map("user_id")
+  name         String                 @db.VarChar(255)
+  address      String?
+  district     String?                @db.VarChar(100)
+  city         String?                @db.VarChar(100)
+  state        String?                @db.VarChar(2)
+  postalCode   String?                @map("postal_code") @db.VarChar(10)
+  phone        String?                @db.VarChar(20)
+  email        String?                @db.VarChar(255)
+  instagram    String?                @db.VarChar(255)
+  logoUrl      String?                @map("logo_url") @db.VarChar(255)
+  active       Boolean                @default(true)
+  createdAt    DateTime               @default(now()) @map("created_at")
+  updatedAt    DateTime               @updatedAt @map("updated_at")
+  user         usuario                @relation(fields: [userId], references: [id])
+  services     Service[]
+  customers    Customer[]
+  appointments Appointment[]
+  payments     Payment[]
+  transactions FinancialTransaction[]
+  businessHours BusinessHour[]
+  @@map("companies")
 }
 
-model negociacao {
-  id          String   @id @default(uuid())
-  titulo      String
-  valor       Decimal  @default(0)
-  etapa       EtapaNegociacao @default(PROSPECCAO)
-  cliente     cliente  @relation(fields: [clienteId], references: [id])
-  clienteId   String
-  criadoEm    DateTime @default(now())
-  fechadoEm   DateTime?
+model Service {
+  id                  String              @id @default(cuid())
+  companyId           String              @map("company_id")
+  name                String              @db.VarChar(255)
+  price               Decimal             @db.Decimal(10, 2)
+  duration            Int
+  active              Boolean             @default(true)
+  createdAt           DateTime            @default(now()) @map("created_at")
+  updatedAt           DateTime            @updatedAt @map("updated_at")
+  company             Company             @relation(fields: [companyId], references: [id])
+  appointmentServices AppointmentService[]
+  @@map("services")
 }
 
-enum statusCliente {
-  LEAD
-  ATIVO
-  INATIVO
+model Customer {
+  id                  String              @id @default(cuid())
+  companyId           String              @map("company_id")
+  name                String              @db.VarChar(255)
+  email               String              @db.VarChar(255)
+  googleId            String              @map("google_id") @db.VarChar(255)
+  active              Boolean             @default(true)
+  createdAt           DateTime            @default(now()) @map("created_at")
+  updatedAt           DateTime            @updatedAt @map("updated_at")
+  company             Company             @relation(fields: [companyId], references: [id])
+  appointments        Appointment[]
+  @@unique([companyId, googleId])
+  @@unique([companyId, email])
+  @@map("customers")
 }
 
-enum EtapaNegociacao {
-  PROSPECCAO
-  QUALIFICACAO
-  PROPOSTA
-  NEGOCIACAO
-  FECHADO_GANHO
-  FECHADO_PERDIDO
+model Appointment {
+  id                 String              @id @default(cuid())
+  companyId          String              @map("company_id")
+  customerId         String              @map("customer_id")
+  startAt            DateTime            @map("start_at")
+  endAt              DateTime            @map("end_at")
+  status             AppointmentStatus   @default(scheduled)
+  totalAmount        Decimal?            @map("total_amount") @db.Decimal(10, 2)
+  cancellationReason String?             @map("cancellation_reason")
+  reminderSent       Boolean             @default(false) @map("reminder_sent")
+  reminderSentAt     DateTime?           @map("reminder_sent_at")
+  createdAt          DateTime            @default(now()) @map("created_at")
+  updatedAt          DateTime            @updatedAt @map("updated_at")
+  company            Company             @relation(fields: [companyId], references: [id])
+  customer           Customer            @relation(fields: [customerId], references: [id])
+  services           AppointmentService[]
+  payment            Payment?
+  @@map("appointments")
+}
+
+model AppointmentService {
+  id                String      @id @default(cuid())
+  appointmentId     String      @map("appointment_id")
+  serviceId         String      @map("service_id")
+  priceAtBooking    Decimal     @map("price_at_booking") @db.Decimal(10, 2)
+  durationAtBooking Int         @map("duration_at_booking")
+  createdAt         DateTime    @default(now()) @map("created_at")
+  appointment       Appointment @relation(fields: [appointmentId], references: [id])
+  service           Service     @relation(fields: [serviceId], references: [id])
+  @@unique([appointmentId, serviceId])
+  @@map("appointment_services")
+}
+
+model Payment {
+  id            String                 @id @default(cuid())
+  appointmentId String                 @unique @map("appointment_id")
+  companyId     String                 @map("company_id")
+  amount        Decimal                @db.Decimal(10, 2)
+  method        PaymentMethod
+  cardBrand     String?                @map("card_brand") @db.VarChar(50)
+  installments  Int                    @default(1)
+  status        PaymentStatus          @default(pending)
+  transactionId String?                @map("transaction_id") @db.VarChar(255)
+  paidAt        DateTime?              @map("paid_at")
+  processedBy   String                 @map("processed_by")
+  notes         String?
+  createdAt     DateTime               @default(now()) @map("created_at")
+  updatedAt     DateTime               @updatedAt @map("updated_at")
+  appointment   Appointment            @relation(fields: [appointmentId], references: [id])
+  company       Company                @relation(fields: [companyId], references: [id])
+  processor     usuario                @relation(fields: [processedBy], references: [id])
+  transaction   FinancialTransaction?
+  @@map("payments")
+}
+
+model FinancialTransaction {
+  id              String               @id @default(cuid())
+  companyId       String               @map("company_id")
+  paymentId       String?              @unique @map("payment_id")
+  type            TransactionType
+  category        String               @db.VarChar(100)
+  description     String?
+  amount          Decimal              @db.Decimal(10, 2)
+  transactionDate DateTime             @map("transaction_date") @db.Date
+  createdAt       DateTime             @default(now()) @map("created_at")
+  updatedAt       DateTime             @updatedAt @map("updated_at")
+  company         Company              @relation(fields: [companyId], references: [id])
+  payment         Payment?             @relation(fields: [paymentId], references: [id])
+  @@map("financial_transactions")
+}
+
+model SubscriptionPlan {
+  id                      String         @id @default(cuid())
+  name                    String         @db.VarChar(100)
+  description             String?
+  monthlyPrice            Decimal        @map("monthly_price") @db.Decimal(10, 2)
+  annualPrice             Decimal?       @map("annual_price") @db.Decimal(10, 2)
+  maxCustomers            Int?           @map("max_customers")
+  maxAppointmentsPerMonth Int?           @map("max_appointments_per_month")
+  features                Json?
+  active                  Boolean        @default(true)
+  createdAt               DateTime       @default(now()) @map("created_at")
+  updatedAt               DateTime       @updatedAt @map("updated_at")
+  subscriptions           Subscription[]
+  @@map("subscription_plans")
+}
+
+model Subscription {
+  id              String             @id @default(cuid())
+  userId          String             @map("user_id")
+  planId          String             @map("plan_id")
+  status          SubscriptionStatus @default(trial)
+  startDate       DateTime           @map("start_date") @db.Date
+  endDate         DateTime?          @map("end_date") @db.Date
+  trialEndsAt     DateTime?          @map("trial_ends_at")
+  paymentMethodId String?            @map("payment_method_id") @db.VarChar(255)
+  createdAt       DateTime           @default(now()) @map("created_at")
+  updatedAt       DateTime           @updatedAt @map("updated_at")
+  user            usuario            @relation(fields: [userId], references: [id])
+  plan            SubscriptionPlan   @relation(fields: [planId], references: [id])
+  @@map("subscriptions")
+}
+
+model BusinessHour {
+  id        String     @id @default(cuid())
+  companyId String     @map("company_id")
+  weekday   DayOfWeek
+  opensAt   DateTime?  @map("opens_at") @db.Time(0)
+  closesAt  DateTime?  @map("closes_at") @db.Time(0)
+  closed    Boolean    @default(false)
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+  company   Company    @relation(fields: [companyId], references: [id])
+  @@unique([companyId, weekday])
+  @@map("business_hours")
 }

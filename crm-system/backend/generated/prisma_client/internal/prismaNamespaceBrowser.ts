@@ -52,8 +52,16 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   usuario: 'usuario',
-  cliente: 'cliente',
-  negociacao: 'negociacao'
+  Company: 'Company',
+  Service: 'Service',
+  Customer: 'Customer',
+  Appointment: 'Appointment',
+  AppointmentService: 'AppointmentService',
+  Payment: 'Payment',
+  FinancialTransaction: 'FinancialTransaction',
+  SubscriptionPlan: 'SubscriptionPlan',
+  Subscription: 'Subscription',
+  BusinessHour: 'BusinessHour'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -74,41 +82,178 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UsuarioScalarFieldEnum = {
   id: 'id',
-  nome: 'nome',
+  name: 'name',
   email: 'email',
-  senha: 'senha',
-  criadoEm: 'criadoEm'
+  taxId: 'taxId',
+  phone: 'phone',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
 
 
-export const ClienteScalarFieldEnum = {
+export const CompanyScalarFieldEnum = {
   id: 'id',
-  nome: 'nome',
+  userId: 'userId',
+  name: 'name',
+  address: 'address',
+  district: 'district',
+  city: 'city',
+  state: 'state',
+  postalCode: 'postalCode',
+  phone: 'phone',
   email: 'email',
-  telefone: 'telefone',
-  empresa: 'empresa',
-  status: 'status',
-  responsavelId: 'responsavelId',
-  criadoEm: 'criadoEm',
-  atualizadoEm: 'atualizadoEm'
+  instagram: 'instagram',
+  logoUrl: 'logoUrl',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type ClienteScalarFieldEnum = (typeof ClienteScalarFieldEnum)[keyof typeof ClienteScalarFieldEnum]
+export type CompanyScalarFieldEnum = (typeof CompanyScalarFieldEnum)[keyof typeof CompanyScalarFieldEnum]
 
 
-export const NegociacaoScalarFieldEnum = {
+export const ServiceScalarFieldEnum = {
   id: 'id',
-  titulo: 'titulo',
-  valor: 'valor',
-  etapa: 'etapa',
-  clienteId: 'clienteId',
-  criadoEm: 'criadoEm',
-  fechadoEm: 'fechadoEm'
+  companyId: 'companyId',
+  name: 'name',
+  price: 'price',
+  duration: 'duration',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
-export type NegociacaoScalarFieldEnum = (typeof NegociacaoScalarFieldEnum)[keyof typeof NegociacaoScalarFieldEnum]
+export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
+
+
+export const CustomerScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  name: 'name',
+  email: 'email',
+  googleId: 'googleId',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type CustomerScalarFieldEnum = (typeof CustomerScalarFieldEnum)[keyof typeof CustomerScalarFieldEnum]
+
+
+export const AppointmentScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  customerId: 'customerId',
+  startAt: 'startAt',
+  endAt: 'endAt',
+  status: 'status',
+  totalAmount: 'totalAmount',
+  cancellationReason: 'cancellationReason',
+  reminderSent: 'reminderSent',
+  reminderSentAt: 'reminderSentAt',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AppointmentScalarFieldEnum = (typeof AppointmentScalarFieldEnum)[keyof typeof AppointmentScalarFieldEnum]
+
+
+export const AppointmentServiceScalarFieldEnum = {
+  id: 'id',
+  appointmentId: 'appointmentId',
+  serviceId: 'serviceId',
+  priceAtBooking: 'priceAtBooking',
+  durationAtBooking: 'durationAtBooking',
+  createdAt: 'createdAt'
+} as const
+
+export type AppointmentServiceScalarFieldEnum = (typeof AppointmentServiceScalarFieldEnum)[keyof typeof AppointmentServiceScalarFieldEnum]
+
+
+export const PaymentScalarFieldEnum = {
+  id: 'id',
+  appointmentId: 'appointmentId',
+  companyId: 'companyId',
+  amount: 'amount',
+  method: 'method',
+  cardBrand: 'cardBrand',
+  installments: 'installments',
+  status: 'status',
+  transactionId: 'transactionId',
+  paidAt: 'paidAt',
+  processedBy: 'processedBy',
+  notes: 'notes',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type PaymentScalarFieldEnum = (typeof PaymentScalarFieldEnum)[keyof typeof PaymentScalarFieldEnum]
+
+
+export const FinancialTransactionScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  paymentId: 'paymentId',
+  type: 'type',
+  category: 'category',
+  description: 'description',
+  amount: 'amount',
+  transactionDate: 'transactionDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type FinancialTransactionScalarFieldEnum = (typeof FinancialTransactionScalarFieldEnum)[keyof typeof FinancialTransactionScalarFieldEnum]
+
+
+export const SubscriptionPlanScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  description: 'description',
+  monthlyPrice: 'monthlyPrice',
+  annualPrice: 'annualPrice',
+  maxCustomers: 'maxCustomers',
+  maxAppointmentsPerMonth: 'maxAppointmentsPerMonth',
+  features: 'features',
+  active: 'active',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionPlanScalarFieldEnum = (typeof SubscriptionPlanScalarFieldEnum)[keyof typeof SubscriptionPlanScalarFieldEnum]
+
+
+export const SubscriptionScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  planId: 'planId',
+  status: 'status',
+  startDate: 'startDate',
+  endDate: 'endDate',
+  trialEndsAt: 'trialEndsAt',
+  paymentMethodId: 'paymentMethodId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SubscriptionScalarFieldEnum = (typeof SubscriptionScalarFieldEnum)[keyof typeof SubscriptionScalarFieldEnum]
+
+
+export const BusinessHourScalarFieldEnum = {
+  id: 'id',
+  companyId: 'companyId',
+  weekday: 'weekday',
+  opensAt: 'opensAt',
+  closesAt: 'closesAt',
+  closed: 'closed',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type BusinessHourScalarFieldEnum = (typeof BusinessHourScalarFieldEnum)[keyof typeof BusinessHourScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -117,6 +262,14 @@ export const SortOrder = {
 } as const
 
 export type SortOrder = (typeof SortOrder)[keyof typeof SortOrder]
+
+
+export const NullableJsonNullValueInput = {
+  DbNull: DbNull,
+  JsonNull: JsonNull
+} as const
+
+export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
 
 
 export const QueryMode = {
@@ -133,4 +286,13 @@ export const NullsOrder = {
 } as const
 
 export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
+
+
+export const JsonNullValueFilter = {
+  DbNull: DbNull,
+  JsonNull: JsonNull,
+  AnyNull: AnyNull
+} as const
+
+export type JsonNullValueFilter = (typeof JsonNullValueFilter)[keyof typeof JsonNullValueFilter]
 

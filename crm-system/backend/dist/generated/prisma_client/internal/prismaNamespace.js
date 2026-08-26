@@ -68,8 +68,16 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 export const ModelName = {
     usuario: 'usuario',
-    cliente: 'cliente',
-    negociacao: 'negociacao'
+    Company: 'Company',
+    Service: 'Service',
+    Customer: 'Customer',
+    Appointment: 'Appointment',
+    AppointmentService: 'AppointmentService',
+    Payment: 'Payment',
+    FinancialTransaction: 'FinancialTransaction',
+    SubscriptionPlan: 'SubscriptionPlan',
+    Subscription: 'Subscription',
+    BusinessHour: 'BusinessHour'
 };
 /**
  * Enums
@@ -82,34 +90,143 @@ export const TransactionIsolationLevel = runtime.makeStrictEnum({
 });
 export const UsuarioScalarFieldEnum = {
     id: 'id',
-    nome: 'nome',
+    name: 'name',
     email: 'email',
-    senha: 'senha',
-    criadoEm: 'criadoEm'
+    taxId: 'taxId',
+    phone: 'phone',
+    active: 'active',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 };
-export const ClienteScalarFieldEnum = {
+export const CompanyScalarFieldEnum = {
     id: 'id',
-    nome: 'nome',
+    userId: 'userId',
+    name: 'name',
+    address: 'address',
+    district: 'district',
+    city: 'city',
+    state: 'state',
+    postalCode: 'postalCode',
+    phone: 'phone',
     email: 'email',
-    telefone: 'telefone',
-    empresa: 'empresa',
+    instagram: 'instagram',
+    logoUrl: 'logoUrl',
+    active: 'active',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const ServiceScalarFieldEnum = {
+    id: 'id',
+    companyId: 'companyId',
+    name: 'name',
+    price: 'price',
+    duration: 'duration',
+    active: 'active',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const CustomerScalarFieldEnum = {
+    id: 'id',
+    companyId: 'companyId',
+    name: 'name',
+    email: 'email',
+    googleId: 'googleId',
+    active: 'active',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const AppointmentScalarFieldEnum = {
+    id: 'id',
+    companyId: 'companyId',
+    customerId: 'customerId',
+    startAt: 'startAt',
+    endAt: 'endAt',
     status: 'status',
-    responsavelId: 'responsavelId',
-    criadoEm: 'criadoEm',
-    atualizadoEm: 'atualizadoEm'
+    totalAmount: 'totalAmount',
+    cancellationReason: 'cancellationReason',
+    reminderSent: 'reminderSent',
+    reminderSentAt: 'reminderSentAt',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 };
-export const NegociacaoScalarFieldEnum = {
+export const AppointmentServiceScalarFieldEnum = {
     id: 'id',
-    titulo: 'titulo',
-    valor: 'valor',
-    etapa: 'etapa',
-    clienteId: 'clienteId',
-    criadoEm: 'criadoEm',
-    fechadoEm: 'fechadoEm'
+    appointmentId: 'appointmentId',
+    serviceId: 'serviceId',
+    priceAtBooking: 'priceAtBooking',
+    durationAtBooking: 'durationAtBooking',
+    createdAt: 'createdAt'
+};
+export const PaymentScalarFieldEnum = {
+    id: 'id',
+    appointmentId: 'appointmentId',
+    companyId: 'companyId',
+    amount: 'amount',
+    method: 'method',
+    cardBrand: 'cardBrand',
+    installments: 'installments',
+    status: 'status',
+    transactionId: 'transactionId',
+    paidAt: 'paidAt',
+    processedBy: 'processedBy',
+    notes: 'notes',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const FinancialTransactionScalarFieldEnum = {
+    id: 'id',
+    companyId: 'companyId',
+    paymentId: 'paymentId',
+    type: 'type',
+    category: 'category',
+    description: 'description',
+    amount: 'amount',
+    transactionDate: 'transactionDate',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const SubscriptionPlanScalarFieldEnum = {
+    id: 'id',
+    name: 'name',
+    description: 'description',
+    monthlyPrice: 'monthlyPrice',
+    annualPrice: 'annualPrice',
+    maxCustomers: 'maxCustomers',
+    maxAppointmentsPerMonth: 'maxAppointmentsPerMonth',
+    features: 'features',
+    active: 'active',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const SubscriptionScalarFieldEnum = {
+    id: 'id',
+    userId: 'userId',
+    planId: 'planId',
+    status: 'status',
+    startDate: 'startDate',
+    endDate: 'endDate',
+    trialEndsAt: 'trialEndsAt',
+    paymentMethodId: 'paymentMethodId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+};
+export const BusinessHourScalarFieldEnum = {
+    id: 'id',
+    companyId: 'companyId',
+    weekday: 'weekday',
+    opensAt: 'opensAt',
+    closesAt: 'closesAt',
+    closed: 'closed',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
 };
 export const SortOrder = {
     asc: 'asc',
     desc: 'desc'
+};
+export const NullableJsonNullValueInput = {
+    DbNull: DbNull,
+    JsonNull: JsonNull
 };
 export const QueryMode = {
     default: 'default',
@@ -118,5 +235,10 @@ export const QueryMode = {
 export const NullsOrder = {
     first: 'first',
     last: 'last'
+};
+export const JsonNullValueFilter = {
+    DbNull: DbNull,
+    JsonNull: JsonNull,
+    AnyNull: AnyNull
 };
 export const defineExtension = runtime.Extensions.defineExtension;
