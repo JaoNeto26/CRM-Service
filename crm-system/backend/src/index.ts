@@ -24,6 +24,7 @@ app.get("appointments", async (req, res) => {
         res.status(500).json({ error: "An error occurred while fetching appointments." });
     }
 });
+
 app.get("/", async (req, res) => {
     const userCount = await prisma.usuario.count();
     res.json(userCount == 0 ? "No users have been added yet." : "Some users have been added to the database.");

@@ -17,11 +17,8 @@ enum SubscriptionStatus {
 
 enum AppointmentStatus {
   scheduled
-  confirmed
-  in_progress
   completed
   cancelled
-  no_show
   waiting
 }
 
@@ -30,7 +27,6 @@ enum PaymentMethod {
   credit_card
   debit_card
   pix
-  bank_transfer
 }
 
 enum PaymentStatus {
@@ -39,11 +35,6 @@ enum PaymentStatus {
   failed
   refunded
   partially_refunded
-}
-
-enum TransactionType {
-  income
-  expense
 }
 
 enum DayOfWeek {
@@ -60,7 +51,6 @@ model usuario {
   id            String         @id @default(cuid())
   name          String         @db.VarChar(255)
   email         String         @unique @db.VarChar(255)
-  taxId         String?        @unique @map("tax_id") @db.VarChar(14)
   phone         String?        @db.VarChar(20)
   active        Boolean        @default(true)
   createdAt     DateTime       @default(now()) @map("created_at")
@@ -193,7 +183,6 @@ model FinancialTransaction {
   id              String          @id @default(cuid())
   companyId       String          @map("company_id")
   paymentId       String?         @unique @map("payment_id")
-  type            TransactionType
   category        String          @db.VarChar(100)
   description     String?
   amount          Decimal         @db.Decimal(10, 2)
