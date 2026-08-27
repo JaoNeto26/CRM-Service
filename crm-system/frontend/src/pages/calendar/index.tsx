@@ -1,7 +1,17 @@
 import { useState } from "react";
+import api from "../../services/api";
 import "./style.css";
 
 function Calendar() {
+    async function fetchData() {
+        try {
+            const response = await api.get("/appointments");
+            console.log("Data fetched successfully:", response.data);
+        } catch (error) {
+            console.error("Error fetching data:", error);
+        }
+    }
+
     // Calendar -------------------------------------------------
     const [currentDate, setCurrentDate] = useState(new Date());
     const [selectedDate, setSelectedDate] = useState<number>(new Date().getDate());
