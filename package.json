@@ -28,5 +28,8 @@
         "docker:down": "docker compose -f crm-system/docker-compose.yml down",
         "docker:logs": "docker compose -f crm-system/docker-compose.yml logs -f",
         "prisma studio": "npx -w backend prisma studio"
+    },
+    "dependencies": {
+        "axios": "^1.20.0"
     }
 }
