@@ -55,6 +55,7 @@ export type Company = Prisma.CompanyModel
  * Model Service
  * 
  */
+<<<<<<< Updated upstream
 export type Service = Prisma.ServiceModel
 /**
  * Model Customer
@@ -96,3 +97,11 @@ export type Subscription = Prisma.SubscriptionModel
  * 
  */
 export type BusinessHour = Prisma.BusinessHourModel
+=======
+export type negociacao = Prisma.negociacaoModel
+/**
+ * Model agendamento
+ * 
+ */
+export type agendamento = Prisma.agendamentoModel
+>>>>>>> Stashed changes

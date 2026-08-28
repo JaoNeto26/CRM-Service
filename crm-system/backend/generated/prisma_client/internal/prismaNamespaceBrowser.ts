@@ -52,6 +52,7 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   usuario: 'usuario',
+<<<<<<< Updated upstream
   Company: 'Company',
   Service: 'Service',
   Customer: 'Customer',
@@ -62,6 +63,11 @@ export const ModelName = {
   SubscriptionPlan: 'SubscriptionPlan',
   Subscription: 'Subscription',
   BusinessHour: 'BusinessHour'
+=======
+  cliente: 'cliente',
+  negociacao: 'negociacao',
+  agendamento: 'agendamento'
+>>>>>>> Stashed changes
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -254,6 +260,22 @@ export const BusinessHourScalarFieldEnum = {
 } as const
 
 export type BusinessHourScalarFieldEnum = (typeof BusinessHourScalarFieldEnum)[keyof typeof BusinessHourScalarFieldEnum]
+
+
+export const AgendamentoScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  dataHora: 'dataHora',
+  duracaoMinutos: 'duracaoMinutos',
+  clienteId: 'clienteId',
+  responsavelId: 'responsavelId',
+  status: 'status',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type AgendamentoScalarFieldEnum = (typeof AgendamentoScalarFieldEnum)[keyof typeof AgendamentoScalarFieldEnum]
 
 
 export const SortOrder = {

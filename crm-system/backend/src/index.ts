@@ -1,3 +1,9 @@
+<<<<<<< Updated upstream
+=======
+import express from "express";
+import cors from "cors";
+import { PrismaClient } from "../generated/prisma_client/client";
+>>>>>>> Stashed changes
 import { PrismaPg } from "@prisma/adapter-pg";
 import cors from "cors";
 import express from "express";

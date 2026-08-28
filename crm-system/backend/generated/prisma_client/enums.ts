@@ -30,6 +30,7 @@ export const AppointmentStatus = {
   waiting: 'waiting'
 } as const
 
+<<<<<<< Updated upstream
 export type AppointmentStatus = (typeof AppointmentStatus)[keyof typeof AppointmentStatus]
 
 
@@ -74,3 +75,15 @@ export const DayOfWeek = {
 } as const
 
 export type DayOfWeek = (typeof DayOfWeek)[keyof typeof DayOfWeek]
+=======
+export type EtapaNegociacao = (typeof EtapaNegociacao)[keyof typeof EtapaNegociacao]
+
+
+export const statusAgendamento = {
+  AGENDADO: 'AGENDADO',
+  CONCLUIDO: 'CONCLUIDO',
+  CANCELADO: 'CANCELADO'
+} as const
+
+export type statusAgendamento = (typeof statusAgendamento)[keyof typeof statusAgendamento]
+>>>>>>> Stashed changes

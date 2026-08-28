@@ -1,6 +1,11 @@
 generator client {
+<<<<<<< Updated upstream
   provider = "prisma-client-js"
   output   = "../generated/prisma_client"
+=======
+  provider = "prisma-client"
+  output   = "./generated/prisma_client"
+>>>>>>> Stashed changes
 }
 
 datasource db {
@@ -48,6 +53,7 @@ enum DayOfWeek {
 }
 
 model usuario {
+<<<<<<< Updated upstream
   id            String         @id @default(cuid())
   name          String         @db.VarChar(255)
   email         String         @unique @db.VarChar(255)
@@ -87,6 +93,32 @@ model Company {
   businessHours BusinessHour[]
 
   @@map("companies")
+=======
+  id        String   @id @default(uuid())
+  nome      String
+  email     String   @unique
+  senha     String
+  criadoEm  DateTime @default(now())
+  clientes  cliente[]
+  ordensServico ordemServico[]
+  agendamentos  agendamento[]
+}
+
+model cliente {
+  id          String       @id @default(uuid())
+  nome        String
+  email       String?
+  telefone    String?
+  empresa     String?
+  status      statusCliente @default(LEAD)
+  responsavel usuario?      @relation(fields: [responsavelId], references: [id])
+  responsavelId String?
+  negociacoes negociacao[]
+  ordensServico ordemServico[]
+  agendamentos  agendamento[]
+  criadoEm    DateTime      @default(now())
+  atualizadoEm DateTime     @updatedAt
+>>>>>>> Stashed changes
 }
 
 model Service {
@@ -104,6 +136,7 @@ model Service {
   @@map("services")
 }
 
+<<<<<<< Updated upstream
 model Customer {
   id           String        @id @default(cuid())
   companyId    String        @map("company_id")
@@ -119,6 +152,45 @@ model Customer {
   @@unique([companyId, googleId])
   @@unique([companyId, email])
   @@map("customers")
+=======
+model ordemServico {
+  id            String              @id @default(uuid())
+  titulo        String
+  descricao     String?
+  status        StatusOrdemServico  @default(ABERTO)
+  prioridade    PrioridadeOS        @default(MEDIA)
+  cliente       cliente             @relation(fields: [clienteId], references: [id])
+  clienteId     String
+  responsavel   usuario?            @relation(fields: [responsavelId], references: [id])
+  responsavelId String?
+  criadoPorId   String
+  criadoEm      DateTime            @default(now())
+  atualizadoEm  DateTime            @updatedAt
+  fechadoEm     DateTime?
+}
+
+model agendamento {
+  id            String            @id @default(uuid())
+  titulo        String
+  descricao     String?
+  dataHora      DateTime
+  duracaoMinutos Int              @default(30)
+  status        StatusAgendamento @default(AGENDADO)
+  cliente       cliente?          @relation(fields: [clienteId], references: [id])
+  clienteId     String?
+  responsavel   usuario           @relation(fields: [responsavelId], references: [id])
+  responsavelId String
+  criadoEm      DateTime          @default(now())
+  atualizadoEm  DateTime          @updatedAt
+
+  @@index([responsavelId, dataHora])
+}
+
+enum statusCliente {
+  LEAD
+  ATIVO
+  INATIVO
+>>>>>>> Stashed changes
 }
 
 model Appointment {
@@ -242,4 +314,26 @@ model BusinessHour {
 
   @@unique([companyId, weekday])
   @@map("business_hours")
+}
+
+enum StatusOrdemServico {
+  ABERTO
+  EM_ANDAMENTO
+  AGUARDANDO_CLIENTE
+  CONCLUIDO
+  CANCELADO
+}
+
+enum PrioridadeOS {
+  BAIXA
+  MEDIA
+  ALTA
+  URGENTE
+}
+
+enum StatusAgendamento {
+  AGENDADO
+  CONFIRMADO
+  CANCELADO
+  CONCLUIDO
 }

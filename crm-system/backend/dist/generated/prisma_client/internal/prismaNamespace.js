@@ -68,6 +68,7 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 export const ModelName = {
     usuario: 'usuario',
+<<<<<<< Updated upstream
     Company: 'Company',
     Service: 'Service',
     Customer: 'Customer',
@@ -78,6 +79,11 @@ export const ModelName = {
     SubscriptionPlan: 'SubscriptionPlan',
     Subscription: 'Subscription',
     BusinessHour: 'BusinessHour'
+=======
+    cliente: 'cliente',
+    negociacao: 'negociacao',
+    agendamento: 'agendamento'
+>>>>>>> Stashed changes
 };
 /**
  * Enums
@@ -219,6 +225,18 @@ export const BusinessHourScalarFieldEnum = {
     closed: 'closed',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
+};
+export const AgendamentoScalarFieldEnum = {
+    id: 'id',
+    titulo: 'titulo',
+    descricao: 'descricao',
+    dataHora: 'dataHora',
+    duracaoMinutos: 'duracaoMinutos',
+    clienteId: 'clienteId',
+    responsavelId: 'responsavelId',
+    status: 'status',
+    criadoEm: 'criadoEm',
+    atualizadoEm: 'atualizadoEm'
 };
 export const SortOrder = {
     asc: 'asc',

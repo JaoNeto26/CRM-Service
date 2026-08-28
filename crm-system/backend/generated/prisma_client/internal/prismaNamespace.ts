@@ -398,6 +398,7 @@ type FieldRefInputType<Model, FieldType> = Model extends never ? never : FieldRe
 
 export const ModelName = {
   usuario: 'usuario',
+<<<<<<< Updated upstream
   Company: 'Company',
   Service: 'Service',
   Customer: 'Customer',
@@ -408,6 +409,11 @@ export const ModelName = {
   SubscriptionPlan: 'SubscriptionPlan',
   Subscription: 'Subscription',
   BusinessHour: 'BusinessHour'
+=======
+  cliente: 'cliente',
+  negociacao: 'negociacao',
+  agendamento: 'agendamento'
+>>>>>>> Stashed changes
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -423,7 +429,11 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
+<<<<<<< Updated upstream
     modelProps: "usuario" | "company" | "service" | "customer" | "appointment" | "appointmentService" | "payment" | "financialTransaction" | "subscriptionPlan" | "subscription" | "businessHour"
+=======
+    modelProps: "usuario" | "cliente" | "negociacao" | "agendamento"
+>>>>>>> Stashed changes
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1241,6 +1251,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    agendamento: {
+      payload: Prisma.$agendamentoPayload<ExtArgs>
+      fields: Prisma.agendamentoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.agendamentoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.agendamentoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>
+        }
+        findFirst: {
+          args: Prisma.agendamentoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.agendamentoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>
+        }
+        findMany: {
+          args: Prisma.agendamentoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>[]
+        }
+        create: {
+          args: Prisma.agendamentoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>
+        }
+        createMany: {
+          args: Prisma.agendamentoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.agendamentoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>[]
+        }
+        delete: {
+          args: Prisma.agendamentoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>
+        }
+        update: {
+          args: Prisma.agendamentoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>
+        }
+        deleteMany: {
+          args: Prisma.agendamentoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.agendamentoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.agendamentoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>[]
+        }
+        upsert: {
+          args: Prisma.agendamentoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$agendamentoPayload>
+        }
+        aggregate: {
+          args: Prisma.AgendamentoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAgendamento>
+        }
+        groupBy: {
+          args: Prisma.agendamentoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AgendamentoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.agendamentoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AgendamentoCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1456,6 +1540,22 @@ export const BusinessHourScalarFieldEnum = {
 export type BusinessHourScalarFieldEnum = (typeof BusinessHourScalarFieldEnum)[keyof typeof BusinessHourScalarFieldEnum]
 
 
+export const AgendamentoScalarFieldEnum = {
+  id: 'id',
+  titulo: 'titulo',
+  descricao: 'descricao',
+  dataHora: 'dataHora',
+  duracaoMinutos: 'duracaoMinutos',
+  clienteId: 'clienteId',
+  responsavelId: 'responsavelId',
+  status: 'status',
+  criadoEm: 'criadoEm',
+  atualizadoEm: 'atualizadoEm'
+} as const
+
+export type AgendamentoScalarFieldEnum = (typeof AgendamentoScalarFieldEnum)[keyof typeof AgendamentoScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -1567,13 +1667,20 @@ export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel,
 
 
 /**
+<<<<<<< Updated upstream
  * Reference to a field of type 'AppointmentStatus'
  */
 export type EnumAppointmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppointmentStatus'>
+=======
+ * Reference to a field of type 'statusAgendamento'
+ */
+export type EnumstatusAgendamentoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'statusAgendamento'>
+>>>>>>> Stashed changes
     
 
 
 /**
+<<<<<<< Updated upstream
  * Reference to a field of type 'AppointmentStatus[]'
  */
 export type ListEnumAppointmentStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'AppointmentStatus[]'>
@@ -1661,6 +1768,11 @@ export type EnumDayOfWeekFieldRefInput<$PrismaModel> = FieldRefInputType<$Prisma
  * Reference to a field of type 'DayOfWeek[]'
  */
 export type ListEnumDayOfWeekFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DayOfWeek[]'>
+=======
+ * Reference to a field of type 'statusAgendamento[]'
+ */
+export type ListEnumstatusAgendamentoFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'statusAgendamento[]'>
+>>>>>>> Stashed changes
     
 
 
@@ -1829,6 +1941,7 @@ export interface PrismaClientOptionsWithAdapter extends PrismaClientBaseOptions 
 export type PrismaClientOptions = PrismaClientOptionsWithAccelerateUrl | PrismaClientOptionsWithAdapter
 export type GlobalOmitConfig = {
   usuario?: Prisma.usuarioOmit
+<<<<<<< Updated upstream
   company?: Prisma.CompanyOmit
   service?: Prisma.ServiceOmit
   customer?: Prisma.CustomerOmit
@@ -1839,6 +1952,11 @@ export type GlobalOmitConfig = {
   subscriptionPlan?: Prisma.SubscriptionPlanOmit
   subscription?: Prisma.SubscriptionOmit
   businessHour?: Prisma.BusinessHourOmit
+=======
+  cliente?: Prisma.clienteOmit
+  negociacao?: Prisma.negociacaoOmit
+  agendamento?: Prisma.agendamentoOmit
+>>>>>>> Stashed changes
 }
 
 /* Types for Logging */

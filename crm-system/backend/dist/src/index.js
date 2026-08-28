@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import express from "express";
 import cors from "cors";
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient } from "../generated/prisma_client/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 const adapter = new PrismaPg({
     connectionString: process.env.DATABASE_URL,

@@ -50,3 +50,8 @@ export const DayOfWeek = {
     saturday: 'saturday',
     sunday: 'sunday'
 };
+export const statusAgendamento = {
+    AGENDADO: 'AGENDADO',
+    CONCLUIDO: 'CONCLUIDO',
+    CANCELADO: 'CANCELADO'
+};

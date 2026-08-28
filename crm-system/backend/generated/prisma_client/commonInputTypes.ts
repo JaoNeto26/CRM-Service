@@ -246,6 +246,7 @@ export type DateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
+<<<<<<< Updated upstream
 export type EnumPaymentMethodFilter<$PrismaModel = never> = {
   equals?: $Enums.PaymentMethod | Prisma.EnumPaymentMethodFieldRefInput<$PrismaModel>
   in?: $Enums.PaymentMethod[] | Prisma.ListEnumPaymentMethodFieldRefInput<$PrismaModel>
@@ -301,10 +302,17 @@ export type IntNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
   notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+=======
+export type IntFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+>>>>>>> Stashed changes
   lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+<<<<<<< Updated upstream
   not?: Prisma.NestedIntNullableFilter<$PrismaModel> | number | null
 }
 
@@ -336,10 +344,27 @@ export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
   notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+=======
+  not?: Prisma.NestedIntFilter<$PrismaModel> | number
+}
+
+export type EnumstatusAgendamentoFilter<$PrismaModel = never> = {
+  equals?: $Enums.statusAgendamento | Prisma.EnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  in?: $Enums.statusAgendamento[] | Prisma.ListEnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.statusAgendamento[] | Prisma.ListEnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumstatusAgendamentoFilter<$PrismaModel> | $Enums.statusAgendamento
+}
+
+export type IntWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+>>>>>>> Stashed changes
   lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+<<<<<<< Updated upstream
   not?: Prisma.NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
@@ -407,6 +432,24 @@ export type EnumDayOfWeekWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumDayOfWeekFilter<$PrismaModel>
   _max?: Prisma.NestedEnumDayOfWeekFilter<$PrismaModel>
+=======
+  not?: Prisma.NestedIntWithAggregatesFilter<$PrismaModel> | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedIntFilter<$PrismaModel>
+  _max?: Prisma.NestedIntFilter<$PrismaModel>
+}
+
+export type EnumstatusAgendamentoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.statusAgendamento | Prisma.EnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  in?: $Enums.statusAgendamento[] | Prisma.ListEnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.statusAgendamento[] | Prisma.ListEnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumstatusAgendamentoWithAggregatesFilter<$PrismaModel> | $Enums.statusAgendamento
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumstatusAgendamentoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumstatusAgendamentoFilter<$PrismaModel>
+>>>>>>> Stashed changes
 }
 
 export type NestedStringFilter<$PrismaModel = never> = {
@@ -654,6 +697,7 @@ export type NestedDateTimeNullableWithAggregatesFilter<$PrismaModel = never> = {
   _max?: Prisma.NestedDateTimeNullableFilter<$PrismaModel>
 }
 
+<<<<<<< Updated upstream
 export type NestedEnumPaymentMethodFilter<$PrismaModel = never> = {
   equals?: $Enums.PaymentMethod | Prisma.EnumPaymentMethodFieldRefInput<$PrismaModel>
   in?: $Enums.PaymentMethod[] | Prisma.ListEnumPaymentMethodFieldRefInput<$PrismaModel>
@@ -709,10 +753,24 @@ export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
   equals?: number | Prisma.IntFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
   notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel> | null
+=======
+export type NestedEnumstatusAgendamentoFilter<$PrismaModel = never> = {
+  equals?: $Enums.statusAgendamento | Prisma.EnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  in?: $Enums.statusAgendamento[] | Prisma.ListEnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.statusAgendamento[] | Prisma.ListEnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumstatusAgendamentoFilter<$PrismaModel> | $Enums.statusAgendamento
+}
+
+export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.IntFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListIntFieldRefInput<$PrismaModel>
+>>>>>>> Stashed changes
   lt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   lte?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gt?: number | Prisma.IntFieldRefInput<$PrismaModel>
   gte?: number | Prisma.IntFieldRefInput<$PrismaModel>
+<<<<<<< Updated upstream
   not?: Prisma.NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
   _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
   _avg?: Prisma.NestedFloatNullableFilter<$PrismaModel>
@@ -725,10 +783,25 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   equals?: number | Prisma.FloatFieldRefInput<$PrismaModel> | null
   in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
   notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel> | null
+=======
+  not?: Prisma.NestedIntWithAggregatesFilter<$PrismaModel> | number
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _avg?: Prisma.NestedFloatFilter<$PrismaModel>
+  _sum?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedIntFilter<$PrismaModel>
+  _max?: Prisma.NestedIntFilter<$PrismaModel>
+}
+
+export type NestedFloatFilter<$PrismaModel = never> = {
+  equals?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+  in?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+  notIn?: number[] | Prisma.ListFloatFieldRefInput<$PrismaModel>
+>>>>>>> Stashed changes
   lt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   lte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gt?: number | Prisma.FloatFieldRefInput<$PrismaModel>
   gte?: number | Prisma.FloatFieldRefInput<$PrismaModel>
+<<<<<<< Updated upstream
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
 }
 
@@ -788,6 +861,19 @@ export type NestedEnumDayOfWeekWithAggregatesFilter<$PrismaModel = never> = {
   _count?: Prisma.NestedIntFilter<$PrismaModel>
   _min?: Prisma.NestedEnumDayOfWeekFilter<$PrismaModel>
   _max?: Prisma.NestedEnumDayOfWeekFilter<$PrismaModel>
+=======
+  not?: Prisma.NestedFloatFilter<$PrismaModel> | number
+}
+
+export type NestedEnumstatusAgendamentoWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.statusAgendamento | Prisma.EnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  in?: $Enums.statusAgendamento[] | Prisma.ListEnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  notIn?: $Enums.statusAgendamento[] | Prisma.ListEnumstatusAgendamentoFieldRefInput<$PrismaModel>
+  not?: Prisma.NestedEnumstatusAgendamentoWithAggregatesFilter<$PrismaModel> | $Enums.statusAgendamento
+  _count?: Prisma.NestedIntFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumstatusAgendamentoFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumstatusAgendamentoFilter<$PrismaModel>
+>>>>>>> Stashed changes
 }
 
 
