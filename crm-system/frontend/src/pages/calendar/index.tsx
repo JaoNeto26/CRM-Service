@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../services/api";
 import "./style.css";
 
 function Calendar() {
+    const [appointments, setAppointments] = useState<any[]>([]);
+
     async function fetchData() {
         try {
             const response = await api.get("/appointments");
             console.log("Data fetched successfully:", response.data);
+
+            console.log("RESPONSE:", response);
+            console.log("DATA:", response.data);
+            console.log("É array?", Array.isArray(response.data));
+
+            setAppointments(response.data);
+            setAppointments(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
         }
     }
+
+    useEffect(() => {
+        fetchData();
+    }, []);
 
     // Calendar -------------------------------------------------
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -34,6 +47,7 @@ function Calendar() {
             <div className="calendar">
                 <div className="calendar-header">
                     <div className="calendar-header month">
+                        <h1>{appointments.length} appointments</h1>
                         <button
                             className="calendar-header_button"
                             onClick={() => {

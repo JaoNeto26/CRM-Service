@@ -33,3 +33,9 @@ export class ConflitoDeDados extends ErroDominio {
     super(mensagem, 409);
   }
 }
+
+export class InvalidClient extends ErroDominio {
+  constructor(mensagem = "Invalid client") {
+    super(mensagem, 422);
+  }
+}

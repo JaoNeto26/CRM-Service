@@ -68,7 +68,6 @@ export const JsonNull = runtime.JsonNull;
 export const AnyNull = runtime.AnyNull;
 export const ModelName = {
     usuario: 'usuario',
-<<<<<<< Updated upstream
     Company: 'Company',
     Service: 'Service',
     Customer: 'Customer',
@@ -79,11 +78,6 @@ export const ModelName = {
     SubscriptionPlan: 'SubscriptionPlan',
     Subscription: 'Subscription',
     BusinessHour: 'BusinessHour'
-=======
-    cliente: 'cliente',
-    negociacao: 'negociacao',
-    agendamento: 'agendamento'
->>>>>>> Stashed changes
 };
 /**
  * Enums

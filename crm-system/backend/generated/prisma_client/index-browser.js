@@ -124,7 +124,6 @@ exports.Prisma.UsuarioScalarFieldEnum = {
   id: 'id',
   name: 'name',
   email: 'email',
-  taxId: 'taxId',
   phone: 'phone',
   active: 'active',
   createdAt: 'createdAt',
@@ -216,7 +215,6 @@ exports.Prisma.FinancialTransactionScalarFieldEnum = {
   id: 'id',
   companyId: 'companyId',
   paymentId: 'paymentId',
-  type: 'type',
   category: 'category',
   description: 'description',
   amount: 'amount',
@@ -290,11 +288,8 @@ exports.Prisma.JsonNullValueFilter = {
 };
 exports.AppointmentStatus = exports.$Enums.AppointmentStatus = {
   scheduled: 'scheduled',
-  confirmed: 'confirmed',
-  in_progress: 'in_progress',
   completed: 'completed',
   cancelled: 'cancelled',
-  no_show: 'no_show',
   waiting: 'waiting'
 };
 
@@ -302,8 +297,7 @@ exports.PaymentMethod = exports.$Enums.PaymentMethod = {
   cash: 'cash',
   credit_card: 'credit_card',
   debit_card: 'debit_card',
-  pix: 'pix',
-  bank_transfer: 'bank_transfer'
+  pix: 'pix'
 };
 
 exports.PaymentStatus = exports.$Enums.PaymentStatus = {
@@ -312,11 +306,6 @@ exports.PaymentStatus = exports.$Enums.PaymentStatus = {
   failed: 'failed',
   refunded: 'refunded',
   partially_refunded: 'partially_refunded'
-};
-
-exports.TransactionType = exports.$Enums.TransactionType = {
-  income: 'income',
-  expense: 'expense'
 };
 
 exports.SubscriptionStatus = exports.$Enums.SubscriptionStatus = {

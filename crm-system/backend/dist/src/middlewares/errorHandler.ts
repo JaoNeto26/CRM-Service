@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import { ErroDominio } from "../utils/erros";
 
 export function errorHandler(err: any, req: Request, res: Response, _next: NextFunction) {
-  // Erros de domínio conhecidos (404, 403, 400, 409) — mensagem segura de expor
+  // Erros de domínio conhecidos (402, 404, 403, 400, 409) — mensagem segura de expor
   if (err instanceof ErroDominio) {
     return res.status(err.status).json({ erro: err.message });
   }
