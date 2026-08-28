@@ -7,16 +7,51 @@
 *
 * 🟢 You can import this file directly.
 */
-export const statusCliente = {
-    LEAD: 'LEAD',
-    ATIVO: 'ATIVO',
-    INATIVO: 'INATIVO'
+export const SubscriptionStatus = {
+    active: 'active',
+    inactive: 'inactive',
+    trial: 'trial',
+    cancelled: 'cancelled',
+    expired: 'expired'
 };
-export const EtapaNegociacao = {
-    PROSPECCAO: 'PROSPECCAO',
-    QUALIFICACAO: 'QUALIFICACAO',
-    PROPOSTA: 'PROPOSTA',
-    NEGOCIACAO: 'NEGOCIACAO',
-    FECHADO_GANHO: 'FECHADO_GANHO',
-    FECHADO_PERDIDO: 'FECHADO_PERDIDO'
+export const AppointmentStatus = {
+    scheduled: 'scheduled',
+    confirmed: 'confirmed',
+    in_progress: 'in_progress',
+    completed: 'completed',
+    cancelled: 'cancelled',
+    no_show: 'no_show',
+    waiting: 'waiting'
+};
+export const PaymentMethod = {
+    cash: 'cash',
+    credit_card: 'credit_card',
+    debit_card: 'debit_card',
+    pix: 'pix',
+    bank_transfer: 'bank_transfer'
+};
+export const PaymentStatus = {
+    pending: 'pending',
+    paid: 'paid',
+    failed: 'failed',
+    refunded: 'refunded',
+    partially_refunded: 'partially_refunded'
+};
+export const TransactionType = {
+    income: 'income',
+    expense: 'expense'
+};
+export const DayOfWeek = {
+    monday: 'monday',
+    tuesday: 'tuesday',
+    wednesday: 'wednesday',
+    thursday: 'thursday',
+    friday: 'friday',
+    saturday: 'saturday',
+    sunday: 'sunday'
+};
+export const statusAgendamento = {
+    AGENDADO: 'AGENDADO',
+    CONCLUIDO: 'CONCLUIDO',
+    CANCELADO: 'CANCELADO'
 };

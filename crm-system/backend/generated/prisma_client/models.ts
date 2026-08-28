@@ -9,6 +9,20 @@
  * 🟢 You can import this file directly.
  */
 export type * from './models/usuario'
+<<<<<<< Updated upstream
+export type * from './models/Company'
+export type * from './models/Service'
+export type * from './models/Customer'
+export type * from './models/Appointment'
+export type * from './models/AppointmentService'
+export type * from './models/Payment'
+export type * from './models/FinancialTransaction'
+export type * from './models/SubscriptionPlan'
+export type * from './models/Subscription'
+export type * from './models/BusinessHour'
+=======
 export type * from './models/cliente'
 export type * from './models/negociacao'
+export type * from './models/agendamento'
+>>>>>>> Stashed changes
 export type * from './commonInputTypes'

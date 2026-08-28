@@ -216,6 +216,7 @@ export type clienteWhereInput = {
   atualizadoEm?: Prisma.DateTimeFilter<"cliente"> | Date | string
   responsavel?: Prisma.XOR<Prisma.UsuarioNullableScalarRelationFilter, Prisma.usuarioWhereInput> | null
   negociacoes?: Prisma.NegociacaoListRelationFilter
+  agendamentos?: Prisma.AgendamentoListRelationFilter
 }
 
 export type clienteOrderByWithRelationInput = {
@@ -230,6 +231,7 @@ export type clienteOrderByWithRelationInput = {
   atualizadoEm?: Prisma.SortOrder
   responsavel?: Prisma.usuarioOrderByWithRelationInput
   negociacoes?: Prisma.negociacaoOrderByRelationAggregateInput
+  agendamentos?: Prisma.agendamentoOrderByRelationAggregateInput
 }
 
 export type clienteWhereUniqueInput = Prisma.AtLeast<{
@@ -247,6 +249,7 @@ export type clienteWhereUniqueInput = Prisma.AtLeast<{
   atualizadoEm?: Prisma.DateTimeFilter<"cliente"> | Date | string
   responsavel?: Prisma.XOR<Prisma.UsuarioNullableScalarRelationFilter, Prisma.usuarioWhereInput> | null
   negociacoes?: Prisma.NegociacaoListRelationFilter
+  agendamentos?: Prisma.AgendamentoListRelationFilter
 }, "id">
 
 export type clienteOrderByWithAggregationInput = {
@@ -290,6 +293,7 @@ export type clienteCreateInput = {
   atualizadoEm?: Date | string
   responsavel?: Prisma.usuarioCreateNestedOneWithoutClientesInput
   negociacoes?: Prisma.negociacaoCreateNestedManyWithoutClienteInput
+  agendamentos?: Prisma.agendamentoCreateNestedManyWithoutClienteInput
 }
 
 export type clienteUncheckedCreateInput = {
@@ -303,6 +307,7 @@ export type clienteUncheckedCreateInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   negociacoes?: Prisma.negociacaoUncheckedCreateNestedManyWithoutClienteInput
+  agendamentos?: Prisma.agendamentoUncheckedCreateNestedManyWithoutClienteInput
 }
 
 export type clienteUpdateInput = {
@@ -316,6 +321,7 @@ export type clienteUpdateInput = {
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsavel?: Prisma.usuarioUpdateOneWithoutClientesNestedInput
   negociacoes?: Prisma.negociacaoUpdateManyWithoutClienteNestedInput
+  agendamentos?: Prisma.agendamentoUpdateManyWithoutClienteNestedInput
 }
 
 export type clienteUncheckedUpdateInput = {
@@ -329,6 +335,7 @@ export type clienteUncheckedUpdateInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   negociacoes?: Prisma.negociacaoUncheckedUpdateManyWithoutClienteNestedInput
+  agendamentos?: Prisma.agendamentoUncheckedUpdateManyWithoutClienteNestedInput
 }
 
 export type clienteCreateManyInput = {
@@ -417,6 +424,11 @@ export type ClienteScalarRelationFilter = {
   isNot?: Prisma.clienteWhereInput
 }
 
+export type ClienteNullableScalarRelationFilter = {
+  is?: Prisma.clienteWhereInput | null
+  isNot?: Prisma.clienteWhereInput | null
+}
+
 export type clienteCreateNestedManyWithoutResponsavelInput = {
   create?: Prisma.XOR<Prisma.clienteCreateWithoutResponsavelInput, Prisma.clienteUncheckedCreateWithoutResponsavelInput> | Prisma.clienteCreateWithoutResponsavelInput[] | Prisma.clienteUncheckedCreateWithoutResponsavelInput[]
   connectOrCreate?: Prisma.clienteCreateOrConnectWithoutResponsavelInput | Prisma.clienteCreateOrConnectWithoutResponsavelInput[]
@@ -481,6 +493,22 @@ export type clienteUpdateOneRequiredWithoutNegociacoesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.clienteUpdateToOneWithWhereWithoutNegociacoesInput, Prisma.clienteUpdateWithoutNegociacoesInput>, Prisma.clienteUncheckedUpdateWithoutNegociacoesInput>
 }
 
+export type clienteCreateNestedOneWithoutAgendamentosInput = {
+  create?: Prisma.XOR<Prisma.clienteCreateWithoutAgendamentosInput, Prisma.clienteUncheckedCreateWithoutAgendamentosInput>
+  connectOrCreate?: Prisma.clienteCreateOrConnectWithoutAgendamentosInput
+  connect?: Prisma.clienteWhereUniqueInput
+}
+
+export type clienteUpdateOneWithoutAgendamentosNestedInput = {
+  create?: Prisma.XOR<Prisma.clienteCreateWithoutAgendamentosInput, Prisma.clienteUncheckedCreateWithoutAgendamentosInput>
+  connectOrCreate?: Prisma.clienteCreateOrConnectWithoutAgendamentosInput
+  upsert?: Prisma.clienteUpsertWithoutAgendamentosInput
+  disconnect?: Prisma.clienteWhereInput | boolean
+  delete?: Prisma.clienteWhereInput | boolean
+  connect?: Prisma.clienteWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.clienteUpdateToOneWithWhereWithoutAgendamentosInput, Prisma.clienteUpdateWithoutAgendamentosInput>, Prisma.clienteUncheckedUpdateWithoutAgendamentosInput>
+}
+
 export type clienteCreateWithoutResponsavelInput = {
   id?: string
   nome: string
@@ -491,6 +519,7 @@ export type clienteCreateWithoutResponsavelInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   negociacoes?: Prisma.negociacaoCreateNestedManyWithoutClienteInput
+  agendamentos?: Prisma.agendamentoCreateNestedManyWithoutClienteInput
 }
 
 export type clienteUncheckedCreateWithoutResponsavelInput = {
@@ -503,6 +532,7 @@ export type clienteUncheckedCreateWithoutResponsavelInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   negociacoes?: Prisma.negociacaoUncheckedCreateNestedManyWithoutClienteInput
+  agendamentos?: Prisma.agendamentoUncheckedCreateNestedManyWithoutClienteInput
 }
 
 export type clienteCreateOrConnectWithoutResponsavelInput = {
@@ -556,6 +586,7 @@ export type clienteCreateWithoutNegociacoesInput = {
   criadoEm?: Date | string
   atualizadoEm?: Date | string
   responsavel?: Prisma.usuarioCreateNestedOneWithoutClientesInput
+  agendamentos?: Prisma.agendamentoCreateNestedManyWithoutClienteInput
 }
 
 export type clienteUncheckedCreateWithoutNegociacoesInput = {
@@ -568,6 +599,7 @@ export type clienteUncheckedCreateWithoutNegociacoesInput = {
   responsavelId?: string | null
   criadoEm?: Date | string
   atualizadoEm?: Date | string
+  agendamentos?: Prisma.agendamentoUncheckedCreateNestedManyWithoutClienteInput
 }
 
 export type clienteCreateOrConnectWithoutNegociacoesInput = {
@@ -596,6 +628,7 @@ export type clienteUpdateWithoutNegociacoesInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   responsavel?: Prisma.usuarioUpdateOneWithoutClientesNestedInput
+  agendamentos?: Prisma.agendamentoUpdateManyWithoutClienteNestedInput
 }
 
 export type clienteUncheckedUpdateWithoutNegociacoesInput = {
@@ -608,6 +641,75 @@ export type clienteUncheckedUpdateWithoutNegociacoesInput = {
   responsavelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agendamentos?: Prisma.agendamentoUncheckedUpdateManyWithoutClienteNestedInput
+}
+
+export type clienteCreateWithoutAgendamentosInput = {
+  id?: string
+  nome: string
+  email?: string | null
+  telefone?: string | null
+  empresa?: string | null
+  status?: $Enums.statusCliente
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  responsavel?: Prisma.usuarioCreateNestedOneWithoutClientesInput
+  negociacoes?: Prisma.negociacaoCreateNestedManyWithoutClienteInput
+}
+
+export type clienteUncheckedCreateWithoutAgendamentosInput = {
+  id?: string
+  nome: string
+  email?: string | null
+  telefone?: string | null
+  empresa?: string | null
+  status?: $Enums.statusCliente
+  responsavelId?: string | null
+  criadoEm?: Date | string
+  atualizadoEm?: Date | string
+  negociacoes?: Prisma.negociacaoUncheckedCreateNestedManyWithoutClienteInput
+}
+
+export type clienteCreateOrConnectWithoutAgendamentosInput = {
+  where: Prisma.clienteWhereUniqueInput
+  create: Prisma.XOR<Prisma.clienteCreateWithoutAgendamentosInput, Prisma.clienteUncheckedCreateWithoutAgendamentosInput>
+}
+
+export type clienteUpsertWithoutAgendamentosInput = {
+  update: Prisma.XOR<Prisma.clienteUpdateWithoutAgendamentosInput, Prisma.clienteUncheckedUpdateWithoutAgendamentosInput>
+  create: Prisma.XOR<Prisma.clienteCreateWithoutAgendamentosInput, Prisma.clienteUncheckedCreateWithoutAgendamentosInput>
+  where?: Prisma.clienteWhereInput
+}
+
+export type clienteUpdateToOneWithWhereWithoutAgendamentosInput = {
+  where?: Prisma.clienteWhereInput
+  data: Prisma.XOR<Prisma.clienteUpdateWithoutAgendamentosInput, Prisma.clienteUncheckedUpdateWithoutAgendamentosInput>
+}
+
+export type clienteUpdateWithoutAgendamentosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  empresa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumstatusClienteFieldUpdateOperationsInput | $Enums.statusCliente
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  responsavel?: Prisma.usuarioUpdateOneWithoutClientesNestedInput
+  negociacoes?: Prisma.negociacaoUpdateManyWithoutClienteNestedInput
+}
+
+export type clienteUncheckedUpdateWithoutAgendamentosInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  nome?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  telefone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  empresa?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumstatusClienteFieldUpdateOperationsInput | $Enums.statusCliente
+  responsavelId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  negociacoes?: Prisma.negociacaoUncheckedUpdateManyWithoutClienteNestedInput
 }
 
 export type clienteCreateManyResponsavelInput = {
@@ -631,6 +733,7 @@ export type clienteUpdateWithoutResponsavelInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   negociacoes?: Prisma.negociacaoUpdateManyWithoutClienteNestedInput
+  agendamentos?: Prisma.agendamentoUpdateManyWithoutClienteNestedInput
 }
 
 export type clienteUncheckedUpdateWithoutResponsavelInput = {
@@ -643,6 +746,7 @@ export type clienteUncheckedUpdateWithoutResponsavelInput = {
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   atualizadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   negociacoes?: Prisma.negociacaoUncheckedUpdateManyWithoutClienteNestedInput
+  agendamentos?: Prisma.agendamentoUncheckedUpdateManyWithoutClienteNestedInput
 }
 
 export type clienteUncheckedUpdateManyWithoutResponsavelInput = {
@@ -663,10 +767,12 @@ export type clienteUncheckedUpdateManyWithoutResponsavelInput = {
 
 export type ClienteCountOutputType = {
   negociacoes: number
+  agendamentos: number
 }
 
 export type ClienteCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   negociacoes?: boolean | ClienteCountOutputTypeCountNegociacoesArgs
+  agendamentos?: boolean | ClienteCountOutputTypeCountAgendamentosArgs
 }
 
 /**
@@ -686,6 +792,13 @@ export type ClienteCountOutputTypeCountNegociacoesArgs<ExtArgs extends runtime.T
   where?: Prisma.negociacaoWhereInput
 }
 
+/**
+ * ClienteCountOutputType without action
+ */
+export type ClienteCountOutputTypeCountAgendamentosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.agendamentoWhereInput
+}
+
 
 export type clienteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -699,6 +812,7 @@ export type clienteSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   atualizadoEm?: boolean
   responsavel?: boolean | Prisma.cliente$responsavelArgs<ExtArgs>
   negociacoes?: boolean | Prisma.cliente$negociacoesArgs<ExtArgs>
+  agendamentos?: boolean | Prisma.cliente$agendamentosArgs<ExtArgs>
   _count?: boolean | Prisma.ClienteCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["cliente"]>
 
@@ -744,6 +858,7 @@ export type clienteOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
 export type clienteInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   responsavel?: boolean | Prisma.cliente$responsavelArgs<ExtArgs>
   negociacoes?: boolean | Prisma.cliente$negociacoesArgs<ExtArgs>
+  agendamentos?: boolean | Prisma.cliente$agendamentosArgs<ExtArgs>
   _count?: boolean | Prisma.ClienteCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type clienteIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -758,6 +873,7 @@ export type $clientePayload<ExtArgs extends runtime.Types.Extensions.InternalArg
   objects: {
     responsavel: Prisma.$usuarioPayload<ExtArgs> | null
     negociacoes: Prisma.$negociacaoPayload<ExtArgs>[]
+    agendamentos: Prisma.$agendamentoPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1165,6 +1281,7 @@ export interface Prisma__clienteClient<T, Null = never, ExtArgs extends runtime.
   readonly [Symbol.toStringTag]: "PrismaPromise"
   responsavel<T extends Prisma.cliente$responsavelArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.cliente$responsavelArgs<ExtArgs>>): Prisma.Prisma__usuarioClient<runtime.Types.Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   negociacoes<T extends Prisma.cliente$negociacoesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.cliente$negociacoesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$negociacaoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  agendamentos<T extends Prisma.cliente$agendamentosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.cliente$agendamentosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$agendamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1644,6 +1761,30 @@ export type cliente$negociacoesArgs<ExtArgs extends runtime.Types.Extensions.Int
   take?: number
   skip?: number
   distinct?: Prisma.NegociacaoScalarFieldEnum | Prisma.NegociacaoScalarFieldEnum[]
+}
+
+/**
+ * cliente.agendamentos
+ */
+export type cliente$agendamentosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the agendamento
+   */
+  select?: Prisma.agendamentoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the agendamento
+   */
+  omit?: Prisma.agendamentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.agendamentoInclude<ExtArgs> | null
+  where?: Prisma.agendamentoWhereInput
+  orderBy?: Prisma.agendamentoOrderByWithRelationInput | Prisma.agendamentoOrderByWithRelationInput[]
+  cursor?: Prisma.agendamentoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AgendamentoScalarFieldEnum | Prisma.AgendamentoScalarFieldEnum[]
 }
 
 /**

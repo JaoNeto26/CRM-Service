@@ -26,52 +26,70 @@ export type AggregateUsuario = {
 
 export type UsuarioMinAggregateOutputType = {
   id: string | null
-  nome: string | null
+  name: string | null
   email: string | null
-  senha: string | null
-  criadoEm: Date | null
+  taxId: string | null
+  phone: string | null
+  active: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UsuarioMaxAggregateOutputType = {
   id: string | null
-  nome: string | null
+  name: string | null
   email: string | null
-  senha: string | null
-  criadoEm: Date | null
+  taxId: string | null
+  phone: string | null
+  active: boolean | null
+  createdAt: Date | null
+  updatedAt: Date | null
 }
 
 export type UsuarioCountAggregateOutputType = {
   id: number
-  nome: number
+  name: number
   email: number
-  senha: number
-  criadoEm: number
+  taxId: number
+  phone: number
+  active: number
+  createdAt: number
+  updatedAt: number
   _all: number
 }
 
 
 export type UsuarioMinAggregateInputType = {
   id?: true
-  nome?: true
+  name?: true
   email?: true
-  senha?: true
-  criadoEm?: true
+  taxId?: true
+  phone?: true
+  active?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type UsuarioMaxAggregateInputType = {
   id?: true
-  nome?: true
+  name?: true
   email?: true
-  senha?: true
-  criadoEm?: true
+  taxId?: true
+  phone?: true
+  active?: true
+  createdAt?: true
+  updatedAt?: true
 }
 
 export type UsuarioCountAggregateInputType = {
   id?: true
-  nome?: true
+  name?: true
   email?: true
-  senha?: true
-  criadoEm?: true
+  taxId?: true
+  phone?: true
+  active?: true
+  createdAt?: true
+  updatedAt?: true
   _all?: true
 }
 
@@ -149,10 +167,13 @@ export type usuarioGroupByArgs<ExtArgs extends runtime.Types.Extensions.Internal
 
 export type UsuarioGroupByOutputType = {
   id: string
-  nome: string
+  name: string
   email: string
-  senha: string
-  criadoEm: Date
+  taxId: string | null
+  phone: string | null
+  active: boolean
+  createdAt: Date
+  updatedAt: Date
   _count: UsuarioCountAggregateOutputType | null
   _min: UsuarioMinAggregateOutputType | null
   _max: UsuarioMaxAggregateOutputType | null
@@ -178,40 +199,81 @@ export type usuarioWhereInput = {
   OR?: Prisma.usuarioWhereInput[]
   NOT?: Prisma.usuarioWhereInput | Prisma.usuarioWhereInput[]
   id?: Prisma.StringFilter<"usuario"> | string
-  nome?: Prisma.StringFilter<"usuario"> | string
+  name?: Prisma.StringFilter<"usuario"> | string
   email?: Prisma.StringFilter<"usuario"> | string
+<<<<<<< Updated upstream
+  taxId?: Prisma.StringNullableFilter<"usuario"> | string | null
+  phone?: Prisma.StringNullableFilter<"usuario"> | string | null
+  active?: Prisma.BoolFilter<"usuario"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"usuario"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"usuario"> | Date | string
+  company?: Prisma.XOR<Prisma.CompanyNullableScalarRelationFilter, Prisma.CompanyWhereInput> | null
+  subscriptions?: Prisma.SubscriptionListRelationFilter
+  payments?: Prisma.PaymentListRelationFilter
+=======
   senha?: Prisma.StringFilter<"usuario"> | string
   criadoEm?: Prisma.DateTimeFilter<"usuario"> | Date | string
   clientes?: Prisma.ClienteListRelationFilter
+  agendamentos?: Prisma.AgendamentoListRelationFilter
+>>>>>>> Stashed changes
 }
 
 export type usuarioOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  nome?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   email?: Prisma.SortOrder
+<<<<<<< Updated upstream
+  taxId?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+  company?: Prisma.CompanyOrderByWithRelationInput
+  subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
+  payments?: Prisma.PaymentOrderByRelationAggregateInput
+=======
   senha?: Prisma.SortOrder
   criadoEm?: Prisma.SortOrder
   clientes?: Prisma.clienteOrderByRelationAggregateInput
+  agendamentos?: Prisma.agendamentoOrderByRelationAggregateInput
+>>>>>>> Stashed changes
 }
 
 export type usuarioWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
+  taxId?: string
   AND?: Prisma.usuarioWhereInput | Prisma.usuarioWhereInput[]
   OR?: Prisma.usuarioWhereInput[]
   NOT?: Prisma.usuarioWhereInput | Prisma.usuarioWhereInput[]
+<<<<<<< Updated upstream
+  name?: Prisma.StringFilter<"usuario"> | string
+  phone?: Prisma.StringNullableFilter<"usuario"> | string | null
+  active?: Prisma.BoolFilter<"usuario"> | boolean
+  createdAt?: Prisma.DateTimeFilter<"usuario"> | Date | string
+  updatedAt?: Prisma.DateTimeFilter<"usuario"> | Date | string
+  company?: Prisma.XOR<Prisma.CompanyNullableScalarRelationFilter, Prisma.CompanyWhereInput> | null
+  subscriptions?: Prisma.SubscriptionListRelationFilter
+  payments?: Prisma.PaymentListRelationFilter
+}, "id" | "email" | "taxId">
+=======
   nome?: Prisma.StringFilter<"usuario"> | string
   senha?: Prisma.StringFilter<"usuario"> | string
   criadoEm?: Prisma.DateTimeFilter<"usuario"> | Date | string
   clientes?: Prisma.ClienteListRelationFilter
+  agendamentos?: Prisma.AgendamentoListRelationFilter
 }, "id" | "email">
+>>>>>>> Stashed changes
 
 export type usuarioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  nome?: Prisma.SortOrder
+  name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-  senha?: Prisma.SortOrder
-  criadoEm?: Prisma.SortOrder
+  taxId?: Prisma.SortOrderInput | Prisma.SortOrder
+  phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  active?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
   _count?: Prisma.usuarioCountOrderByAggregateInput
   _max?: Prisma.usuarioMaxOrderByAggregateInput
   _min?: Prisma.usuarioMinOrderByAggregateInput
@@ -222,13 +284,476 @@ export type usuarioScalarWhereWithAggregatesInput = {
   OR?: Prisma.usuarioScalarWhereWithAggregatesInput[]
   NOT?: Prisma.usuarioScalarWhereWithAggregatesInput | Prisma.usuarioScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"usuario"> | string
-  nome?: Prisma.StringWithAggregatesFilter<"usuario"> | string
+  name?: Prisma.StringWithAggregatesFilter<"usuario"> | string
   email?: Prisma.StringWithAggregatesFilter<"usuario"> | string
-  senha?: Prisma.StringWithAggregatesFilter<"usuario"> | string
-  criadoEm?: Prisma.DateTimeWithAggregatesFilter<"usuario"> | Date | string
+  taxId?: Prisma.StringNullableWithAggregatesFilter<"usuario"> | string | null
+  phone?: Prisma.StringNullableWithAggregatesFilter<"usuario"> | string | null
+  active?: Prisma.BoolWithAggregatesFilter<"usuario"> | boolean
+  createdAt?: Prisma.DateTimeWithAggregatesFilter<"usuario"> | Date | string
+  updatedAt?: Prisma.DateTimeWithAggregatesFilter<"usuario"> | Date | string
 }
 
 export type usuarioCreateInput = {
+  id?: string
+  name: string
+  email: string
+<<<<<<< Updated upstream
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  company?: Prisma.CompanyCreateNestedOneWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutProcessorInput
+=======
+  senha: string
+  criadoEm?: Date | string
+  clientes?: Prisma.clienteCreateNestedManyWithoutResponsavelInput
+  agendamentos?: Prisma.agendamentoCreateNestedManyWithoutResponsavelInput
+>>>>>>> Stashed changes
+}
+
+export type usuarioUncheckedCreateInput = {
+  id?: string
+  name: string
+  email: string
+<<<<<<< Updated upstream
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  company?: Prisma.CompanyUncheckedCreateNestedOneWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutProcessorInput
+=======
+  senha: string
+  criadoEm?: Date | string
+  clientes?: Prisma.clienteUncheckedCreateNestedManyWithoutResponsavelInput
+  agendamentos?: Prisma.agendamentoUncheckedCreateNestedManyWithoutResponsavelInput
+>>>>>>> Stashed changes
+}
+
+export type usuarioUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+<<<<<<< Updated upstream
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.CompanyUpdateOneWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutProcessorNestedInput
+=======
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientes?: Prisma.clienteUpdateManyWithoutResponsavelNestedInput
+  agendamentos?: Prisma.agendamentoUpdateManyWithoutResponsavelNestedInput
+>>>>>>> Stashed changes
+}
+
+export type usuarioUncheckedUpdateInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+<<<<<<< Updated upstream
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.CompanyUncheckedUpdateOneWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutProcessorNestedInput
+=======
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  clientes?: Prisma.clienteUncheckedUpdateManyWithoutResponsavelNestedInput
+  agendamentos?: Prisma.agendamentoUncheckedUpdateManyWithoutResponsavelNestedInput
+>>>>>>> Stashed changes
+}
+
+export type usuarioCreateManyInput = {
+  id?: string
+  name: string
+  email: string
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type usuarioUpdateManyMutationInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type usuarioUncheckedUpdateManyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type usuarioCountOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  taxId?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type usuarioMaxOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  taxId?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type usuarioMinOrderByAggregateInput = {
+  id?: Prisma.SortOrder
+  name?: Prisma.SortOrder
+  email?: Prisma.SortOrder
+  taxId?: Prisma.SortOrder
+  phone?: Prisma.SortOrder
+  active?: Prisma.SortOrder
+  createdAt?: Prisma.SortOrder
+  updatedAt?: Prisma.SortOrder
+}
+
+export type UsuarioScalarRelationFilter = {
+  is?: Prisma.usuarioWhereInput
+  isNot?: Prisma.usuarioWhereInput
+}
+
+export type StringFieldUpdateOperationsInput = {
+  set?: string
+}
+
+export type NullableStringFieldUpdateOperationsInput = {
+  set?: string | null
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
+export type DateTimeFieldUpdateOperationsInput = {
+  set?: Date | string
+}
+
+export type usuarioCreateNestedOneWithoutCompanyInput = {
+  create?: Prisma.XOR<Prisma.usuarioCreateWithoutCompanyInput, Prisma.usuarioUncheckedCreateWithoutCompanyInput>
+  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutCompanyInput
+  connect?: Prisma.usuarioWhereUniqueInput
+}
+
+export type usuarioUpdateOneRequiredWithoutCompanyNestedInput = {
+  create?: Prisma.XOR<Prisma.usuarioCreateWithoutCompanyInput, Prisma.usuarioUncheckedCreateWithoutCompanyInput>
+  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutCompanyInput
+  upsert?: Prisma.usuarioUpsertWithoutCompanyInput
+  connect?: Prisma.usuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usuarioUpdateToOneWithWhereWithoutCompanyInput, Prisma.usuarioUpdateWithoutCompanyInput>, Prisma.usuarioUncheckedUpdateWithoutCompanyInput>
+}
+
+<<<<<<< Updated upstream
+export type usuarioCreateNestedOneWithoutPaymentsInput = {
+  create?: Prisma.XOR<Prisma.usuarioCreateWithoutPaymentsInput, Prisma.usuarioUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutPaymentsInput
+  connect?: Prisma.usuarioWhereUniqueInput
+}
+
+export type usuarioUpdateOneRequiredWithoutPaymentsNestedInput = {
+  create?: Prisma.XOR<Prisma.usuarioCreateWithoutPaymentsInput, Prisma.usuarioUncheckedCreateWithoutPaymentsInput>
+  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutPaymentsInput
+  upsert?: Prisma.usuarioUpsertWithoutPaymentsInput
+  connect?: Prisma.usuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usuarioUpdateToOneWithWhereWithoutPaymentsInput, Prisma.usuarioUpdateWithoutPaymentsInput>, Prisma.usuarioUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type usuarioCreateNestedOneWithoutSubscriptionsInput = {
+  create?: Prisma.XOR<Prisma.usuarioCreateWithoutSubscriptionsInput, Prisma.usuarioUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutSubscriptionsInput
+  connect?: Prisma.usuarioWhereUniqueInput
+}
+
+export type usuarioUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+  create?: Prisma.XOR<Prisma.usuarioCreateWithoutSubscriptionsInput, Prisma.usuarioUncheckedCreateWithoutSubscriptionsInput>
+  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutSubscriptionsInput
+  upsert?: Prisma.usuarioUpsertWithoutSubscriptionsInput
+  connect?: Prisma.usuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usuarioUpdateToOneWithWhereWithoutSubscriptionsInput, Prisma.usuarioUpdateWithoutSubscriptionsInput>, Prisma.usuarioUncheckedUpdateWithoutSubscriptionsInput>
+}
+
+export type usuarioCreateWithoutCompanyInput = {
+=======
+export type usuarioCreateNestedOneWithoutAgendamentosInput = {
+  create?: Prisma.XOR<Prisma.usuarioCreateWithoutAgendamentosInput, Prisma.usuarioUncheckedCreateWithoutAgendamentosInput>
+  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutAgendamentosInput
+  connect?: Prisma.usuarioWhereUniqueInput
+}
+
+export type usuarioUpdateOneWithoutAgendamentosNestedInput = {
+  create?: Prisma.XOR<Prisma.usuarioCreateWithoutAgendamentosInput, Prisma.usuarioUncheckedCreateWithoutAgendamentosInput>
+  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutAgendamentosInput
+  upsert?: Prisma.usuarioUpsertWithoutAgendamentosInput
+  disconnect?: Prisma.usuarioWhereInput | boolean
+  delete?: Prisma.usuarioWhereInput | boolean
+  connect?: Prisma.usuarioWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.usuarioUpdateToOneWithWhereWithoutAgendamentosInput, Prisma.usuarioUpdateWithoutAgendamentosInput>, Prisma.usuarioUncheckedUpdateWithoutAgendamentosInput>
+}
+
+export type usuarioCreateWithoutClientesInput = {
+>>>>>>> Stashed changes
+  id?: string
+  name: string
+  email: string
+<<<<<<< Updated upstream
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutProcessorInput
+=======
+  senha: string
+  criadoEm?: Date | string
+  agendamentos?: Prisma.agendamentoCreateNestedManyWithoutResponsavelInput
+>>>>>>> Stashed changes
+}
+
+export type usuarioUncheckedCreateWithoutCompanyInput = {
+  id?: string
+  name: string
+  email: string
+<<<<<<< Updated upstream
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutProcessorInput
+=======
+  senha: string
+  criadoEm?: Date | string
+  agendamentos?: Prisma.agendamentoUncheckedCreateNestedManyWithoutResponsavelInput
+>>>>>>> Stashed changes
+}
+
+export type usuarioCreateOrConnectWithoutCompanyInput = {
+  where: Prisma.usuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.usuarioCreateWithoutCompanyInput, Prisma.usuarioUncheckedCreateWithoutCompanyInput>
+}
+
+export type usuarioUpsertWithoutCompanyInput = {
+  update: Prisma.XOR<Prisma.usuarioUpdateWithoutCompanyInput, Prisma.usuarioUncheckedUpdateWithoutCompanyInput>
+  create: Prisma.XOR<Prisma.usuarioCreateWithoutCompanyInput, Prisma.usuarioUncheckedCreateWithoutCompanyInput>
+  where?: Prisma.usuarioWhereInput
+}
+
+export type usuarioUpdateToOneWithWhereWithoutCompanyInput = {
+  where?: Prisma.usuarioWhereInput
+  data: Prisma.XOR<Prisma.usuarioUpdateWithoutCompanyInput, Prisma.usuarioUncheckedUpdateWithoutCompanyInput>
+}
+
+export type usuarioUpdateWithoutCompanyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+<<<<<<< Updated upstream
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutProcessorNestedInput
+=======
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agendamentos?: Prisma.agendamentoUpdateManyWithoutResponsavelNestedInput
+>>>>>>> Stashed changes
+}
+
+export type usuarioUncheckedUpdateWithoutCompanyInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+<<<<<<< Updated upstream
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutProcessorNestedInput
+}
+
+export type usuarioCreateWithoutPaymentsInput = {
+  id?: string
+  name: string
+  email: string
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  company?: Prisma.CompanyCreateNestedOneWithoutUserInput
+  subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
+}
+
+export type usuarioUncheckedCreateWithoutPaymentsInput = {
+  id?: string
+  name: string
+  email: string
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  company?: Prisma.CompanyUncheckedCreateNestedOneWithoutUserInput
+  subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type usuarioCreateOrConnectWithoutPaymentsInput = {
+  where: Prisma.usuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.usuarioCreateWithoutPaymentsInput, Prisma.usuarioUncheckedCreateWithoutPaymentsInput>
+}
+
+export type usuarioUpsertWithoutPaymentsInput = {
+  update: Prisma.XOR<Prisma.usuarioUpdateWithoutPaymentsInput, Prisma.usuarioUncheckedUpdateWithoutPaymentsInput>
+  create: Prisma.XOR<Prisma.usuarioCreateWithoutPaymentsInput, Prisma.usuarioUncheckedCreateWithoutPaymentsInput>
+  where?: Prisma.usuarioWhereInput
+}
+
+export type usuarioUpdateToOneWithWhereWithoutPaymentsInput = {
+  where?: Prisma.usuarioWhereInput
+  data: Prisma.XOR<Prisma.usuarioUpdateWithoutPaymentsInput, Prisma.usuarioUncheckedUpdateWithoutPaymentsInput>
+}
+
+export type usuarioUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.CompanyUpdateOneWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
+}
+
+export type usuarioUncheckedUpdateWithoutPaymentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.CompanyUncheckedUpdateOneWithoutUserNestedInput
+  subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type usuarioCreateWithoutSubscriptionsInput = {
+  id?: string
+  name: string
+  email: string
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  company?: Prisma.CompanyCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentCreateNestedManyWithoutProcessorInput
+}
+
+export type usuarioUncheckedCreateWithoutSubscriptionsInput = {
+  id?: string
+  name: string
+  email: string
+  taxId?: string | null
+  phone?: string | null
+  active?: boolean
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  company?: Prisma.CompanyUncheckedCreateNestedOneWithoutUserInput
+  payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutProcessorInput
+}
+
+export type usuarioCreateOrConnectWithoutSubscriptionsInput = {
+  where: Prisma.usuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.usuarioCreateWithoutSubscriptionsInput, Prisma.usuarioUncheckedCreateWithoutSubscriptionsInput>
+}
+
+export type usuarioUpsertWithoutSubscriptionsInput = {
+  update: Prisma.XOR<Prisma.usuarioUpdateWithoutSubscriptionsInput, Prisma.usuarioUncheckedUpdateWithoutSubscriptionsInput>
+  create: Prisma.XOR<Prisma.usuarioCreateWithoutSubscriptionsInput, Prisma.usuarioUncheckedCreateWithoutSubscriptionsInput>
+  where?: Prisma.usuarioWhereInput
+}
+
+export type usuarioUpdateToOneWithWhereWithoutSubscriptionsInput = {
+  where?: Prisma.usuarioWhereInput
+  data: Prisma.XOR<Prisma.usuarioUpdateWithoutSubscriptionsInput, Prisma.usuarioUncheckedUpdateWithoutSubscriptionsInput>
+}
+
+export type usuarioUpdateWithoutSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.CompanyUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUpdateManyWithoutProcessorNestedInput
+}
+
+export type usuarioUncheckedUpdateWithoutSubscriptionsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  active?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  company?: Prisma.CompanyUncheckedUpdateOneWithoutUserNestedInput
+  payments?: Prisma.PaymentUncheckedUpdateManyWithoutProcessorNestedInput
+=======
+  senha?: Prisma.StringFieldUpdateOperationsInput | string
+  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  agendamentos?: Prisma.agendamentoUncheckedUpdateManyWithoutResponsavelNestedInput
+}
+
+export type usuarioCreateWithoutAgendamentosInput = {
   id?: string
   nome: string
   email: string
@@ -237,7 +762,7 @@ export type usuarioCreateInput = {
   clientes?: Prisma.clienteCreateNestedManyWithoutResponsavelInput
 }
 
-export type usuarioUncheckedCreateInput = {
+export type usuarioUncheckedCreateWithoutAgendamentosInput = {
   id?: string
   nome: string
   email: string
@@ -246,7 +771,23 @@ export type usuarioUncheckedCreateInput = {
   clientes?: Prisma.clienteUncheckedCreateNestedManyWithoutResponsavelInput
 }
 
-export type usuarioUpdateInput = {
+export type usuarioCreateOrConnectWithoutAgendamentosInput = {
+  where: Prisma.usuarioWhereUniqueInput
+  create: Prisma.XOR<Prisma.usuarioCreateWithoutAgendamentosInput, Prisma.usuarioUncheckedCreateWithoutAgendamentosInput>
+}
+
+export type usuarioUpsertWithoutAgendamentosInput = {
+  update: Prisma.XOR<Prisma.usuarioUpdateWithoutAgendamentosInput, Prisma.usuarioUncheckedUpdateWithoutAgendamentosInput>
+  create: Prisma.XOR<Prisma.usuarioCreateWithoutAgendamentosInput, Prisma.usuarioUncheckedCreateWithoutAgendamentosInput>
+  where?: Prisma.usuarioWhereInput
+}
+
+export type usuarioUpdateToOneWithWhereWithoutAgendamentosInput = {
+  where?: Prisma.usuarioWhereInput
+  data: Prisma.XOR<Prisma.usuarioUpdateWithoutAgendamentosInput, Prisma.usuarioUncheckedUpdateWithoutAgendamentosInput>
+}
+
+export type usuarioUpdateWithoutAgendamentosInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
@@ -255,138 +796,14 @@ export type usuarioUpdateInput = {
   clientes?: Prisma.clienteUpdateManyWithoutResponsavelNestedInput
 }
 
-export type usuarioUncheckedUpdateInput = {
+export type usuarioUncheckedUpdateWithoutAgendamentosInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   nome?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   senha?: Prisma.StringFieldUpdateOperationsInput | string
   criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   clientes?: Prisma.clienteUncheckedUpdateManyWithoutResponsavelNestedInput
-}
-
-export type usuarioCreateManyInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  criadoEm?: Date | string
-}
-
-export type usuarioUpdateManyMutationInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type usuarioUncheckedUpdateManyInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type usuarioCountOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  nome?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  senha?: Prisma.SortOrder
-  criadoEm?: Prisma.SortOrder
-}
-
-export type usuarioMaxOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  nome?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  senha?: Prisma.SortOrder
-  criadoEm?: Prisma.SortOrder
-}
-
-export type usuarioMinOrderByAggregateInput = {
-  id?: Prisma.SortOrder
-  nome?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  senha?: Prisma.SortOrder
-  criadoEm?: Prisma.SortOrder
-}
-
-export type UsuarioNullableScalarRelationFilter = {
-  is?: Prisma.usuarioWhereInput | null
-  isNot?: Prisma.usuarioWhereInput | null
-}
-
-export type StringFieldUpdateOperationsInput = {
-  set?: string
-}
-
-export type DateTimeFieldUpdateOperationsInput = {
-  set?: Date | string
-}
-
-export type usuarioCreateNestedOneWithoutClientesInput = {
-  create?: Prisma.XOR<Prisma.usuarioCreateWithoutClientesInput, Prisma.usuarioUncheckedCreateWithoutClientesInput>
-  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutClientesInput
-  connect?: Prisma.usuarioWhereUniqueInput
-}
-
-export type usuarioUpdateOneWithoutClientesNestedInput = {
-  create?: Prisma.XOR<Prisma.usuarioCreateWithoutClientesInput, Prisma.usuarioUncheckedCreateWithoutClientesInput>
-  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutClientesInput
-  upsert?: Prisma.usuarioUpsertWithoutClientesInput
-  disconnect?: Prisma.usuarioWhereInput | boolean
-  delete?: Prisma.usuarioWhereInput | boolean
-  connect?: Prisma.usuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.usuarioUpdateToOneWithWhereWithoutClientesInput, Prisma.usuarioUpdateWithoutClientesInput>, Prisma.usuarioUncheckedUpdateWithoutClientesInput>
-}
-
-export type usuarioCreateWithoutClientesInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  criadoEm?: Date | string
-}
-
-export type usuarioUncheckedCreateWithoutClientesInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  criadoEm?: Date | string
-}
-
-export type usuarioCreateOrConnectWithoutClientesInput = {
-  where: Prisma.usuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.usuarioCreateWithoutClientesInput, Prisma.usuarioUncheckedCreateWithoutClientesInput>
-}
-
-export type usuarioUpsertWithoutClientesInput = {
-  update: Prisma.XOR<Prisma.usuarioUpdateWithoutClientesInput, Prisma.usuarioUncheckedUpdateWithoutClientesInput>
-  create: Prisma.XOR<Prisma.usuarioCreateWithoutClientesInput, Prisma.usuarioUncheckedCreateWithoutClientesInput>
-  where?: Prisma.usuarioWhereInput
-}
-
-export type usuarioUpdateToOneWithWhereWithoutClientesInput = {
-  where?: Prisma.usuarioWhereInput
-  data: Prisma.XOR<Prisma.usuarioUpdateWithoutClientesInput, Prisma.usuarioUncheckedUpdateWithoutClientesInput>
-}
-
-export type usuarioUpdateWithoutClientesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-}
-
-export type usuarioUncheckedUpdateWithoutClientesInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+>>>>>>> Stashed changes
 }
 
 
@@ -395,11 +812,23 @@ export type usuarioUncheckedUpdateWithoutClientesInput = {
  */
 
 export type UsuarioCountOutputType = {
+<<<<<<< Updated upstream
+  subscriptions: number
+  payments: number
+}
+
+export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  subscriptions?: boolean | UsuarioCountOutputTypeCountSubscriptionsArgs
+  payments?: boolean | UsuarioCountOutputTypeCountPaymentsArgs
+=======
   clientes: number
+  agendamentos: number
 }
 
 export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   clientes?: boolean | UsuarioCountOutputTypeCountClientesArgs
+  agendamentos?: boolean | UsuarioCountOutputTypeCountAgendamentosArgs
+>>>>>>> Stashed changes
 }
 
 /**
@@ -415,48 +844,90 @@ export type UsuarioCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Exte
 /**
  * UsuarioCountOutputType without action
  */
-export type UsuarioCountOutputTypeCountClientesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.clienteWhereInput
+export type UsuarioCountOutputTypeCountSubscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SubscriptionWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountPaymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.PaymentWhereInput
+}
+
+/**
+ * UsuarioCountOutputType without action
+ */
+export type UsuarioCountOutputTypeCountAgendamentosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.agendamentoWhereInput
 }
 
 
 export type usuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  nome?: boolean
+  name?: boolean
   email?: boolean
+<<<<<<< Updated upstream
+  taxId?: boolean
+  phone?: boolean
+  active?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
+  company?: boolean | Prisma.usuario$companyArgs<ExtArgs>
+  subscriptions?: boolean | Prisma.usuario$subscriptionsArgs<ExtArgs>
+  payments?: boolean | Prisma.usuario$paymentsArgs<ExtArgs>
+=======
   senha?: boolean
   criadoEm?: boolean
   clientes?: boolean | Prisma.usuario$clientesArgs<ExtArgs>
+  agendamentos?: boolean | Prisma.usuario$agendamentosArgs<ExtArgs>
+>>>>>>> Stashed changes
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
 
 export type usuarioSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  nome?: boolean
+  name?: boolean
   email?: boolean
-  senha?: boolean
-  criadoEm?: boolean
+  taxId?: boolean
+  phone?: boolean
+  active?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["usuario"]>
 
 export type usuarioSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  nome?: boolean
+  name?: boolean
   email?: boolean
-  senha?: boolean
-  criadoEm?: boolean
+  taxId?: boolean
+  phone?: boolean
+  active?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }, ExtArgs["result"]["usuario"]>
 
 export type usuarioSelectScalar = {
   id?: boolean
-  nome?: boolean
+  name?: boolean
   email?: boolean
-  senha?: boolean
-  criadoEm?: boolean
+  taxId?: boolean
+  phone?: boolean
+  active?: boolean
+  createdAt?: boolean
+  updatedAt?: boolean
 }
 
-export type usuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "nome" | "email" | "senha" | "criadoEm", ExtArgs["result"]["usuario"]>
+export type usuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "taxId" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["usuario"]>
 export type usuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+<<<<<<< Updated upstream
+  company?: boolean | Prisma.usuario$companyArgs<ExtArgs>
+  subscriptions?: boolean | Prisma.usuario$subscriptionsArgs<ExtArgs>
+  payments?: boolean | Prisma.usuario$paymentsArgs<ExtArgs>
+=======
   clientes?: boolean | Prisma.usuario$clientesArgs<ExtArgs>
+  agendamentos?: boolean | Prisma.usuario$agendamentosArgs<ExtArgs>
+>>>>>>> Stashed changes
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type usuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -465,14 +936,24 @@ export type usuarioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $usuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "usuario"
   objects: {
+<<<<<<< Updated upstream
+    company: Prisma.$CompanyPayload<ExtArgs> | null
+    subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
+    payments: Prisma.$PaymentPayload<ExtArgs>[]
+=======
     clientes: Prisma.$clientePayload<ExtArgs>[]
+    agendamentos: Prisma.$agendamentoPayload<ExtArgs>[]
+>>>>>>> Stashed changes
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    nome: string
+    name: string
     email: string
-    senha: string
-    criadoEm: Date
+    taxId: string | null
+    phone: string | null
+    active: boolean
+    createdAt: Date
+    updatedAt: Date
   }, ExtArgs["result"]["usuario"]>
   composites: {}
 }
@@ -867,7 +1348,14 @@ readonly fields: usuarioFieldRefs;
  */
 export interface Prisma__usuarioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+<<<<<<< Updated upstream
+  company<T extends Prisma.usuario$companyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$companyArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  subscriptions<T extends Prisma.usuario$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  payments<T extends Prisma.usuario$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+=======
   clientes<T extends Prisma.usuario$clientesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$clientesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$clientePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  agendamentos<T extends Prisma.usuario$agendamentosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$agendamentosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$agendamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+>>>>>>> Stashed changes
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -898,10 +1386,13 @@ export interface Prisma__usuarioClient<T, Null = never, ExtArgs extends runtime.
  */
 export interface usuarioFieldRefs {
   readonly id: Prisma.FieldRef<"usuario", 'String'>
-  readonly nome: Prisma.FieldRef<"usuario", 'String'>
+  readonly name: Prisma.FieldRef<"usuario", 'String'>
   readonly email: Prisma.FieldRef<"usuario", 'String'>
-  readonly senha: Prisma.FieldRef<"usuario", 'String'>
-  readonly criadoEm: Prisma.FieldRef<"usuario", 'DateTime'>
+  readonly taxId: Prisma.FieldRef<"usuario", 'String'>
+  readonly phone: Prisma.FieldRef<"usuario", 'String'>
+  readonly active: Prisma.FieldRef<"usuario", 'Boolean'>
+  readonly createdAt: Prisma.FieldRef<"usuario", 'DateTime'>
+  readonly updatedAt: Prisma.FieldRef<"usuario", 'DateTime'>
 }
     
 
@@ -1295,27 +1786,94 @@ export type usuarioDeleteManyArgs<ExtArgs extends runtime.Types.Extensions.Inter
 }
 
 /**
- * usuario.clientes
+ * usuario.company
  */
-export type usuario$clientesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type usuario$companyArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the cliente
+   * Select specific fields to fetch from the Company
    */
-  select?: Prisma.clienteSelect<ExtArgs> | null
+  select?: Prisma.CompanySelect<ExtArgs> | null
   /**
-   * Omit specific fields from the cliente
+   * Omit specific fields from the Company
    */
-  omit?: Prisma.clienteOmit<ExtArgs> | null
+  omit?: Prisma.CompanyOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.clienteInclude<ExtArgs> | null
-  where?: Prisma.clienteWhereInput
-  orderBy?: Prisma.clienteOrderByWithRelationInput | Prisma.clienteOrderByWithRelationInput[]
-  cursor?: Prisma.clienteWhereUniqueInput
+  include?: Prisma.CompanyInclude<ExtArgs> | null
+  where?: Prisma.CompanyWhereInput
+}
+
+/**
+ * usuario.subscriptions
+ */
+export type usuario$subscriptionsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Subscription
+   */
+  select?: Prisma.SubscriptionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Subscription
+   */
+  omit?: Prisma.SubscriptionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SubscriptionInclude<ExtArgs> | null
+  where?: Prisma.SubscriptionWhereInput
+  orderBy?: Prisma.SubscriptionOrderByWithRelationInput | Prisma.SubscriptionOrderByWithRelationInput[]
+  cursor?: Prisma.SubscriptionWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.ClienteScalarFieldEnum | Prisma.ClienteScalarFieldEnum[]
+  distinct?: Prisma.SubscriptionScalarFieldEnum | Prisma.SubscriptionScalarFieldEnum[]
+}
+
+/**
+ * usuario.payments
+ */
+export type usuario$paymentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Payment
+   */
+  select?: Prisma.PaymentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Payment
+   */
+  omit?: Prisma.PaymentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.PaymentInclude<ExtArgs> | null
+  where?: Prisma.PaymentWhereInput
+  orderBy?: Prisma.PaymentOrderByWithRelationInput | Prisma.PaymentOrderByWithRelationInput[]
+  cursor?: Prisma.PaymentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.PaymentScalarFieldEnum | Prisma.PaymentScalarFieldEnum[]
+}
+
+/**
+ * usuario.agendamentos
+ */
+export type usuario$agendamentosArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the agendamento
+   */
+  select?: Prisma.agendamentoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the agendamento
+   */
+  omit?: Prisma.agendamentoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.agendamentoInclude<ExtArgs> | null
+  where?: Prisma.agendamentoWhereInput
+  orderBy?: Prisma.agendamentoOrderByWithRelationInput | Prisma.agendamentoOrderByWithRelationInput[]
+  cursor?: Prisma.agendamentoWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.AgendamentoScalarFieldEnum | Prisma.AgendamentoScalarFieldEnum[]
 }
 
 /**

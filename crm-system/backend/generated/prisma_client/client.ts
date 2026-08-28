@@ -47,12 +47,61 @@ export { Prisma }
  */
 export type usuario = Prisma.usuarioModel
 /**
- * Model cliente
+ * Model Company
  * 
  */
-export type cliente = Prisma.clienteModel
+export type Company = Prisma.CompanyModel
 /**
- * Model negociacao
+ * Model Service
  * 
  */
+<<<<<<< Updated upstream
+export type Service = Prisma.ServiceModel
+/**
+ * Model Customer
+ * 
+ */
+export type Customer = Prisma.CustomerModel
+/**
+ * Model Appointment
+ * 
+ */
+export type Appointment = Prisma.AppointmentModel
+/**
+ * Model AppointmentService
+ * 
+ */
+export type AppointmentService = Prisma.AppointmentServiceModel
+/**
+ * Model Payment
+ * 
+ */
+export type Payment = Prisma.PaymentModel
+/**
+ * Model FinancialTransaction
+ * 
+ */
+export type FinancialTransaction = Prisma.FinancialTransactionModel
+/**
+ * Model SubscriptionPlan
+ * 
+ */
+export type SubscriptionPlan = Prisma.SubscriptionPlanModel
+/**
+ * Model Subscription
+ * 
+ */
+export type Subscription = Prisma.SubscriptionModel
+/**
+ * Model BusinessHour
+ * 
+ */
+export type BusinessHour = Prisma.BusinessHourModel
+=======
 export type negociacao = Prisma.negociacaoModel
+/**
+ * Model agendamento
+ * 
+ */
+export type agendamento = Prisma.agendamentoModel
+>>>>>>> Stashed changes

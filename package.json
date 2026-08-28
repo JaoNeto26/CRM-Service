@@ -1,31 +1,35 @@
 {
-  "name": "crm-system",
-  "version": "1.0.2",
-  "description": "API para Workspaces, visando facilitar o desenvolvimento.",
-  "private": true,
-  "workspaces": [
-    "crm-system/frontend",
-    "crm-system/backend"
-  ],
-  "homepage": "https://github.com/JaoNeto26/CRM-Service#readme",
-  "bugs": {
-    "url": "https://github.com/JaoNeto26/CRM-Service/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/JaoNeto26/CRM-Service.git"
-  },
-  "license": "ISC",
-  "author": "",
-  "type": "module",
-  "main": "index.js",
-  "scripts": {
-    "build": "npm run build --workspaces",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npm run lint --workspaces",
-    "dev": "npm run dev --workspaces",
-    "docker:up": "docker compose -f crm-system/docker-compose.yml up -d",
-    "docker:down": "docker compose -f crm-system/docker-compose.yml down",
-    "docker:logs": "docker compose -f crm-system/docker-compose.yml logs -f"
-  }
+    "name": "crm-system",
+    "version": "1.0.2",
+    "description": "API para Workspaces, visando facilitar o desenvolvimento.",
+    "private": true,
+    "workspaces": [
+        "crm-system/frontend",
+        "crm-system/backend"
+    ],
+    "homepage": "https://github.com/JaoNeto26/CRM-Service#readme",
+    "bugs": {
+        "url": "https://github.com/JaoNeto26/CRM-Service/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/JaoNeto26/CRM-Service.git"
+    },
+    "license": "ISC",
+    "author": "",
+    "type": "module",
+    "main": "index.js",
+    "scripts": {
+        "build": "npm run build --workspaces",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "lint": "npm run lint --workspaces",
+        "dev": "npm run dev --workspaces",
+        "docker:up": "docker compose -f crm-system/docker-compose.yml up -d",
+        "docker:down": "docker compose -f crm-system/docker-compose.yml down",
+        "docker:logs": "docker compose -f crm-system/docker-compose.yml logs -f",
+        "prisma studio": "npx -w backend prisma studio"
+    },
+    "dependencies": {
+        "axios": "^1.20.0"
+    }
 }
