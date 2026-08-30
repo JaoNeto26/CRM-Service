@@ -47,7 +47,7 @@ enum DayOfWeek {
   sunday
 }
 
-model usuario {
+model Usuario {
   id            String         @id @default(cuid())
   name          String         @db.VarChar(255)
   email         String         @unique @db.VarChar(255)
@@ -78,7 +78,7 @@ model Company {
   active        Boolean                @default(true)
   createdAt     DateTime               @default(now()) @map("created_at")
   updatedAt     DateTime               @updatedAt @map("updated_at")
-  user          usuario                @relation(fields: [userId], references: [id])
+  user          Usuario                @relation(fields: [userId], references: [id])
   services      Service[]
   customers     Customer[]
   appointments  Appointment[]
@@ -173,7 +173,7 @@ model Payment {
   updatedAt     DateTime              @updatedAt @map("updated_at")
   appointment   Appointment           @relation(fields: [appointmentId], references: [id])
   company       Company               @relation(fields: [companyId], references: [id])
-  processor     usuario               @relation(fields: [processedBy], references: [id])
+  processor     Usuario               @relation(fields: [processedBy], references: [id])
   transaction   FinancialTransaction?
 
   @@map("payments")
@@ -223,7 +223,7 @@ model Subscription {
   paymentMethodId String?            @map("payment_method_id") @db.VarChar(255)
   createdAt       DateTime           @default(now()) @map("created_at")
   updatedAt       DateTime           @updatedAt @map("updated_at")
-  user            usuario            @relation(fields: [userId], references: [id])
+  user            Usuario            @relation(fields: [userId], references: [id])
   plan            SubscriptionPlan   @relation(fields: [planId], references: [id])
 
   @@map("subscriptions")

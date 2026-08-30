@@ -201,7 +201,6 @@ export type usuarioWhereInput = {
   id?: Prisma.StringFilter<"usuario"> | string
   name?: Prisma.StringFilter<"usuario"> | string
   email?: Prisma.StringFilter<"usuario"> | string
-<<<<<<< Updated upstream
   taxId?: Prisma.StringNullableFilter<"usuario"> | string | null
   phone?: Prisma.StringNullableFilter<"usuario"> | string | null
   active?: Prisma.BoolFilter<"usuario"> | boolean
@@ -210,19 +209,12 @@ export type usuarioWhereInput = {
   company?: Prisma.XOR<Prisma.CompanyNullableScalarRelationFilter, Prisma.CompanyWhereInput> | null
   subscriptions?: Prisma.SubscriptionListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
-=======
-  senha?: Prisma.StringFilter<"usuario"> | string
-  criadoEm?: Prisma.DateTimeFilter<"usuario"> | Date | string
-  clientes?: Prisma.ClienteListRelationFilter
-  agendamentos?: Prisma.AgendamentoListRelationFilter
->>>>>>> Stashed changes
 }
 
 export type usuarioOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   name?: Prisma.SortOrder
   email?: Prisma.SortOrder
-<<<<<<< Updated upstream
   taxId?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
   active?: Prisma.SortOrder
@@ -231,12 +223,6 @@ export type usuarioOrderByWithRelationInput = {
   company?: Prisma.CompanyOrderByWithRelationInput
   subscriptions?: Prisma.SubscriptionOrderByRelationAggregateInput
   payments?: Prisma.PaymentOrderByRelationAggregateInput
-=======
-  senha?: Prisma.SortOrder
-  criadoEm?: Prisma.SortOrder
-  clientes?: Prisma.clienteOrderByRelationAggregateInput
-  agendamentos?: Prisma.agendamentoOrderByRelationAggregateInput
->>>>>>> Stashed changes
 }
 
 export type usuarioWhereUniqueInput = Prisma.AtLeast<{
@@ -246,7 +232,6 @@ export type usuarioWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.usuarioWhereInput | Prisma.usuarioWhereInput[]
   OR?: Prisma.usuarioWhereInput[]
   NOT?: Prisma.usuarioWhereInput | Prisma.usuarioWhereInput[]
-<<<<<<< Updated upstream
   name?: Prisma.StringFilter<"usuario"> | string
   phone?: Prisma.StringNullableFilter<"usuario"> | string | null
   active?: Prisma.BoolFilter<"usuario"> | boolean
@@ -256,14 +241,6 @@ export type usuarioWhereUniqueInput = Prisma.AtLeast<{
   subscriptions?: Prisma.SubscriptionListRelationFilter
   payments?: Prisma.PaymentListRelationFilter
 }, "id" | "email" | "taxId">
-=======
-  nome?: Prisma.StringFilter<"usuario"> | string
-  senha?: Prisma.StringFilter<"usuario"> | string
-  criadoEm?: Prisma.DateTimeFilter<"usuario"> | Date | string
-  clientes?: Prisma.ClienteListRelationFilter
-  agendamentos?: Prisma.AgendamentoListRelationFilter
-}, "id" | "email">
->>>>>>> Stashed changes
 
 export type usuarioOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -297,7 +274,6 @@ export type usuarioCreateInput = {
   id?: string
   name: string
   email: string
-<<<<<<< Updated upstream
   taxId?: string | null
   phone?: string | null
   active?: boolean
@@ -306,19 +282,12 @@ export type usuarioCreateInput = {
   company?: Prisma.CompanyCreateNestedOneWithoutUserInput
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutProcessorInput
-=======
-  senha: string
-  criadoEm?: Date | string
-  clientes?: Prisma.clienteCreateNestedManyWithoutResponsavelInput
-  agendamentos?: Prisma.agendamentoCreateNestedManyWithoutResponsavelInput
->>>>>>> Stashed changes
 }
 
 export type usuarioUncheckedCreateInput = {
   id?: string
   name: string
   email: string
-<<<<<<< Updated upstream
   taxId?: string | null
   phone?: string | null
   active?: boolean
@@ -327,19 +296,12 @@ export type usuarioUncheckedCreateInput = {
   company?: Prisma.CompanyUncheckedCreateNestedOneWithoutUserInput
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutProcessorInput
-=======
-  senha: string
-  criadoEm?: Date | string
-  clientes?: Prisma.clienteUncheckedCreateNestedManyWithoutResponsavelInput
-  agendamentos?: Prisma.agendamentoUncheckedCreateNestedManyWithoutResponsavelInput
->>>>>>> Stashed changes
 }
 
 export type usuarioUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-<<<<<<< Updated upstream
   taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -348,19 +310,12 @@ export type usuarioUpdateInput = {
   company?: Prisma.CompanyUpdateOneWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutProcessorNestedInput
-=======
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clientes?: Prisma.clienteUpdateManyWithoutResponsavelNestedInput
-  agendamentos?: Prisma.agendamentoUpdateManyWithoutResponsavelNestedInput
->>>>>>> Stashed changes
 }
 
 export type usuarioUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-<<<<<<< Updated upstream
   taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -369,12 +324,6 @@ export type usuarioUncheckedUpdateInput = {
   company?: Prisma.CompanyUncheckedUpdateOneWithoutUserNestedInput
   subscriptions?: Prisma.SubscriptionUncheckedUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutProcessorNestedInput
-=======
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clientes?: Prisma.clienteUncheckedUpdateManyWithoutResponsavelNestedInput
-  agendamentos?: Prisma.agendamentoUncheckedUpdateManyWithoutResponsavelNestedInput
->>>>>>> Stashed changes
 }
 
 export type usuarioCreateManyInput = {
@@ -478,7 +427,6 @@ export type usuarioUpdateOneRequiredWithoutCompanyNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.usuarioUpdateToOneWithWhereWithoutCompanyInput, Prisma.usuarioUpdateWithoutCompanyInput>, Prisma.usuarioUncheckedUpdateWithoutCompanyInput>
 }
 
-<<<<<<< Updated upstream
 export type usuarioCreateNestedOneWithoutPaymentsInput = {
   create?: Prisma.XOR<Prisma.usuarioCreateWithoutPaymentsInput, Prisma.usuarioUncheckedCreateWithoutPaymentsInput>
   connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutPaymentsInput
@@ -508,29 +456,9 @@ export type usuarioUpdateOneRequiredWithoutSubscriptionsNestedInput = {
 }
 
 export type usuarioCreateWithoutCompanyInput = {
-=======
-export type usuarioCreateNestedOneWithoutAgendamentosInput = {
-  create?: Prisma.XOR<Prisma.usuarioCreateWithoutAgendamentosInput, Prisma.usuarioUncheckedCreateWithoutAgendamentosInput>
-  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutAgendamentosInput
-  connect?: Prisma.usuarioWhereUniqueInput
-}
-
-export type usuarioUpdateOneWithoutAgendamentosNestedInput = {
-  create?: Prisma.XOR<Prisma.usuarioCreateWithoutAgendamentosInput, Prisma.usuarioUncheckedCreateWithoutAgendamentosInput>
-  connectOrCreate?: Prisma.usuarioCreateOrConnectWithoutAgendamentosInput
-  upsert?: Prisma.usuarioUpsertWithoutAgendamentosInput
-  disconnect?: Prisma.usuarioWhereInput | boolean
-  delete?: Prisma.usuarioWhereInput | boolean
-  connect?: Prisma.usuarioWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.usuarioUpdateToOneWithWhereWithoutAgendamentosInput, Prisma.usuarioUpdateWithoutAgendamentosInput>, Prisma.usuarioUncheckedUpdateWithoutAgendamentosInput>
-}
-
-export type usuarioCreateWithoutClientesInput = {
->>>>>>> Stashed changes
   id?: string
   name: string
   email: string
-<<<<<<< Updated upstream
   taxId?: string | null
   phone?: string | null
   active?: boolean
@@ -538,18 +466,12 @@ export type usuarioCreateWithoutClientesInput = {
   updatedAt?: Date | string
   subscriptions?: Prisma.SubscriptionCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentCreateNestedManyWithoutProcessorInput
-=======
-  senha: string
-  criadoEm?: Date | string
-  agendamentos?: Prisma.agendamentoCreateNestedManyWithoutResponsavelInput
->>>>>>> Stashed changes
 }
 
 export type usuarioUncheckedCreateWithoutCompanyInput = {
   id?: string
   name: string
   email: string
-<<<<<<< Updated upstream
   taxId?: string | null
   phone?: string | null
   active?: boolean
@@ -557,11 +479,6 @@ export type usuarioUncheckedCreateWithoutCompanyInput = {
   updatedAt?: Date | string
   subscriptions?: Prisma.SubscriptionUncheckedCreateNestedManyWithoutUserInput
   payments?: Prisma.PaymentUncheckedCreateNestedManyWithoutProcessorInput
-=======
-  senha: string
-  criadoEm?: Date | string
-  agendamentos?: Prisma.agendamentoUncheckedCreateNestedManyWithoutResponsavelInput
->>>>>>> Stashed changes
 }
 
 export type usuarioCreateOrConnectWithoutCompanyInput = {
@@ -584,7 +501,6 @@ export type usuarioUpdateWithoutCompanyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-<<<<<<< Updated upstream
   taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -592,18 +508,12 @@ export type usuarioUpdateWithoutCompanyInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   subscriptions?: Prisma.SubscriptionUpdateManyWithoutUserNestedInput
   payments?: Prisma.PaymentUpdateManyWithoutProcessorNestedInput
-=======
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  agendamentos?: Prisma.agendamentoUpdateManyWithoutResponsavelNestedInput
->>>>>>> Stashed changes
 }
 
 export type usuarioUncheckedUpdateWithoutCompanyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
-<<<<<<< Updated upstream
   taxId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   active?: Prisma.BoolFieldUpdateOperationsInput | boolean
@@ -747,63 +657,6 @@ export type usuarioUncheckedUpdateWithoutSubscriptionsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   company?: Prisma.CompanyUncheckedUpdateOneWithoutUserNestedInput
   payments?: Prisma.PaymentUncheckedUpdateManyWithoutProcessorNestedInput
-=======
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  agendamentos?: Prisma.agendamentoUncheckedUpdateManyWithoutResponsavelNestedInput
-}
-
-export type usuarioCreateWithoutAgendamentosInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  criadoEm?: Date | string
-  clientes?: Prisma.clienteCreateNestedManyWithoutResponsavelInput
-}
-
-export type usuarioUncheckedCreateWithoutAgendamentosInput = {
-  id?: string
-  nome: string
-  email: string
-  senha: string
-  criadoEm?: Date | string
-  clientes?: Prisma.clienteUncheckedCreateNestedManyWithoutResponsavelInput
-}
-
-export type usuarioCreateOrConnectWithoutAgendamentosInput = {
-  where: Prisma.usuarioWhereUniqueInput
-  create: Prisma.XOR<Prisma.usuarioCreateWithoutAgendamentosInput, Prisma.usuarioUncheckedCreateWithoutAgendamentosInput>
-}
-
-export type usuarioUpsertWithoutAgendamentosInput = {
-  update: Prisma.XOR<Prisma.usuarioUpdateWithoutAgendamentosInput, Prisma.usuarioUncheckedUpdateWithoutAgendamentosInput>
-  create: Prisma.XOR<Prisma.usuarioCreateWithoutAgendamentosInput, Prisma.usuarioUncheckedCreateWithoutAgendamentosInput>
-  where?: Prisma.usuarioWhereInput
-}
-
-export type usuarioUpdateToOneWithWhereWithoutAgendamentosInput = {
-  where?: Prisma.usuarioWhereInput
-  data: Prisma.XOR<Prisma.usuarioUpdateWithoutAgendamentosInput, Prisma.usuarioUncheckedUpdateWithoutAgendamentosInput>
-}
-
-export type usuarioUpdateWithoutAgendamentosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clientes?: Prisma.clienteUpdateManyWithoutResponsavelNestedInput
-}
-
-export type usuarioUncheckedUpdateWithoutAgendamentosInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  nome?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  senha?: Prisma.StringFieldUpdateOperationsInput | string
-  criadoEm?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  clientes?: Prisma.clienteUncheckedUpdateManyWithoutResponsavelNestedInput
->>>>>>> Stashed changes
 }
 
 
@@ -812,7 +665,6 @@ export type usuarioUncheckedUpdateWithoutAgendamentosInput = {
  */
 
 export type UsuarioCountOutputType = {
-<<<<<<< Updated upstream
   subscriptions: number
   payments: number
 }
@@ -820,15 +672,6 @@ export type UsuarioCountOutputType = {
 export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   subscriptions?: boolean | UsuarioCountOutputTypeCountSubscriptionsArgs
   payments?: boolean | UsuarioCountOutputTypeCountPaymentsArgs
-=======
-  clientes: number
-  agendamentos: number
-}
-
-export type UsuarioCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  clientes?: boolean | UsuarioCountOutputTypeCountClientesArgs
-  agendamentos?: boolean | UsuarioCountOutputTypeCountAgendamentosArgs
->>>>>>> Stashed changes
 }
 
 /**
@@ -867,7 +710,6 @@ export type usuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   id?: boolean
   name?: boolean
   email?: boolean
-<<<<<<< Updated upstream
   taxId?: boolean
   phone?: boolean
   active?: boolean
@@ -876,12 +718,6 @@ export type usuarioSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   company?: boolean | Prisma.usuario$companyArgs<ExtArgs>
   subscriptions?: boolean | Prisma.usuario$subscriptionsArgs<ExtArgs>
   payments?: boolean | Prisma.usuario$paymentsArgs<ExtArgs>
-=======
-  senha?: boolean
-  criadoEm?: boolean
-  clientes?: boolean | Prisma.usuario$clientesArgs<ExtArgs>
-  agendamentos?: boolean | Prisma.usuario$agendamentosArgs<ExtArgs>
->>>>>>> Stashed changes
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["usuario"]>
 
@@ -920,14 +756,9 @@ export type usuarioSelectScalar = {
 
 export type usuarioOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "email" | "taxId" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["usuario"]>
 export type usuarioInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-<<<<<<< Updated upstream
   company?: boolean | Prisma.usuario$companyArgs<ExtArgs>
   subscriptions?: boolean | Prisma.usuario$subscriptionsArgs<ExtArgs>
   payments?: boolean | Prisma.usuario$paymentsArgs<ExtArgs>
-=======
-  clientes?: boolean | Prisma.usuario$clientesArgs<ExtArgs>
-  agendamentos?: boolean | Prisma.usuario$agendamentosArgs<ExtArgs>
->>>>>>> Stashed changes
   _count?: boolean | Prisma.UsuarioCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type usuarioIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -936,14 +767,9 @@ export type usuarioIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
 export type $usuarioPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "usuario"
   objects: {
-<<<<<<< Updated upstream
     company: Prisma.$CompanyPayload<ExtArgs> | null
     subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
     payments: Prisma.$PaymentPayload<ExtArgs>[]
-=======
-    clientes: Prisma.$clientePayload<ExtArgs>[]
-    agendamentos: Prisma.$agendamentoPayload<ExtArgs>[]
->>>>>>> Stashed changes
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1348,14 +1174,9 @@ readonly fields: usuarioFieldRefs;
  */
 export interface Prisma__usuarioClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
-<<<<<<< Updated upstream
   company<T extends Prisma.usuario$companyArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$companyArgs<ExtArgs>>): Prisma.Prisma__CompanyClient<runtime.Types.Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   subscriptions<T extends Prisma.usuario$subscriptionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   payments<T extends Prisma.usuario$paymentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-=======
-  clientes<T extends Prisma.usuario$clientesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$clientesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$clientePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  agendamentos<T extends Prisma.usuario$agendamentosArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.usuario$agendamentosArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$agendamentoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
->>>>>>> Stashed changes
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
