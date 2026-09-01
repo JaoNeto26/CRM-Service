@@ -27,7 +27,8 @@
         "docker:up": "docker compose -f crm-system/docker-compose.yml up -d",
         "docker:down": "docker compose -f crm-system/docker-compose.yml down",
         "docker:logs": "docker compose -f crm-system/docker-compose.yml logs -f",
-        "prisma studio": "npx -w backend prisma studio",
+        "prisma:generate": "docker exec -it crm_backend npx prisma generate",
+        "prisma:reset": "docker exec -it crm_backend npx prisma migrate reset",
         "db:deploy": "npx -w backend db:deploy"
     }
 }
