@@ -327,7 +327,7 @@ exports.DayOfWeek = exports.$Enums.DayOfWeek = {
 };
 
 exports.Prisma.ModelName = {
-  usuario: 'usuario',
+  Usuario: 'Usuario',
   Company: 'Company',
   Service: 'Service',
   Customer: 'Customer',

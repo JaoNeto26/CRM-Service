@@ -14,10 +14,10 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 
 /**
- * Model usuario
+ * Model Usuario
  * 
  */
-export type usuario = $Result.DefaultSelection<Prisma.$usuarioPayload>
+export type Usuario = $Result.DefaultSelection<Prisma.$UsuarioPayload>
 /**
  * Model Company
  * 
@@ -271,14 +271,14 @@ export class PrismaClient<
   }>>
 
       /**
-   * `prisma.usuario`: Exposes CRUD operations for the **usuario** model.
+   * `prisma.usuario`: Exposes CRUD operations for the **Usuario** model.
     * Example usage:
     * ```ts
     * // Fetch zero or more Usuarios
     * const usuarios = await prisma.usuario.findMany()
     * ```
     */
-  get usuario(): Prisma.usuarioDelegate<ExtArgs, ClientOptions>;
+  get usuario(): Prisma.UsuarioDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.company`: Exposes CRUD operations for the **Company** model.
@@ -826,7 +826,7 @@ export namespace Prisma {
 
 
   export const ModelName: {
-    usuario: 'usuario',
+    Usuario: 'Usuario',
     Company: 'Company',
     Service: 'Service',
     Customer: 'Customer',
@@ -856,76 +856,76 @@ export namespace Prisma {
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
-      usuario: {
-        payload: Prisma.$usuarioPayload<ExtArgs>
-        fields: Prisma.usuarioFieldRefs
+      Usuario: {
+        payload: Prisma.$UsuarioPayload<ExtArgs>
+        fields: Prisma.UsuarioFieldRefs
         operations: {
           findUnique: {
-            args: Prisma.usuarioFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload> | null
+            args: Prisma.UsuarioFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload> | null
           }
           findUniqueOrThrow: {
-            args: Prisma.usuarioFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>
+            args: Prisma.UsuarioFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           findFirst: {
-            args: Prisma.usuarioFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload> | null
+            args: Prisma.UsuarioFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload> | null
           }
           findFirstOrThrow: {
-            args: Prisma.usuarioFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>
+            args: Prisma.UsuarioFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           findMany: {
-            args: Prisma.usuarioFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>[]
+            args: Prisma.UsuarioFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>[]
           }
           create: {
-            args: Prisma.usuarioCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>
+            args: Prisma.UsuarioCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           createMany: {
-            args: Prisma.usuarioCreateManyArgs<ExtArgs>
+            args: Prisma.UsuarioCreateManyArgs<ExtArgs>
             result: BatchPayload
           }
           createManyAndReturn: {
-            args: Prisma.usuarioCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>[]
+            args: Prisma.UsuarioCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>[]
           }
           delete: {
-            args: Prisma.usuarioDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>
+            args: Prisma.UsuarioDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           update: {
-            args: Prisma.usuarioUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>
+            args: Prisma.UsuarioUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           deleteMany: {
-            args: Prisma.usuarioDeleteManyArgs<ExtArgs>
+            args: Prisma.UsuarioDeleteManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateMany: {
-            args: Prisma.usuarioUpdateManyArgs<ExtArgs>
+            args: Prisma.UsuarioUpdateManyArgs<ExtArgs>
             result: BatchPayload
           }
           updateManyAndReturn: {
-            args: Prisma.usuarioUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>[]
+            args: Prisma.UsuarioUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>[]
           }
           upsert: {
-            args: Prisma.usuarioUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$usuarioPayload>
+            args: Prisma.UsuarioUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
           }
           aggregate: {
             args: Prisma.UsuarioAggregateArgs<ExtArgs>
             result: $Utils.Optional<AggregateUsuario>
           }
           groupBy: {
-            args: Prisma.usuarioGroupByArgs<ExtArgs>
+            args: Prisma.UsuarioGroupByArgs<ExtArgs>
             result: $Utils.Optional<UsuarioGroupByOutputType>[]
           }
           count: {
-            args: Prisma.usuarioCountArgs<ExtArgs>
+            args: Prisma.UsuarioCountArgs<ExtArgs>
             result: $Utils.Optional<UsuarioCountAggregateOutputType> | number
           }
         }
@@ -1793,7 +1793,7 @@ export namespace Prisma {
     comments?: runtime.SqlCommenterPlugin[]
   }
   export type GlobalOmitConfig = {
-    usuario?: usuarioOmit
+    usuario?: UsuarioOmit
     company?: CompanyOmit
     service?: ServiceOmit
     customer?: CustomerOmit
@@ -2124,7 +2124,7 @@ export namespace Prisma {
    */
 
   /**
-   * Model usuario
+   * Model Usuario
    */
 
   export type AggregateUsuario = {
@@ -2198,37 +2198,37 @@ export namespace Prisma {
 
   export type UsuarioAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which usuario to aggregate.
+     * Filter which Usuario to aggregate.
      */
-    where?: usuarioWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of usuarios to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: usuarioOrderByWithRelationInput | usuarioOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
      * Sets the start position
      */
-    cursor?: usuarioWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` usuarios from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` usuarios.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
-     * Count returned usuarios
+     * Count returned Usuarios
     **/
     _count?: true | UsuarioCountAggregateInputType
     /**
@@ -2256,11 +2256,11 @@ export namespace Prisma {
 
 
 
-  export type usuarioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: usuarioWhereInput
-    orderBy?: usuarioOrderByWithAggregationInput | usuarioOrderByWithAggregationInput[]
+  export type UsuarioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioWhereInput
+    orderBy?: UsuarioOrderByWithAggregationInput | UsuarioOrderByWithAggregationInput[]
     by: UsuarioScalarFieldEnum[] | UsuarioScalarFieldEnum
-    having?: usuarioScalarWhereWithAggregatesInput
+    having?: UsuarioScalarWhereWithAggregatesInput
     take?: number
     skip?: number
     _count?: UsuarioCountAggregateInputType | true
@@ -2281,7 +2281,7 @@ export namespace Prisma {
     _max: UsuarioMaxAggregateOutputType | null
   }
 
-  type GetUsuarioGroupByPayload<T extends usuarioGroupByArgs> = Prisma.PrismaPromise<
+  type GetUsuarioGroupByPayload<T extends UsuarioGroupByArgs> = Prisma.PrismaPromise<
     Array<
       PickEnumerable<UsuarioGroupByOutputType, T['by']> &
         {
@@ -2295,7 +2295,7 @@ export namespace Prisma {
     >
 
 
-  export type usuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UsuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     email?: boolean
@@ -2303,13 +2303,13 @@ export namespace Prisma {
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    company?: boolean | usuario$companyArgs<ExtArgs>
-    subscriptions?: boolean | usuario$subscriptionsArgs<ExtArgs>
-    payments?: boolean | usuario$paymentsArgs<ExtArgs>
+    company?: boolean | Usuario$companyArgs<ExtArgs>
+    subscriptions?: boolean | Usuario$subscriptionsArgs<ExtArgs>
+    payments?: boolean | Usuario$paymentsArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["usuario"]>
 
-  export type usuarioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UsuarioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     email?: boolean
@@ -2319,7 +2319,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }, ExtArgs["result"]["usuario"]>
 
-  export type usuarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+  export type UsuarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     email?: boolean
@@ -2329,7 +2329,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }, ExtArgs["result"]["usuario"]>
 
-  export type usuarioSelectScalar = {
+  export type UsuarioSelectScalar = {
     id?: boolean
     name?: boolean
     email?: boolean
@@ -2339,18 +2339,18 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type usuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["usuario"]>
-  export type usuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    company?: boolean | usuario$companyArgs<ExtArgs>
-    subscriptions?: boolean | usuario$subscriptionsArgs<ExtArgs>
-    payments?: boolean | usuario$paymentsArgs<ExtArgs>
+  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["usuario"]>
+  export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    company?: boolean | Usuario$companyArgs<ExtArgs>
+    subscriptions?: boolean | Usuario$subscriptionsArgs<ExtArgs>
+    payments?: boolean | Usuario$paymentsArgs<ExtArgs>
     _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type usuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type usuarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UsuarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
-  export type $usuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "usuario"
+  export type $UsuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Usuario"
     objects: {
       company: Prisma.$CompanyPayload<ExtArgs> | null
       subscriptions: Prisma.$SubscriptionPayload<ExtArgs>[]
@@ -2368,18 +2368,18 @@ export namespace Prisma {
     composites: {}
   }
 
-  type usuarioGetPayload<S extends boolean | null | undefined | usuarioDefaultArgs> = $Result.GetResult<Prisma.$usuarioPayload, S>
+  type UsuarioGetPayload<S extends boolean | null | undefined | UsuarioDefaultArgs> = $Result.GetResult<Prisma.$UsuarioPayload, S>
 
-  type usuarioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<usuarioFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+  type UsuarioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UsuarioFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
       select?: UsuarioCountAggregateInputType | true
     }
 
-  export interface usuarioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['usuario'], meta: { name: 'usuario' } }
+  export interface UsuarioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Usuario'], meta: { name: 'Usuario' } }
     /**
      * Find zero or one Usuario that matches the filter.
-     * @param {usuarioFindUniqueArgs} args - Arguments to find a Usuario
+     * @param {UsuarioFindUniqueArgs} args - Arguments to find a Usuario
      * @example
      * // Get one Usuario
      * const usuario = await prisma.usuario.findUnique({
@@ -2388,12 +2388,12 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUnique<T extends usuarioFindUniqueArgs>(args: SelectSubset<T, usuarioFindUniqueArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findUnique<T extends UsuarioFindUniqueArgs>(args: SelectSubset<T, UsuarioFindUniqueArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find one Usuario that matches the filter or throw an error with `error.code='P2025'`
      * if no matches were found.
-     * @param {usuarioFindUniqueOrThrowArgs} args - Arguments to find a Usuario
+     * @param {UsuarioFindUniqueOrThrowArgs} args - Arguments to find a Usuario
      * @example
      * // Get one Usuario
      * const usuario = await prisma.usuario.findUniqueOrThrow({
@@ -2402,13 +2402,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findUniqueOrThrow<T extends usuarioFindUniqueOrThrowArgs>(args: SelectSubset<T, usuarioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findUniqueOrThrow<T extends UsuarioFindUniqueOrThrowArgs>(args: SelectSubset<T, UsuarioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Usuario that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {usuarioFindFirstArgs} args - Arguments to find a Usuario
+     * @param {UsuarioFindFirstArgs} args - Arguments to find a Usuario
      * @example
      * // Get one Usuario
      * const usuario = await prisma.usuario.findFirst({
@@ -2417,14 +2417,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirst<T extends usuarioFindFirstArgs>(args?: SelectSubset<T, usuarioFindFirstArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    findFirst<T extends UsuarioFindFirstArgs>(args?: SelectSubset<T, UsuarioFindFirstArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find the first Usuario that matches the filter or
      * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {usuarioFindFirstOrThrowArgs} args - Arguments to find a Usuario
+     * @param {UsuarioFindFirstOrThrowArgs} args - Arguments to find a Usuario
      * @example
      * // Get one Usuario
      * const usuario = await prisma.usuario.findFirstOrThrow({
@@ -2433,13 +2433,13 @@ export namespace Prisma {
      *   }
      * })
      */
-    findFirstOrThrow<T extends usuarioFindFirstOrThrowArgs>(args?: SelectSubset<T, usuarioFindFirstOrThrowArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    findFirstOrThrow<T extends UsuarioFindFirstOrThrowArgs>(args?: SelectSubset<T, UsuarioFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Find zero or more Usuarios that matches the filter.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {usuarioFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @param {UsuarioFindManyArgs} args - Arguments to filter and select certain fields only.
      * @example
      * // Get all Usuarios
      * const usuarios = await prisma.usuario.findMany()
@@ -2451,11 +2451,11 @@ export namespace Prisma {
      * const usuarioWithIdOnly = await prisma.usuario.findMany({ select: { id: true } })
      * 
      */
-    findMany<T extends usuarioFindManyArgs>(args?: SelectSubset<T, usuarioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+    findMany<T extends UsuarioFindManyArgs>(args?: SelectSubset<T, UsuarioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
 
     /**
      * Create a Usuario.
-     * @param {usuarioCreateArgs} args - Arguments to create a Usuario.
+     * @param {UsuarioCreateArgs} args - Arguments to create a Usuario.
      * @example
      * // Create one Usuario
      * const Usuario = await prisma.usuario.create({
@@ -2465,11 +2465,11 @@ export namespace Prisma {
      * })
      * 
      */
-    create<T extends usuarioCreateArgs>(args: SelectSubset<T, usuarioCreateArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    create<T extends UsuarioCreateArgs>(args: SelectSubset<T, UsuarioCreateArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Create many Usuarios.
-     * @param {usuarioCreateManyArgs} args - Arguments to create many Usuarios.
+     * @param {UsuarioCreateManyArgs} args - Arguments to create many Usuarios.
      * @example
      * // Create many Usuarios
      * const usuario = await prisma.usuario.createMany({
@@ -2479,11 +2479,11 @@ export namespace Prisma {
      * })
      *     
      */
-    createMany<T extends usuarioCreateManyArgs>(args?: SelectSubset<T, usuarioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    createMany<T extends UsuarioCreateManyArgs>(args?: SelectSubset<T, UsuarioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Create many Usuarios and returns the data saved in the database.
-     * @param {usuarioCreateManyAndReturnArgs} args - Arguments to create many Usuarios.
+     * @param {UsuarioCreateManyAndReturnArgs} args - Arguments to create many Usuarios.
      * @example
      * // Create many Usuarios
      * const usuario = await prisma.usuario.createManyAndReturn({
@@ -2503,11 +2503,11 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    createManyAndReturn<T extends usuarioCreateManyAndReturnArgs>(args?: SelectSubset<T, usuarioCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+    createManyAndReturn<T extends UsuarioCreateManyAndReturnArgs>(args?: SelectSubset<T, UsuarioCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Delete a Usuario.
-     * @param {usuarioDeleteArgs} args - Arguments to delete one Usuario.
+     * @param {UsuarioDeleteArgs} args - Arguments to delete one Usuario.
      * @example
      * // Delete one Usuario
      * const Usuario = await prisma.usuario.delete({
@@ -2517,11 +2517,11 @@ export namespace Prisma {
      * })
      * 
      */
-    delete<T extends usuarioDeleteArgs>(args: SelectSubset<T, usuarioDeleteArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    delete<T extends UsuarioDeleteArgs>(args: SelectSubset<T, UsuarioDeleteArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Update one Usuario.
-     * @param {usuarioUpdateArgs} args - Arguments to update one Usuario.
+     * @param {UsuarioUpdateArgs} args - Arguments to update one Usuario.
      * @example
      * // Update one Usuario
      * const usuario = await prisma.usuario.update({
@@ -2534,11 +2534,11 @@ export namespace Prisma {
      * })
      * 
      */
-    update<T extends usuarioUpdateArgs>(args: SelectSubset<T, usuarioUpdateArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    update<T extends UsuarioUpdateArgs>(args: SelectSubset<T, UsuarioUpdateArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
     /**
      * Delete zero or more Usuarios.
-     * @param {usuarioDeleteManyArgs} args - Arguments to filter Usuarios to delete.
+     * @param {UsuarioDeleteManyArgs} args - Arguments to filter Usuarios to delete.
      * @example
      * // Delete a few Usuarios
      * const { count } = await prisma.usuario.deleteMany({
@@ -2548,13 +2548,13 @@ export namespace Prisma {
      * })
      * 
      */
-    deleteMany<T extends usuarioDeleteManyArgs>(args?: SelectSubset<T, usuarioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    deleteMany<T extends UsuarioDeleteManyArgs>(args?: SelectSubset<T, UsuarioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Usuarios.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {usuarioUpdateManyArgs} args - Arguments to update one or more rows.
+     * @param {UsuarioUpdateManyArgs} args - Arguments to update one or more rows.
      * @example
      * // Update many Usuarios
      * const usuario = await prisma.usuario.updateMany({
@@ -2567,11 +2567,11 @@ export namespace Prisma {
      * })
      * 
      */
-    updateMany<T extends usuarioUpdateManyArgs>(args: SelectSubset<T, usuarioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+    updateMany<T extends UsuarioUpdateManyArgs>(args: SelectSubset<T, UsuarioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
 
     /**
      * Update zero or more Usuarios and returns the data updated in the database.
-     * @param {usuarioUpdateManyAndReturnArgs} args - Arguments to update many Usuarios.
+     * @param {UsuarioUpdateManyAndReturnArgs} args - Arguments to update many Usuarios.
      * @example
      * // Update many Usuarios
      * const usuario = await prisma.usuario.updateManyAndReturn({
@@ -2597,11 +2597,11 @@ export namespace Prisma {
      * Read more here: https://pris.ly/d/null-undefined
      * 
      */
-    updateManyAndReturn<T extends usuarioUpdateManyAndReturnArgs>(args: SelectSubset<T, usuarioUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+    updateManyAndReturn<T extends UsuarioUpdateManyAndReturnArgs>(args: SelectSubset<T, UsuarioUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
 
     /**
      * Create or update one Usuario.
-     * @param {usuarioUpsertArgs} args - Arguments to update or create a Usuario.
+     * @param {UsuarioUpsertArgs} args - Arguments to update or create a Usuario.
      * @example
      * // Update or create a Usuario
      * const usuario = await prisma.usuario.upsert({
@@ -2616,14 +2616,14 @@ export namespace Prisma {
      *   }
      * })
      */
-    upsert<T extends usuarioUpsertArgs>(args: SelectSubset<T, usuarioUpsertArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+    upsert<T extends UsuarioUpsertArgs>(args: SelectSubset<T, UsuarioUpsertArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
 
 
     /**
      * Count the number of Usuarios.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {usuarioCountArgs} args - Arguments to filter Usuarios to count.
+     * @param {UsuarioCountArgs} args - Arguments to filter Usuarios to count.
      * @example
      * // Count the number of Usuarios
      * const count = await prisma.usuario.count({
@@ -2632,8 +2632,8 @@ export namespace Prisma {
      *   }
      * })
     **/
-    count<T extends usuarioCountArgs>(
-      args?: Subset<T, usuarioCountArgs>,
+    count<T extends UsuarioCountArgs>(
+      args?: Subset<T, UsuarioCountArgs>,
     ): Prisma.PrismaPromise<
       T extends $Utils.Record<'select', any>
         ? T['select'] extends true
@@ -2672,7 +2672,7 @@ export namespace Prisma {
      * Group by Usuario.
      * Note, that providing `undefined` is treated as the value not being there.
      * Read more here: https://pris.ly/d/null-undefined
-     * @param {usuarioGroupByArgs} args - Group by arguments.
+     * @param {UsuarioGroupByArgs} args - Group by arguments.
      * @example
      * // Group by city, order by createdAt, get count
      * const result = await prisma.user.groupBy({
@@ -2687,14 +2687,14 @@ export namespace Prisma {
      * 
     **/
     groupBy<
-      T extends usuarioGroupByArgs,
+      T extends UsuarioGroupByArgs,
       HasSelectOrTake extends Or<
         Extends<'skip', Keys<T>>,
         Extends<'take', Keys<T>>
       >,
       OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: usuarioGroupByArgs['orderBy'] }
-        : { orderBy?: usuarioGroupByArgs['orderBy'] },
+        ? { orderBy: UsuarioGroupByArgs['orderBy'] }
+        : { orderBy?: UsuarioGroupByArgs['orderBy'] },
       OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
       ByFields extends MaybeTupleToUnion<T['by']>,
       ByValid extends Has<ByFields, OrderFields>,
@@ -2743,24 +2743,24 @@ export namespace Prisma {
             ? never
             : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
         }[OrderFields]
-    >(args: SubsetIntersection<T, usuarioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsuarioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+    >(args: SubsetIntersection<T, UsuarioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsuarioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
   /**
-   * Fields of the usuario model
+   * Fields of the Usuario model
    */
-  readonly fields: usuarioFieldRefs;
+  readonly fields: UsuarioFieldRefs;
   }
 
   /**
-   * The delegate class that acts as a "Promise-like" for usuario.
+   * The delegate class that acts as a "Promise-like" for Usuario.
    * Why is this prefixed with `Prisma__`?
    * Because we want to prevent naming conflicts as mentioned in
    * https://github.com/prisma/prisma-client-js/issues/707
    */
-  export interface Prisma__usuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+  export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    company<T extends usuario$companyArgs<ExtArgs> = {}>(args?: Subset<T, usuario$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-    subscriptions<T extends usuario$subscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, usuario$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    payments<T extends usuario$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, usuario$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    company<T extends Usuario$companyArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$companyArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    subscriptions<T extends Usuario$subscriptionsArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$subscriptionsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubscriptionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    payments<T extends Usuario$paymentsArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$paymentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PaymentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2787,412 +2787,412 @@ export namespace Prisma {
 
 
   /**
-   * Fields of the usuario model
+   * Fields of the Usuario model
    */
-  interface usuarioFieldRefs {
-    readonly id: FieldRef<"usuario", 'String'>
-    readonly name: FieldRef<"usuario", 'String'>
-    readonly email: FieldRef<"usuario", 'String'>
-    readonly phone: FieldRef<"usuario", 'String'>
-    readonly active: FieldRef<"usuario", 'Boolean'>
-    readonly createdAt: FieldRef<"usuario", 'DateTime'>
-    readonly updatedAt: FieldRef<"usuario", 'DateTime'>
+  interface UsuarioFieldRefs {
+    readonly id: FieldRef<"Usuario", 'String'>
+    readonly name: FieldRef<"Usuario", 'String'>
+    readonly email: FieldRef<"Usuario", 'String'>
+    readonly phone: FieldRef<"Usuario", 'String'>
+    readonly active: FieldRef<"Usuario", 'Boolean'>
+    readonly createdAt: FieldRef<"Usuario", 'DateTime'>
+    readonly updatedAt: FieldRef<"Usuario", 'DateTime'>
   }
     
 
   // Custom InputTypes
   /**
-   * usuario findUnique
+   * Usuario findUnique
    */
-  export type usuarioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which usuario to fetch.
+     * Filter, which Usuario to fetch.
      */
-    where: usuarioWhereUniqueInput
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * usuario findUniqueOrThrow
+   * Usuario findUniqueOrThrow
    */
-  export type usuarioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which usuario to fetch.
+     * Filter, which Usuario to fetch.
      */
-    where: usuarioWhereUniqueInput
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * usuario findFirst
+   * Usuario findFirst
    */
-  export type usuarioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which usuario to fetch.
+     * Filter, which Usuario to fetch.
      */
-    where?: usuarioWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of usuarios to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: usuarioOrderByWithRelationInput | usuarioOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for usuarios.
+     * Sets the position for searching for Usuarios.
      */
-    cursor?: usuarioWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` usuarios from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` usuarios.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of usuarios.
+     * Filter by unique combinations of Usuarios.
      */
     distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * usuario findFirstOrThrow
+   * Usuario findFirstOrThrow
    */
-  export type usuarioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which usuario to fetch.
+     * Filter, which Usuario to fetch.
      */
-    where?: usuarioWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of usuarios to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: usuarioOrderByWithRelationInput | usuarioOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for searching for usuarios.
+     * Sets the position for searching for Usuarios.
      */
-    cursor?: usuarioWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` usuarios from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` usuarios.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of usuarios.
+     * Filter by unique combinations of Usuarios.
      */
     distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * usuario findMany
+   * Usuario findMany
    */
-  export type usuarioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter, which usuarios to fetch.
+     * Filter, which Usuarios to fetch.
      */
-    where?: usuarioWhereInput
+    where?: UsuarioWhereInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
      * 
-     * Determine the order of usuarios to fetch.
+     * Determine the order of Usuarios to fetch.
      */
-    orderBy?: usuarioOrderByWithRelationInput | usuarioOrderByWithRelationInput[]
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
      * 
-     * Sets the position for listing usuarios.
+     * Sets the position for listing Usuarios.
      */
-    cursor?: usuarioWhereUniqueInput
+    cursor?: UsuarioWhereUniqueInput
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Take `±n` usuarios from the position of the cursor.
+     * Take `±n` Usuarios from the position of the cursor.
      */
     take?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
      * 
-     * Skip the first `n` usuarios.
+     * Skip the first `n` Usuarios.
      */
     skip?: number
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
      * 
-     * Filter by unique combinations of usuarios.
+     * Filter by unique combinations of Usuarios.
      */
     distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
   }
 
   /**
-   * usuario create
+   * Usuario create
    */
-  export type usuarioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * The data needed to create a usuario.
+     * The data needed to create a Usuario.
      */
-    data: XOR<usuarioCreateInput, usuarioUncheckedCreateInput>
+    data: XOR<UsuarioCreateInput, UsuarioUncheckedCreateInput>
   }
 
   /**
-   * usuario createMany
+   * Usuario createMany
    */
-  export type usuarioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to create many usuarios.
+     * The data used to create many Usuarios.
      */
-    data: usuarioCreateManyInput | usuarioCreateManyInput[]
+    data: UsuarioCreateManyInput | UsuarioCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * usuario createManyAndReturn
+   * Usuario createManyAndReturn
    */
-  export type usuarioCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelectCreateManyAndReturn<ExtArgs> | null
+    select?: UsuarioSelectCreateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * The data used to create many usuarios.
+     * The data used to create many Usuarios.
      */
-    data: usuarioCreateManyInput | usuarioCreateManyInput[]
+    data: UsuarioCreateManyInput | UsuarioCreateManyInput[]
     skipDuplicates?: boolean
   }
 
   /**
-   * usuario update
+   * Usuario update
    */
-  export type usuarioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * The data needed to update a usuario.
+     * The data needed to update a Usuario.
      */
-    data: XOR<usuarioUpdateInput, usuarioUncheckedUpdateInput>
+    data: XOR<UsuarioUpdateInput, UsuarioUncheckedUpdateInput>
     /**
-     * Choose, which usuario to update.
+     * Choose, which Usuario to update.
      */
-    where: usuarioWhereUniqueInput
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * usuario updateMany
+   * Usuario updateMany
    */
-  export type usuarioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * The data used to update usuarios.
+     * The data used to update Usuarios.
      */
-    data: XOR<usuarioUpdateManyMutationInput, usuarioUncheckedUpdateManyInput>
+    data: XOR<UsuarioUpdateManyMutationInput, UsuarioUncheckedUpdateManyInput>
     /**
-     * Filter which usuarios to update
+     * Filter which Usuarios to update
      */
-    where?: usuarioWhereInput
+    where?: UsuarioWhereInput
     /**
-     * Limit how many usuarios to update.
+     * Limit how many Usuarios to update.
      */
     limit?: number
   }
 
   /**
-   * usuario updateManyAndReturn
+   * Usuario updateManyAndReturn
    */
-  export type usuarioUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelectUpdateManyAndReturn<ExtArgs> | null
+    select?: UsuarioSelectUpdateManyAndReturn<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
-     * The data used to update usuarios.
+     * The data used to update Usuarios.
      */
-    data: XOR<usuarioUpdateManyMutationInput, usuarioUncheckedUpdateManyInput>
+    data: XOR<UsuarioUpdateManyMutationInput, UsuarioUncheckedUpdateManyInput>
     /**
-     * Filter which usuarios to update
+     * Filter which Usuarios to update
      */
-    where?: usuarioWhereInput
+    where?: UsuarioWhereInput
     /**
-     * Limit how many usuarios to update.
+     * Limit how many Usuarios to update.
      */
     limit?: number
   }
 
   /**
-   * usuario upsert
+   * Usuario upsert
    */
-  export type usuarioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * The filter to search for the usuario to update in case it exists.
+     * The filter to search for the Usuario to update in case it exists.
      */
-    where: usuarioWhereUniqueInput
+    where: UsuarioWhereUniqueInput
     /**
-     * In case the usuario found by the `where` argument doesn't exist, create a new usuario with this data.
+     * In case the Usuario found by the `where` argument doesn't exist, create a new Usuario with this data.
      */
-    create: XOR<usuarioCreateInput, usuarioUncheckedCreateInput>
+    create: XOR<UsuarioCreateInput, UsuarioUncheckedCreateInput>
     /**
-     * In case the usuario was found with the provided `where` argument, update it with this data.
+     * In case the Usuario was found with the provided `where` argument, update it with this data.
      */
-    update: XOR<usuarioUpdateInput, usuarioUncheckedUpdateInput>
+    update: XOR<UsuarioUpdateInput, UsuarioUncheckedUpdateInput>
   }
 
   /**
-   * usuario delete
+   * Usuario delete
    */
-  export type usuarioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
     /**
-     * Filter which usuario to delete.
+     * Filter which Usuario to delete.
      */
-    where: usuarioWhereUniqueInput
+    where: UsuarioWhereUniqueInput
   }
 
   /**
-   * usuario deleteMany
+   * Usuario deleteMany
    */
-  export type usuarioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Filter which usuarios to delete
+     * Filter which Usuarios to delete
      */
-    where?: usuarioWhereInput
+    where?: UsuarioWhereInput
     /**
-     * Limit how many usuarios to delete.
+     * Limit how many Usuarios to delete.
      */
     limit?: number
   }
 
   /**
-   * usuario.company
+   * Usuario.company
    */
-  export type usuario$companyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Usuario$companyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Company
      */
@@ -3209,9 +3209,9 @@ export namespace Prisma {
   }
 
   /**
-   * usuario.subscriptions
+   * Usuario.subscriptions
    */
-  export type usuario$subscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Usuario$subscriptionsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Subscription
      */
@@ -3233,9 +3233,9 @@ export namespace Prisma {
   }
 
   /**
-   * usuario.payments
+   * Usuario.payments
    */
-  export type usuario$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type Usuario$paymentsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
      * Select specific fields to fetch from the Payment
      */
@@ -3257,21 +3257,21 @@ export namespace Prisma {
   }
 
   /**
-   * usuario without action
+   * Usuario without action
    */
-  export type usuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UsuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the usuario
+     * Select specific fields to fetch from the Usuario
      */
-    select?: usuarioSelect<ExtArgs> | null
+    select?: UsuarioSelect<ExtArgs> | null
     /**
-     * Omit specific fields from the usuario
+     * Omit specific fields from the Usuario
      */
-    omit?: usuarioOmit<ExtArgs> | null
+    omit?: UsuarioOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: usuarioInclude<ExtArgs> | null
+    include?: UsuarioInclude<ExtArgs> | null
   }
 
 
@@ -3519,7 +3519,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
     services?: boolean | Company$servicesArgs<ExtArgs>
     customers?: boolean | Company$customersArgs<ExtArgs>
     appointments?: boolean | Company$appointmentsArgs<ExtArgs>
@@ -3545,7 +3545,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
   export type CompanySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -3564,7 +3564,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["company"]>
 
   export type CompanySelectScalar = {
@@ -3587,7 +3587,7 @@ export namespace Prisma {
 
   export type CompanyOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "name" | "address" | "district" | "city" | "state" | "postalCode" | "phone" | "email" | "instagram" | "logoUrl" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["company"]>
   export type CompanyInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
     services?: boolean | Company$servicesArgs<ExtArgs>
     customers?: boolean | Company$customersArgs<ExtArgs>
     appointments?: boolean | Company$appointmentsArgs<ExtArgs>
@@ -3597,16 +3597,16 @@ export namespace Prisma {
     _count?: boolean | CompanyCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
   }
   export type CompanyIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
   }
 
   export type $CompanyPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Company"
     objects: {
-      user: Prisma.$usuarioPayload<ExtArgs>
+      user: Prisma.$UsuarioPayload<ExtArgs>
       services: Prisma.$ServicePayload<ExtArgs>[]
       customers: Prisma.$CustomerPayload<ExtArgs>[]
       appointments: Prisma.$AppointmentPayload<ExtArgs>[]
@@ -4024,7 +4024,7 @@ export namespace Prisma {
    */
   export interface Prisma__CompanyClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends usuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usuarioDefaultArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     services<T extends Company$servicesArgs<ExtArgs> = {}>(args?: Subset<T, Company$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     customers<T extends Company$customersArgs<ExtArgs> = {}>(args?: Subset<T, Company$customersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CustomerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     appointments<T extends Company$appointmentsArgs<ExtArgs> = {}>(args?: Subset<T, Company$appointmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -9587,7 +9587,7 @@ export namespace Prisma {
     updatedAt?: boolean
     appointment?: boolean | AppointmentDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    processor?: boolean | usuarioDefaultArgs<ExtArgs>
+    processor?: boolean | UsuarioDefaultArgs<ExtArgs>
     transaction?: boolean | Payment$transactionArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
@@ -9608,7 +9608,7 @@ export namespace Prisma {
     updatedAt?: boolean
     appointment?: boolean | AppointmentDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    processor?: boolean | usuarioDefaultArgs<ExtArgs>
+    processor?: boolean | UsuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
   export type PaymentSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -9628,7 +9628,7 @@ export namespace Prisma {
     updatedAt?: boolean
     appointment?: boolean | AppointmentDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    processor?: boolean | usuarioDefaultArgs<ExtArgs>
+    processor?: boolean | UsuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["payment"]>
 
   export type PaymentSelectScalar = {
@@ -9652,18 +9652,18 @@ export namespace Prisma {
   export type PaymentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     appointment?: boolean | AppointmentDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    processor?: boolean | usuarioDefaultArgs<ExtArgs>
+    processor?: boolean | UsuarioDefaultArgs<ExtArgs>
     transaction?: boolean | Payment$transactionArgs<ExtArgs>
   }
   export type PaymentIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     appointment?: boolean | AppointmentDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    processor?: boolean | usuarioDefaultArgs<ExtArgs>
+    processor?: boolean | UsuarioDefaultArgs<ExtArgs>
   }
   export type PaymentIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     appointment?: boolean | AppointmentDefaultArgs<ExtArgs>
     company?: boolean | CompanyDefaultArgs<ExtArgs>
-    processor?: boolean | usuarioDefaultArgs<ExtArgs>
+    processor?: boolean | UsuarioDefaultArgs<ExtArgs>
   }
 
   export type $PaymentPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -9671,7 +9671,7 @@ export namespace Prisma {
     objects: {
       appointment: Prisma.$AppointmentPayload<ExtArgs>
       company: Prisma.$CompanyPayload<ExtArgs>
-      processor: Prisma.$usuarioPayload<ExtArgs>
+      processor: Prisma.$UsuarioPayload<ExtArgs>
       transaction: Prisma.$FinancialTransactionPayload<ExtArgs> | null
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -10085,7 +10085,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     appointment<T extends AppointmentDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AppointmentDefaultArgs<ExtArgs>>): Prisma__AppointmentClient<$Result.GetResult<Prisma.$AppointmentPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     company<T extends CompanyDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CompanyDefaultArgs<ExtArgs>>): Prisma__CompanyClient<$Result.GetResult<Prisma.$CompanyPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    processor<T extends usuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usuarioDefaultArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    processor<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     transaction<T extends Payment$transactionArgs<ExtArgs> = {}>(args?: Subset<T, Payment$transactionArgs<ExtArgs>>): Prisma__FinancialTransactionClient<$Result.GetResult<Prisma.$FinancialTransactionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -13143,7 +13143,7 @@ export namespace Prisma {
     paymentMethodId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
     plan?: boolean | SubscriptionPlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
@@ -13158,7 +13158,7 @@ export namespace Prisma {
     paymentMethodId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
     plan?: boolean | SubscriptionPlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
@@ -13173,7 +13173,7 @@ export namespace Prisma {
     paymentMethodId?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
     plan?: boolean | SubscriptionPlanDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["subscription"]>
 
@@ -13192,22 +13192,22 @@ export namespace Prisma {
 
   export type SubscriptionOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "planId" | "status" | "startDate" | "endDate" | "trialEndsAt" | "paymentMethodId" | "createdAt" | "updatedAt", ExtArgs["result"]["subscription"]>
   export type SubscriptionInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
     plan?: boolean | SubscriptionPlanDefaultArgs<ExtArgs>
   }
   export type SubscriptionIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
     plan?: boolean | SubscriptionPlanDefaultArgs<ExtArgs>
   }
   export type SubscriptionIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    user?: boolean | usuarioDefaultArgs<ExtArgs>
+    user?: boolean | UsuarioDefaultArgs<ExtArgs>
     plan?: boolean | SubscriptionPlanDefaultArgs<ExtArgs>
   }
 
   export type $SubscriptionPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Subscription"
     objects: {
-      user: Prisma.$usuarioPayload<ExtArgs>
+      user: Prisma.$UsuarioPayload<ExtArgs>
       plan: Prisma.$SubscriptionPlanPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -13615,7 +13615,7 @@ export namespace Prisma {
    */
   export interface Prisma__SubscriptionClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    user<T extends usuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, usuarioDefaultArgs<ExtArgs>>): Prisma__usuarioClient<$Result.GetResult<Prisma.$usuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    user<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     plan<T extends SubscriptionPlanDefaultArgs<ExtArgs> = {}>(args?: Subset<T, SubscriptionPlanDefaultArgs<ExtArgs>>): Prisma__SubscriptionPlanClient<$Result.GetResult<Prisma.$SubscriptionPlanPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -15575,23 +15575,23 @@ export namespace Prisma {
    */
 
 
-  export type usuarioWhereInput = {
-    AND?: usuarioWhereInput | usuarioWhereInput[]
-    OR?: usuarioWhereInput[]
-    NOT?: usuarioWhereInput | usuarioWhereInput[]
-    id?: StringFilter<"usuario"> | string
-    name?: StringFilter<"usuario"> | string
-    email?: StringFilter<"usuario"> | string
-    phone?: StringNullableFilter<"usuario"> | string | null
-    active?: BoolFilter<"usuario"> | boolean
-    createdAt?: DateTimeFilter<"usuario"> | Date | string
-    updatedAt?: DateTimeFilter<"usuario"> | Date | string
+  export type UsuarioWhereInput = {
+    AND?: UsuarioWhereInput | UsuarioWhereInput[]
+    OR?: UsuarioWhereInput[]
+    NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    id?: StringFilter<"Usuario"> | string
+    name?: StringFilter<"Usuario"> | string
+    email?: StringFilter<"Usuario"> | string
+    phone?: StringNullableFilter<"Usuario"> | string | null
+    active?: BoolFilter<"Usuario"> | boolean
+    createdAt?: DateTimeFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeFilter<"Usuario"> | Date | string
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
     subscriptions?: SubscriptionListRelationFilter
     payments?: PaymentListRelationFilter
   }
 
-  export type usuarioOrderByWithRelationInput = {
+  export type UsuarioOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
@@ -15604,23 +15604,23 @@ export namespace Prisma {
     payments?: PaymentOrderByRelationAggregateInput
   }
 
-  export type usuarioWhereUniqueInput = Prisma.AtLeast<{
+  export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     email?: string
-    AND?: usuarioWhereInput | usuarioWhereInput[]
-    OR?: usuarioWhereInput[]
-    NOT?: usuarioWhereInput | usuarioWhereInput[]
-    name?: StringFilter<"usuario"> | string
-    phone?: StringNullableFilter<"usuario"> | string | null
-    active?: BoolFilter<"usuario"> | boolean
-    createdAt?: DateTimeFilter<"usuario"> | Date | string
-    updatedAt?: DateTimeFilter<"usuario"> | Date | string
+    AND?: UsuarioWhereInput | UsuarioWhereInput[]
+    OR?: UsuarioWhereInput[]
+    NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    name?: StringFilter<"Usuario"> | string
+    phone?: StringNullableFilter<"Usuario"> | string | null
+    active?: BoolFilter<"Usuario"> | boolean
+    createdAt?: DateTimeFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeFilter<"Usuario"> | Date | string
     company?: XOR<CompanyNullableScalarRelationFilter, CompanyWhereInput> | null
     subscriptions?: SubscriptionListRelationFilter
     payments?: PaymentListRelationFilter
   }, "id" | "email">
 
-  export type usuarioOrderByWithAggregationInput = {
+  export type UsuarioOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
@@ -15628,22 +15628,22 @@ export namespace Prisma {
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    _count?: usuarioCountOrderByAggregateInput
-    _max?: usuarioMaxOrderByAggregateInput
-    _min?: usuarioMinOrderByAggregateInput
+    _count?: UsuarioCountOrderByAggregateInput
+    _max?: UsuarioMaxOrderByAggregateInput
+    _min?: UsuarioMinOrderByAggregateInput
   }
 
-  export type usuarioScalarWhereWithAggregatesInput = {
-    AND?: usuarioScalarWhereWithAggregatesInput | usuarioScalarWhereWithAggregatesInput[]
-    OR?: usuarioScalarWhereWithAggregatesInput[]
-    NOT?: usuarioScalarWhereWithAggregatesInput | usuarioScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"usuario"> | string
-    name?: StringWithAggregatesFilter<"usuario"> | string
-    email?: StringWithAggregatesFilter<"usuario"> | string
-    phone?: StringNullableWithAggregatesFilter<"usuario"> | string | null
-    active?: BoolWithAggregatesFilter<"usuario"> | boolean
-    createdAt?: DateTimeWithAggregatesFilter<"usuario"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"usuario"> | Date | string
+  export type UsuarioScalarWhereWithAggregatesInput = {
+    AND?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
+    OR?: UsuarioScalarWhereWithAggregatesInput[]
+    NOT?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Usuario"> | string
+    name?: StringWithAggregatesFilter<"Usuario"> | string
+    email?: StringWithAggregatesFilter<"Usuario"> | string
+    phone?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
+    active?: BoolWithAggregatesFilter<"Usuario"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"Usuario"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Usuario"> | Date | string
   }
 
   export type CompanyWhereInput = {
@@ -15665,7 +15665,7 @@ export namespace Prisma {
     active?: BoolFilter<"Company"> | boolean
     createdAt?: DateTimeFilter<"Company"> | Date | string
     updatedAt?: DateTimeFilter<"Company"> | Date | string
-    user?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
+    user?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     services?: ServiceListRelationFilter
     customers?: CustomerListRelationFilter
     appointments?: AppointmentListRelationFilter
@@ -15690,7 +15690,7 @@ export namespace Prisma {
     active?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: usuarioOrderByWithRelationInput
+    user?: UsuarioOrderByWithRelationInput
     services?: ServiceOrderByRelationAggregateInput
     customers?: CustomerOrderByRelationAggregateInput
     appointments?: AppointmentOrderByRelationAggregateInput
@@ -15718,7 +15718,7 @@ export namespace Prisma {
     active?: BoolFilter<"Company"> | boolean
     createdAt?: DateTimeFilter<"Company"> | Date | string
     updatedAt?: DateTimeFilter<"Company"> | Date | string
-    user?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
+    user?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     services?: ServiceListRelationFilter
     customers?: CustomerListRelationFilter
     appointments?: AppointmentListRelationFilter
@@ -16106,7 +16106,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Payment"> | Date | string
     appointment?: XOR<AppointmentScalarRelationFilter, AppointmentWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-    processor?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
+    processor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     transaction?: XOR<FinancialTransactionNullableScalarRelationFilter, FinancialTransactionWhereInput> | null
   }
 
@@ -16127,7 +16127,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
     appointment?: AppointmentOrderByWithRelationInput
     company?: CompanyOrderByWithRelationInput
-    processor?: usuarioOrderByWithRelationInput
+    processor?: UsuarioOrderByWithRelationInput
     transaction?: FinancialTransactionOrderByWithRelationInput
   }
 
@@ -16151,7 +16151,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Payment"> | Date | string
     appointment?: XOR<AppointmentScalarRelationFilter, AppointmentWhereInput>
     company?: XOR<CompanyScalarRelationFilter, CompanyWhereInput>
-    processor?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
+    processor?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     transaction?: XOR<FinancialTransactionNullableScalarRelationFilter, FinancialTransactionWhereInput> | null
   }, "id" | "appointmentId">
 
@@ -16378,7 +16378,7 @@ export namespace Prisma {
     paymentMethodId?: StringNullableFilter<"Subscription"> | string | null
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeFilter<"Subscription"> | Date | string
-    user?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
+    user?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     plan?: XOR<SubscriptionPlanScalarRelationFilter, SubscriptionPlanWhereInput>
   }
 
@@ -16393,7 +16393,7 @@ export namespace Prisma {
     paymentMethodId?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    user?: usuarioOrderByWithRelationInput
+    user?: UsuarioOrderByWithRelationInput
     plan?: SubscriptionPlanOrderByWithRelationInput
   }
 
@@ -16411,7 +16411,7 @@ export namespace Prisma {
     paymentMethodId?: StringNullableFilter<"Subscription"> | string | null
     createdAt?: DateTimeFilter<"Subscription"> | Date | string
     updatedAt?: DateTimeFilter<"Subscription"> | Date | string
-    user?: XOR<UsuarioScalarRelationFilter, usuarioWhereInput>
+    user?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
     plan?: XOR<SubscriptionPlanScalarRelationFilter, SubscriptionPlanWhereInput>
   }, "id">
 
@@ -16518,7 +16518,7 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"BusinessHour"> | Date | string
   }
 
-  export type usuarioCreateInput = {
+  export type UsuarioCreateInput = {
     id?: string
     name: string
     email: string
@@ -16531,7 +16531,7 @@ export namespace Prisma {
     payments?: PaymentCreateNestedManyWithoutProcessorInput
   }
 
-  export type usuarioUncheckedCreateInput = {
+  export type UsuarioUncheckedCreateInput = {
     id?: string
     name: string
     email: string
@@ -16544,7 +16544,7 @@ export namespace Prisma {
     payments?: PaymentUncheckedCreateNestedManyWithoutProcessorInput
   }
 
-  export type usuarioUpdateInput = {
+  export type UsuarioUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -16557,7 +16557,7 @@ export namespace Prisma {
     payments?: PaymentUpdateManyWithoutProcessorNestedInput
   }
 
-  export type usuarioUncheckedUpdateInput = {
+  export type UsuarioUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -16570,7 +16570,7 @@ export namespace Prisma {
     payments?: PaymentUncheckedUpdateManyWithoutProcessorNestedInput
   }
 
-  export type usuarioCreateManyInput = {
+  export type UsuarioCreateManyInput = {
     id?: string
     name: string
     email: string
@@ -16580,7 +16580,7 @@ export namespace Prisma {
     updatedAt?: Date | string
   }
 
-  export type usuarioUpdateManyMutationInput = {
+  export type UsuarioUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -16590,7 +16590,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type usuarioUncheckedUpdateManyInput = {
+  export type UsuarioUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -16615,7 +16615,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutCompanyInput
+    user: UsuarioCreateNestedOneWithoutCompanyInput
     services?: ServiceCreateNestedManyWithoutCompanyInput
     customers?: CustomerCreateNestedManyWithoutCompanyInput
     appointments?: AppointmentCreateNestedManyWithoutCompanyInput
@@ -16663,7 +16663,7 @@ export namespace Prisma {
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutCompanyNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutCompanyNestedInput
     services?: ServiceUpdateManyWithoutCompanyNestedInput
     customers?: CustomerUpdateManyWithoutCompanyNestedInput
     appointments?: AppointmentUpdateManyWithoutCompanyNestedInput
@@ -17095,7 +17095,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     appointment: AppointmentCreateNestedOneWithoutPaymentInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
-    processor: usuarioCreateNestedOneWithoutPaymentsInput
+    processor: UsuarioCreateNestedOneWithoutPaymentsInput
     transaction?: FinancialTransactionCreateNestedOneWithoutPaymentInput
   }
 
@@ -17131,7 +17131,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     appointment?: AppointmentUpdateOneRequiredWithoutPaymentNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
-    processor?: usuarioUpdateOneRequiredWithoutPaymentsNestedInput
+    processor?: UsuarioUpdateOneRequiredWithoutPaymentsNestedInput
     transaction?: FinancialTransactionUpdateOneWithoutPaymentNestedInput
   }
 
@@ -17394,7 +17394,7 @@ export namespace Prisma {
     paymentMethodId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutSubscriptionsInput
+    user: UsuarioCreateNestedOneWithoutSubscriptionsInput
     plan: SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput
   }
 
@@ -17420,7 +17420,7 @@ export namespace Prisma {
     paymentMethodId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutSubscriptionsNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutSubscriptionsNestedInput
     plan?: SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput
   }
 
@@ -17626,7 +17626,7 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
-  export type usuarioCountOrderByAggregateInput = {
+  export type UsuarioCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
@@ -17636,7 +17636,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type usuarioMaxOrderByAggregateInput = {
+  export type UsuarioMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
@@ -17646,7 +17646,7 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
-  export type usuarioMinOrderByAggregateInput = {
+  export type UsuarioMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
@@ -17715,8 +17715,8 @@ export namespace Prisma {
   }
 
   export type UsuarioScalarRelationFilter = {
-    is?: usuarioWhereInput
-    isNot?: usuarioWhereInput
+    is?: UsuarioWhereInput
+    isNot?: UsuarioWhereInput
   }
 
   export type ServiceListRelationFilter = {
@@ -18684,10 +18684,10 @@ export namespace Prisma {
     deleteMany?: PaymentScalarWhereInput | PaymentScalarWhereInput[]
   }
 
-  export type usuarioCreateNestedOneWithoutCompanyInput = {
-    create?: XOR<usuarioCreateWithoutCompanyInput, usuarioUncheckedCreateWithoutCompanyInput>
-    connectOrCreate?: usuarioCreateOrConnectWithoutCompanyInput
-    connect?: usuarioWhereUniqueInput
+  export type UsuarioCreateNestedOneWithoutCompanyInput = {
+    create?: XOR<UsuarioCreateWithoutCompanyInput, UsuarioUncheckedCreateWithoutCompanyInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutCompanyInput
+    connect?: UsuarioWhereUniqueInput
   }
 
   export type ServiceCreateNestedManyWithoutCompanyInput = {
@@ -18774,12 +18774,12 @@ export namespace Prisma {
     connect?: BusinessHourWhereUniqueInput | BusinessHourWhereUniqueInput[]
   }
 
-  export type usuarioUpdateOneRequiredWithoutCompanyNestedInput = {
-    create?: XOR<usuarioCreateWithoutCompanyInput, usuarioUncheckedCreateWithoutCompanyInput>
-    connectOrCreate?: usuarioCreateOrConnectWithoutCompanyInput
-    upsert?: usuarioUpsertWithoutCompanyInput
-    connect?: usuarioWhereUniqueInput
-    update?: XOR<XOR<usuarioUpdateToOneWithWhereWithoutCompanyInput, usuarioUpdateWithoutCompanyInput>, usuarioUncheckedUpdateWithoutCompanyInput>
+  export type UsuarioUpdateOneRequiredWithoutCompanyNestedInput = {
+    create?: XOR<UsuarioCreateWithoutCompanyInput, UsuarioUncheckedCreateWithoutCompanyInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutCompanyInput
+    upsert?: UsuarioUpsertWithoutCompanyInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutCompanyInput, UsuarioUpdateWithoutCompanyInput>, UsuarioUncheckedUpdateWithoutCompanyInput>
   }
 
   export type ServiceUpdateManyWithoutCompanyNestedInput = {
@@ -19236,10 +19236,10 @@ export namespace Prisma {
     connect?: CompanyWhereUniqueInput
   }
 
-  export type usuarioCreateNestedOneWithoutPaymentsInput = {
-    create?: XOR<usuarioCreateWithoutPaymentsInput, usuarioUncheckedCreateWithoutPaymentsInput>
-    connectOrCreate?: usuarioCreateOrConnectWithoutPaymentsInput
-    connect?: usuarioWhereUniqueInput
+  export type UsuarioCreateNestedOneWithoutPaymentsInput = {
+    create?: XOR<UsuarioCreateWithoutPaymentsInput, UsuarioUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutPaymentsInput
+    connect?: UsuarioWhereUniqueInput
   }
 
   export type FinancialTransactionCreateNestedOneWithoutPaymentInput = {
@@ -19278,12 +19278,12 @@ export namespace Prisma {
     update?: XOR<XOR<CompanyUpdateToOneWithWhereWithoutPaymentsInput, CompanyUpdateWithoutPaymentsInput>, CompanyUncheckedUpdateWithoutPaymentsInput>
   }
 
-  export type usuarioUpdateOneRequiredWithoutPaymentsNestedInput = {
-    create?: XOR<usuarioCreateWithoutPaymentsInput, usuarioUncheckedCreateWithoutPaymentsInput>
-    connectOrCreate?: usuarioCreateOrConnectWithoutPaymentsInput
-    upsert?: usuarioUpsertWithoutPaymentsInput
-    connect?: usuarioWhereUniqueInput
-    update?: XOR<XOR<usuarioUpdateToOneWithWhereWithoutPaymentsInput, usuarioUpdateWithoutPaymentsInput>, usuarioUncheckedUpdateWithoutPaymentsInput>
+  export type UsuarioUpdateOneRequiredWithoutPaymentsNestedInput = {
+    create?: XOR<UsuarioCreateWithoutPaymentsInput, UsuarioUncheckedCreateWithoutPaymentsInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutPaymentsInput
+    upsert?: UsuarioUpsertWithoutPaymentsInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutPaymentsInput, UsuarioUpdateWithoutPaymentsInput>, UsuarioUncheckedUpdateWithoutPaymentsInput>
   }
 
   export type FinancialTransactionUpdateOneWithoutPaymentNestedInput = {
@@ -19386,10 +19386,10 @@ export namespace Prisma {
     deleteMany?: SubscriptionScalarWhereInput | SubscriptionScalarWhereInput[]
   }
 
-  export type usuarioCreateNestedOneWithoutSubscriptionsInput = {
-    create?: XOR<usuarioCreateWithoutSubscriptionsInput, usuarioUncheckedCreateWithoutSubscriptionsInput>
-    connectOrCreate?: usuarioCreateOrConnectWithoutSubscriptionsInput
-    connect?: usuarioWhereUniqueInput
+  export type UsuarioCreateNestedOneWithoutSubscriptionsInput = {
+    create?: XOR<UsuarioCreateWithoutSubscriptionsInput, UsuarioUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutSubscriptionsInput
+    connect?: UsuarioWhereUniqueInput
   }
 
   export type SubscriptionPlanCreateNestedOneWithoutSubscriptionsInput = {
@@ -19402,12 +19402,12 @@ export namespace Prisma {
     set?: $Enums.SubscriptionStatus
   }
 
-  export type usuarioUpdateOneRequiredWithoutSubscriptionsNestedInput = {
-    create?: XOR<usuarioCreateWithoutSubscriptionsInput, usuarioUncheckedCreateWithoutSubscriptionsInput>
-    connectOrCreate?: usuarioCreateOrConnectWithoutSubscriptionsInput
-    upsert?: usuarioUpsertWithoutSubscriptionsInput
-    connect?: usuarioWhereUniqueInput
-    update?: XOR<XOR<usuarioUpdateToOneWithWhereWithoutSubscriptionsInput, usuarioUpdateWithoutSubscriptionsInput>, usuarioUncheckedUpdateWithoutSubscriptionsInput>
+  export type UsuarioUpdateOneRequiredWithoutSubscriptionsNestedInput = {
+    create?: XOR<UsuarioCreateWithoutSubscriptionsInput, UsuarioUncheckedCreateWithoutSubscriptionsInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutSubscriptionsInput
+    upsert?: UsuarioUpsertWithoutSubscriptionsInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutSubscriptionsInput, UsuarioUpdateWithoutSubscriptionsInput>, UsuarioUncheckedUpdateWithoutSubscriptionsInput>
   }
 
   export type SubscriptionPlanUpdateOneRequiredWithoutSubscriptionsNestedInput = {
@@ -20053,7 +20053,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"Payment"> | Date | string
   }
 
-  export type usuarioCreateWithoutCompanyInput = {
+  export type UsuarioCreateWithoutCompanyInput = {
     id?: string
     name: string
     email: string
@@ -20065,7 +20065,7 @@ export namespace Prisma {
     payments?: PaymentCreateNestedManyWithoutProcessorInput
   }
 
-  export type usuarioUncheckedCreateWithoutCompanyInput = {
+  export type UsuarioUncheckedCreateWithoutCompanyInput = {
     id?: string
     name: string
     email: string
@@ -20077,9 +20077,9 @@ export namespace Prisma {
     payments?: PaymentUncheckedCreateNestedManyWithoutProcessorInput
   }
 
-  export type usuarioCreateOrConnectWithoutCompanyInput = {
-    where: usuarioWhereUniqueInput
-    create: XOR<usuarioCreateWithoutCompanyInput, usuarioUncheckedCreateWithoutCompanyInput>
+  export type UsuarioCreateOrConnectWithoutCompanyInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutCompanyInput, UsuarioUncheckedCreateWithoutCompanyInput>
   }
 
   export type ServiceCreateWithoutCompanyInput = {
@@ -20201,7 +20201,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     appointment: AppointmentCreateNestedOneWithoutPaymentInput
-    processor: usuarioCreateNestedOneWithoutPaymentsInput
+    processor: UsuarioCreateNestedOneWithoutPaymentsInput
     transaction?: FinancialTransactionCreateNestedOneWithoutPaymentInput
   }
 
@@ -20294,18 +20294,18 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
-  export type usuarioUpsertWithoutCompanyInput = {
-    update: XOR<usuarioUpdateWithoutCompanyInput, usuarioUncheckedUpdateWithoutCompanyInput>
-    create: XOR<usuarioCreateWithoutCompanyInput, usuarioUncheckedCreateWithoutCompanyInput>
-    where?: usuarioWhereInput
+  export type UsuarioUpsertWithoutCompanyInput = {
+    update: XOR<UsuarioUpdateWithoutCompanyInput, UsuarioUncheckedUpdateWithoutCompanyInput>
+    create: XOR<UsuarioCreateWithoutCompanyInput, UsuarioUncheckedCreateWithoutCompanyInput>
+    where?: UsuarioWhereInput
   }
 
-  export type usuarioUpdateToOneWithWhereWithoutCompanyInput = {
-    where?: usuarioWhereInput
-    data: XOR<usuarioUpdateWithoutCompanyInput, usuarioUncheckedUpdateWithoutCompanyInput>
+  export type UsuarioUpdateToOneWithWhereWithoutCompanyInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutCompanyInput, UsuarioUncheckedUpdateWithoutCompanyInput>
   }
 
-  export type usuarioUpdateWithoutCompanyInput = {
+  export type UsuarioUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -20317,7 +20317,7 @@ export namespace Prisma {
     payments?: PaymentUpdateManyWithoutProcessorNestedInput
   }
 
-  export type usuarioUncheckedUpdateWithoutCompanyInput = {
+  export type UsuarioUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -20515,7 +20515,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutCompanyInput
+    user: UsuarioCreateNestedOneWithoutCompanyInput
     customers?: CustomerCreateNestedManyWithoutCompanyInput
     appointments?: AppointmentCreateNestedManyWithoutCompanyInput
     payments?: PaymentCreateNestedManyWithoutCompanyInput
@@ -20603,7 +20603,7 @@ export namespace Prisma {
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutCompanyNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutCompanyNestedInput
     customers?: CustomerUpdateManyWithoutCompanyNestedInput
     appointments?: AppointmentUpdateManyWithoutCompanyNestedInput
     payments?: PaymentUpdateManyWithoutCompanyNestedInput
@@ -20677,7 +20677,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutCompanyInput
+    user: UsuarioCreateNestedOneWithoutCompanyInput
     services?: ServiceCreateNestedManyWithoutCompanyInput
     appointments?: AppointmentCreateNestedManyWithoutCompanyInput
     payments?: PaymentCreateNestedManyWithoutCompanyInput
@@ -20781,7 +20781,7 @@ export namespace Prisma {
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutCompanyNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutCompanyNestedInput
     services?: ServiceUpdateManyWithoutCompanyNestedInput
     appointments?: AppointmentUpdateManyWithoutCompanyNestedInput
     payments?: PaymentUpdateManyWithoutCompanyNestedInput
@@ -20843,7 +20843,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutCompanyInput
+    user: UsuarioCreateNestedOneWithoutCompanyInput
     services?: ServiceCreateNestedManyWithoutCompanyInput
     customers?: CustomerCreateNestedManyWithoutCompanyInput
     payments?: PaymentCreateNestedManyWithoutCompanyInput
@@ -20945,7 +20945,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     company: CompanyCreateNestedOneWithoutPaymentsInput
-    processor: usuarioCreateNestedOneWithoutPaymentsInput
+    processor: UsuarioCreateNestedOneWithoutPaymentsInput
     transaction?: FinancialTransactionCreateNestedOneWithoutPaymentInput
   }
 
@@ -20997,7 +20997,7 @@ export namespace Prisma {
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutCompanyNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutCompanyNestedInput
     services?: ServiceUpdateManyWithoutCompanyNestedInput
     customers?: CustomerUpdateManyWithoutCompanyNestedInput
     payments?: PaymentUpdateManyWithoutCompanyNestedInput
@@ -21101,7 +21101,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
-    processor?: usuarioUpdateOneRequiredWithoutPaymentsNestedInput
+    processor?: UsuarioUpdateOneRequiredWithoutPaymentsNestedInput
     transaction?: FinancialTransactionUpdateOneWithoutPaymentNestedInput
   }
 
@@ -21314,7 +21314,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutCompanyInput
+    user: UsuarioCreateNestedOneWithoutCompanyInput
     services?: ServiceCreateNestedManyWithoutCompanyInput
     customers?: CustomerCreateNestedManyWithoutCompanyInput
     appointments?: AppointmentCreateNestedManyWithoutCompanyInput
@@ -21350,7 +21350,7 @@ export namespace Prisma {
     create: XOR<CompanyCreateWithoutPaymentsInput, CompanyUncheckedCreateWithoutPaymentsInput>
   }
 
-  export type usuarioCreateWithoutPaymentsInput = {
+  export type UsuarioCreateWithoutPaymentsInput = {
     id?: string
     name: string
     email: string
@@ -21362,7 +21362,7 @@ export namespace Prisma {
     subscriptions?: SubscriptionCreateNestedManyWithoutUserInput
   }
 
-  export type usuarioUncheckedCreateWithoutPaymentsInput = {
+  export type UsuarioUncheckedCreateWithoutPaymentsInput = {
     id?: string
     name: string
     email: string
@@ -21374,9 +21374,9 @@ export namespace Prisma {
     subscriptions?: SubscriptionUncheckedCreateNestedManyWithoutUserInput
   }
 
-  export type usuarioCreateOrConnectWithoutPaymentsInput = {
-    where: usuarioWhereUniqueInput
-    create: XOR<usuarioCreateWithoutPaymentsInput, usuarioUncheckedCreateWithoutPaymentsInput>
+  export type UsuarioCreateOrConnectWithoutPaymentsInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutPaymentsInput, UsuarioUncheckedCreateWithoutPaymentsInput>
   }
 
   export type FinancialTransactionCreateWithoutPaymentInput = {
@@ -21475,7 +21475,7 @@ export namespace Prisma {
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutCompanyNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutCompanyNestedInput
     services?: ServiceUpdateManyWithoutCompanyNestedInput
     customers?: CustomerUpdateManyWithoutCompanyNestedInput
     appointments?: AppointmentUpdateManyWithoutCompanyNestedInput
@@ -21506,18 +21506,18 @@ export namespace Prisma {
     businessHours?: BusinessHourUncheckedUpdateManyWithoutCompanyNestedInput
   }
 
-  export type usuarioUpsertWithoutPaymentsInput = {
-    update: XOR<usuarioUpdateWithoutPaymentsInput, usuarioUncheckedUpdateWithoutPaymentsInput>
-    create: XOR<usuarioCreateWithoutPaymentsInput, usuarioUncheckedCreateWithoutPaymentsInput>
-    where?: usuarioWhereInput
+  export type UsuarioUpsertWithoutPaymentsInput = {
+    update: XOR<UsuarioUpdateWithoutPaymentsInput, UsuarioUncheckedUpdateWithoutPaymentsInput>
+    create: XOR<UsuarioCreateWithoutPaymentsInput, UsuarioUncheckedCreateWithoutPaymentsInput>
+    where?: UsuarioWhereInput
   }
 
-  export type usuarioUpdateToOneWithWhereWithoutPaymentsInput = {
-    where?: usuarioWhereInput
-    data: XOR<usuarioUpdateWithoutPaymentsInput, usuarioUncheckedUpdateWithoutPaymentsInput>
+  export type UsuarioUpdateToOneWithWhereWithoutPaymentsInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutPaymentsInput, UsuarioUncheckedUpdateWithoutPaymentsInput>
   }
 
-  export type usuarioUpdateWithoutPaymentsInput = {
+  export type UsuarioUpdateWithoutPaymentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -21529,7 +21529,7 @@ export namespace Prisma {
     subscriptions?: SubscriptionUpdateManyWithoutUserNestedInput
   }
 
-  export type usuarioUncheckedUpdateWithoutPaymentsInput = {
+  export type UsuarioUncheckedUpdateWithoutPaymentsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -21589,7 +21589,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutCompanyInput
+    user: UsuarioCreateNestedOneWithoutCompanyInput
     services?: ServiceCreateNestedManyWithoutCompanyInput
     customers?: CustomerCreateNestedManyWithoutCompanyInput
     appointments?: AppointmentCreateNestedManyWithoutCompanyInput
@@ -21639,7 +21639,7 @@ export namespace Prisma {
     updatedAt?: Date | string
     appointment: AppointmentCreateNestedOneWithoutPaymentInput
     company: CompanyCreateNestedOneWithoutPaymentsInput
-    processor: usuarioCreateNestedOneWithoutPaymentsInput
+    processor: UsuarioCreateNestedOneWithoutPaymentsInput
   }
 
   export type PaymentUncheckedCreateWithoutTransactionInput = {
@@ -21690,7 +21690,7 @@ export namespace Prisma {
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutCompanyNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutCompanyNestedInput
     services?: ServiceUpdateManyWithoutCompanyNestedInput
     customers?: CustomerUpdateManyWithoutCompanyNestedInput
     appointments?: AppointmentUpdateManyWithoutCompanyNestedInput
@@ -21746,7 +21746,7 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     appointment?: AppointmentUpdateOneRequiredWithoutPaymentNestedInput
     company?: CompanyUpdateOneRequiredWithoutPaymentsNestedInput
-    processor?: usuarioUpdateOneRequiredWithoutPaymentsNestedInput
+    processor?: UsuarioUpdateOneRequiredWithoutPaymentsNestedInput
   }
 
   export type PaymentUncheckedUpdateWithoutTransactionInput = {
@@ -21775,7 +21775,7 @@ export namespace Prisma {
     paymentMethodId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutSubscriptionsInput
+    user: UsuarioCreateNestedOneWithoutSubscriptionsInput
   }
 
   export type SubscriptionUncheckedCreateWithoutPlanInput = {
@@ -21816,7 +21816,7 @@ export namespace Prisma {
     data: XOR<SubscriptionUpdateManyMutationInput, SubscriptionUncheckedUpdateManyWithoutPlanInput>
   }
 
-  export type usuarioCreateWithoutSubscriptionsInput = {
+  export type UsuarioCreateWithoutSubscriptionsInput = {
     id?: string
     name: string
     email: string
@@ -21828,7 +21828,7 @@ export namespace Prisma {
     payments?: PaymentCreateNestedManyWithoutProcessorInput
   }
 
-  export type usuarioUncheckedCreateWithoutSubscriptionsInput = {
+  export type UsuarioUncheckedCreateWithoutSubscriptionsInput = {
     id?: string
     name: string
     email: string
@@ -21840,9 +21840,9 @@ export namespace Prisma {
     payments?: PaymentUncheckedCreateNestedManyWithoutProcessorInput
   }
 
-  export type usuarioCreateOrConnectWithoutSubscriptionsInput = {
-    where: usuarioWhereUniqueInput
-    create: XOR<usuarioCreateWithoutSubscriptionsInput, usuarioUncheckedCreateWithoutSubscriptionsInput>
+  export type UsuarioCreateOrConnectWithoutSubscriptionsInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutSubscriptionsInput, UsuarioUncheckedCreateWithoutSubscriptionsInput>
   }
 
   export type SubscriptionPlanCreateWithoutSubscriptionsInput = {
@@ -21878,18 +21878,18 @@ export namespace Prisma {
     create: XOR<SubscriptionPlanCreateWithoutSubscriptionsInput, SubscriptionPlanUncheckedCreateWithoutSubscriptionsInput>
   }
 
-  export type usuarioUpsertWithoutSubscriptionsInput = {
-    update: XOR<usuarioUpdateWithoutSubscriptionsInput, usuarioUncheckedUpdateWithoutSubscriptionsInput>
-    create: XOR<usuarioCreateWithoutSubscriptionsInput, usuarioUncheckedCreateWithoutSubscriptionsInput>
-    where?: usuarioWhereInput
+  export type UsuarioUpsertWithoutSubscriptionsInput = {
+    update: XOR<UsuarioUpdateWithoutSubscriptionsInput, UsuarioUncheckedUpdateWithoutSubscriptionsInput>
+    create: XOR<UsuarioCreateWithoutSubscriptionsInput, UsuarioUncheckedCreateWithoutSubscriptionsInput>
+    where?: UsuarioWhereInput
   }
 
-  export type usuarioUpdateToOneWithWhereWithoutSubscriptionsInput = {
-    where?: usuarioWhereInput
-    data: XOR<usuarioUpdateWithoutSubscriptionsInput, usuarioUncheckedUpdateWithoutSubscriptionsInput>
+  export type UsuarioUpdateToOneWithWhereWithoutSubscriptionsInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutSubscriptionsInput, UsuarioUncheckedUpdateWithoutSubscriptionsInput>
   }
 
-  export type usuarioUpdateWithoutSubscriptionsInput = {
+  export type UsuarioUpdateWithoutSubscriptionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -21901,7 +21901,7 @@ export namespace Prisma {
     payments?: PaymentUpdateManyWithoutProcessorNestedInput
   }
 
-  export type usuarioUncheckedUpdateWithoutSubscriptionsInput = {
+  export type UsuarioUncheckedUpdateWithoutSubscriptionsInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
@@ -21967,7 +21967,7 @@ export namespace Prisma {
     active?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
-    user: usuarioCreateNestedOneWithoutCompanyInput
+    user: UsuarioCreateNestedOneWithoutCompanyInput
     services?: ServiceCreateNestedManyWithoutCompanyInput
     customers?: CustomerCreateNestedManyWithoutCompanyInput
     appointments?: AppointmentCreateNestedManyWithoutCompanyInput
@@ -22029,7 +22029,7 @@ export namespace Prisma {
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutCompanyNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutCompanyNestedInput
     services?: ServiceUpdateManyWithoutCompanyNestedInput
     customers?: CustomerUpdateManyWithoutCompanyNestedInput
     appointments?: AppointmentUpdateManyWithoutCompanyNestedInput
@@ -22368,7 +22368,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     appointment?: AppointmentUpdateOneRequiredWithoutPaymentNestedInput
-    processor?: usuarioUpdateOneRequiredWithoutPaymentsNestedInput
+    processor?: UsuarioUpdateOneRequiredWithoutPaymentsNestedInput
     transaction?: FinancialTransactionUpdateOneWithoutPaymentNestedInput
   }
 
@@ -22613,7 +22613,7 @@ export namespace Prisma {
     paymentMethodId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    user?: usuarioUpdateOneRequiredWithoutSubscriptionsNestedInput
+    user?: UsuarioUpdateOneRequiredWithoutSubscriptionsNestedInput
   }
 
   export type SubscriptionUncheckedUpdateWithoutPlanInput = {

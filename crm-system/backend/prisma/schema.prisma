@@ -1,3 +1,41 @@
+/**
+ * ============================================================================
+ * SCHEMA PRISMA - CRM SYSTEM
+ * ============================================================================
+ * 
+ * CONVENÇÕES DE NOMENCLATURA:
+ * - Nomes de modelos: PascalCase (ex: Usuario, Company)
+ * - Nomes de campos: camelCase (ex: userId, createdAt)
+ * - Nomes em BD: snake_case (ex: user_id, created_at) via @map()
+ * - IDs: CUID gerado automaticamente
+ * - Timestamps: createdAt, updatedAt (gerenciados automaticamente)
+ * - Booleanos padrão: true (ativo por padrão)
+ * 
+ * ESTRUTURA DE RELAÇÕES:
+ * 1. Usuario (Usuário) - Entidade raiz do sistema
+ *    └─ Company (1:1) - Uma empresa por usuário
+ *       ├─ Services - Serviços oferecidos
+ *       ├─ Customers - Clientes da empresa
+ *       ├─ Appointments - Agendamentos
+ *       ├─ Payments - Pagamentos
+ *       ├─ FinancialTransactions - Transações financeiras
+ *       └─ BusinessHours - Horários de funcionamento
+ * 
+ * 2. Appointment (Agendamento) - Centro das operações
+ *    ├─ Customer - Quem agendou
+ *    ├─ Company - Qual empresa
+ *    ├─ AppointmentService[] - Serviços do agendamento (M:N)
+ *    └─ Payment (1:1) - Pagamento associado
+ * 
+ * 3. Payment (Pagamento) - Transações financeiras
+ *    ├─ Appointment - Agendamento pago
+ *    ├─ Company - Empresa que recebe
+ *    ├─ Usuario (processor) - Quem processou
+ *    └─ FinancialTransaction - Registro contábil
+ * 
+ * ============================================================================
+ */
+
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma_client"
@@ -7,239 +45,722 @@ datasource db {
   provider = "postgresql"
 }
 
+// ============================================================================
+// ENUMS - Enumeradores de Status e Tipos
+// ============================================================================
+
+/**
+ * SUBSCRIPTION STATUS - Estados da Assinatura
+ * Estados que uma assinatura pode ter durante seu ciclo de vida
+ * Uso: Subscription.status
+ */
 enum SubscriptionStatus {
-  active
-  inactive
-  trial
-  cancelled
-  expired
+  active         // Assinatura ativa e paga
+  inactive       // Assinatura descontinuada pelo usuário
+  trial          // Período de teste (ex: 14 dias)
+  cancelled      // Cancelada (diferente de inativa)
+  expired        // Expirada (período fim sem renovação)
 }
 
+/**
+ * APPOINTMENT STATUS - Estados do Agendamento
+ * Define em qual fase o agendamento está no ciclo de vida
+ * Uso: Appointment.status
+ */
 enum AppointmentStatus {
-  scheduled
-  completed
-  cancelled
-  waiting
+  scheduled      // Confirmado e aguardando data/hora
+  completed      // Serviço realizado com sucesso
+  cancelled      // Cancelado (verificar cancellationReason)
+  waiting        // Cliente checado, aguardando atendimento
 }
 
+/**
+ * PAYMENT METHOD - Métodos de Pagamento
+ * Diferentes formas aceitas para receber pagamentos
+ * Uso: Payment.method
+ * Nota: PIX é o método preferido (mais rápido)
+ */
 enum PaymentMethod {
-  cash
-  credit_card
-  debit_card
-  pix
+  cash           // Dinheiro em espécie
+  credit_card    // Cartão de crédito (verificar installments)
+  debit_card     // Cartão de débito
+  pix            // Transferência bancária instantânea
 }
 
+/**
+ * PAYMENT STATUS - Estados do Pagamento
+ * Rastreia o processamento e confirmação do pagamento
+ * Uso: Payment.status
+ * Fluxo típico: pending → paid
+ * Fluxo com erro: pending → failed (tentar novamente)
+ */
 enum PaymentStatus {
-  pending
-  paid
-  failed
-  refunded
-  partially_refunded
+  pending              // Aguardando processamento/confirmação
+  paid                 // Pagamento confirmado e recebido
+  failed               // Processamento falhou (gateway erro)
+  refunded             // Reembolso total processado
+  partially_refunded   // Reembolso parcial processado
 }
 
+/**
+ * DAY OF WEEK - Dias da Semana
+ * Identifica dias específicos para horários de funcionamento
+ * Uso: BusinessHour.weekday
+ * Nota: Segunda = monday (index 0), Domingo = sunday (index 6)
+ */
 enum DayOfWeek {
-  monday
-  tuesday
-  wednesday
-  thursday
-  friday
-  saturday
-  sunday
+  monday      // Segunda-feira
+  tuesday     // Terça-feira
+  wednesday   // Quarta-feira
+  thursday    // Quinta-feira
+  friday      // Sexta-feira
+  saturday    // Sábado
+  sunday      // Domingo
 }
 
+
+
+// ============================================================================
+// MODELS - Modelos de Dados
+// ============================================================================
+
+/**
+ * USUARIO - Usuário do Sistema
+ * 
+ * Entidade raiz: representa um usuário/proprietário de empresa que acessa o sistema.
+ * 
+ * RELAÇÕES:
+ * - company (1:1): Uma empresa criada por este usuário
+ *   Acesso: usuario.company → Company
+ * 
+ * - subscriptions (1:N): Planos de assinatura do usuário
+ *   Acesso: usuario.subscriptions → Subscription[]
+ *   Exemplo: usuario.subscriptions[0].plan.name
+ * 
+ * - payments (1:N): Pagamentos processados por este usuário
+ *   Acesso: usuario.payments → Payment[]
+ *   Uso: Rastrear quem processou cada pagamento
+ * 
+ * EXCLUSÃO:
+ * - Ao deletar usuario: Company será deletada (cascade)
+ * - Subscriptions e Payments serão deletadas (cascade)
+ * 
+ * QUERIES COMUNS:
+ * - Encontrar usuário com sua empresa: findUnique({where: {id}, include: {company: true}})
+ * - Usuário com todos seus pagamentos: findUnique({where: {id}, include: {payments: true}})
+ * 
+ * @table users (banco de dados)
+ */
 model Usuario {
   id            String         @id @default(cuid())
   name          String         @db.VarChar(255)
-  email         String         @unique @db.VarChar(255)
-  phone         String?        @db.VarChar(20)
-  active        Boolean        @default(true)
+  email         String         @unique @db.VarChar(255)  // Email único por usuário
+  phone         String?        @db.VarChar(20)          // Contato opcional 
+  active        Boolean        @default(true)           // Soft delete via ativação
   createdAt     DateTime       @default(now()) @map("created_at")
   updatedAt     DateTime       @updatedAt @map("updated_at")
-  company       Company?
-  subscriptions Subscription[]
-  payments      Payment[]
+  
+  // RELAÇÕES
+  company       Company?                        // Relação 1:1 (opcionalmente nenhuma)
+  subscriptions Subscription[]                  // Relação 1:N
+  payments      Payment[]                       // Relação 1:N (pagamentos processados)
 
   @@map("users")
 }
 
+/**
+ * COMPANY - Empresa/Negócio
+ * 
+ * Representa um negócio registrado no sistema (salão, clínica, consultório, etc).
+ * Cada empresa é propriedade de um usuário único.
+ * 
+ * RELAÇÕES:
+ * - user (1:1): Proprietário da empresa (Usuario)
+ *   Acesso: company.user → Usuario
+ *   Constraint: company.userId é UNIQUE (uma empresa por usuário)
+ * 
+ * - services (1:N): Serviços oferecidos pela empresa
+ *   Acesso: company.services → Service[]
+ *   Exemplo: company.services.map(s => s.name)
+ * 
+ * - customers (1:N): Clientes cadastrados para esta empresa
+ *   Acesso: company.customers → Customer[]
+ * 
+ * - appointments (1:N): Agendamentos feitos na empresa
+ *   Acesso: company.appointments → Appointment[]
+ *   Com dados: appointments(include: {customer: true, services: true})
+ * 
+ * - payments (1:N): Pagamentos recebidos pela empresa
+ *   Acesso: company.payments → Payment[]
+ * 
+ * - transactions (1:N): Transações financeiras da empresa
+ *   Acesso: company.transactions → FinancialTransaction[]
+ * 
+ * - businessHours (1:N): Horários de funcionamento por dia da semana
+ *   Acesso: company.businessHours → BusinessHour[]
+ *   Uso: Validar disponibilidade para agendamentos
+ * 
+ * FILTROS IMPORTANTES:
+ * - active: true - Apenas empresas ativas
+ * - Dados em banco: campos como postalCode são armazenados com underscores
+ * 
+ * QUERIES COMUNS:
+ * - Empresa com todos os seus dados: findUnique({
+ *     where: {id},
+ *     include: {
+ *       user: true,
+ *       services: true,
+ *       customers: true,
+ *       appointments: {include: {customer: true, services: true}},
+ *       businessHours: true
+ *     }
+ *   })
+ * 
+ * - Buscar por usuário: findUnique({where: {userId}})
+ * 
+ * @table companies (banco de dados)
+ */
 model Company {
   id            String                 @id @default(cuid())
-  userId        String                 @unique @map("user_id")
+  userId        String                 @unique @map("user_id")  // Foreign key ÚNICO (1:1)
   name          String                 @db.VarChar(255)
-  address       String?
-  district      String?                @db.VarChar(100)
+  address       String?                                          // Endereço completo
+  district      String?                @db.VarChar(100)         // Bairro
   city          String?                @db.VarChar(100)
-  state         String?                @db.VarChar(2)
-  postalCode    String?                @map("postal_code") @db.VarChar(10)
+  state         String?                @db.VarChar(2)           // UF: SP, RJ, etc
+  postalCode    String?                @map("postal_code") @db.VarChar(10)  // CEP
   phone         String?                @db.VarChar(20)
   email         String?                @db.VarChar(255)
-  instagram     String?                @db.VarChar(255)
-  logoUrl       String?                @map("logo_url") @db.VarChar(255)
-  active        Boolean                @default(true)
+  instagram     String?                @db.VarChar(255)         // Handle Instagram (@usuario)
+  logoUrl       String?                @map("logo_url") @db.VarChar(255)    // URL da logo
+  active        Boolean                @default(true)           // true = empresa operacional
   createdAt     DateTime               @default(now()) @map("created_at")
   updatedAt     DateTime               @updatedAt @map("updated_at")
-  user          Usuario                @relation(fields: [userId], references: [id])
-  services      Service[]
-  customers     Customer[]
-  appointments  Appointment[]
-  payments      Payment[]
-  transactions  FinancialTransaction[]
-  businessHours BusinessHour[]
+  
+  // RELAÇÕES
+  user          Usuario                @relation(fields: [userId], references: [id])  // Proprietário
+  services      Service[]              // Serviços oferecidos
+  customers     Customer[]             // Clientes da empresa
+  appointments  Appointment[]          // Agendamentos
+  payments      Payment[]              // Pagamentos recebidos
+  transactions  FinancialTransaction[] // Histórico financeiro
+  businessHours BusinessHour[]         // Horários por dia semana
 
   @@map("companies")
 }
 
+
+/**
+ * SERVICE - Serviço Oferecido
+ * 
+ * Catálogo de serviços que uma empresa oferece (corte cabelo, manicure, consulta, etc).
+ * Será usado em agendamentos via AppointmentService (relação M:N).
+ * 
+ * RELAÇÕES:
+ * - company (N:1): Qual empresa oferece este serviço
+ *   Acesso: service.company → Company
+ * 
+ * - appointmentServices (N:M): Agendamentos que usam este serviço
+ *   Acesso: service.appointmentServices → AppointmentService[]
+ *   Uso: Histórico de quando este serviço foi agendado
+ * 
+ * CONSULTAS RELACIONADAS:
+ * - Serviços de uma empresa: company.services
+ * - Agendamentos que usam este serviço: service.appointmentServices
+ * - Quantas vezes foi agendado: service.appointmentServices.length
+ * 
+ * PREÇOS E DURAÇÕES:
+ * - price: Preço atual (pode mudar no tempo)
+ * - duration: Duração em minutos
+ * - Preço histórico fica em AppointmentService.priceAtBooking (imutável)
+ * 
+ * QUERIES:
+ * - Serviços de uma empresa com seus agendamentos:
+ *   findMany({where: {companyId}, include: {appointmentServices: true}})
+ * 
+ * @table services (banco de dados)
+ */
 model Service {
   id                  String               @id @default(cuid())
-  companyId           String               @map("company_id")
-  name                String               @db.VarChar(255)
-  price               Decimal              @db.Decimal(10, 2)
-  duration            Int
-  active              Boolean              @default(true)
+  companyId           String               @map("company_id")              // FK para Company
+  name                String               @db.VarChar(255)               // Ex: "Corte Cabelo"
+  price               Decimal              @db.Decimal(10, 2)             // Preço em R$
+  duration            Int                  // Duração em minutos
+  active              Boolean              @default(true)                 // true = serviço disponível
   createdAt           DateTime             @default(now()) @map("created_at")
   updatedAt           DateTime             @updatedAt @map("updated_at")
+  
+  // RELAÇÕES
   company             Company              @relation(fields: [companyId], references: [id])
-  appointmentServices AppointmentService[]
+  appointmentServices AppointmentService[] // Histórico de uso em agendamentos
 
   @@map("services")
 }
 
+/**
+ * CUSTOMER - Cliente/Paciente
+ * 
+ * Pessoas que agendam serviços na empresa.
+ * Cadastro feito geralmente via Google (OAuth).
+ * 
+ * RELAÇÕES:
+ * - company (N:1): Qual empresa este cliente frequenta
+ *   Acesso: customer.company → Company
+ * 
+ * - appointments (1:N): Todos os agendamentos deste cliente
+ *   Acesso: customer.appointments → Appointment[]
+ *   Uso: Histórico de serviços agendados
+ * 
+ * UNICIDADE:
+ * - @@unique([companyId, googleId]): Um Google ID por cliente por empresa
+ * - @@unique([companyId, email]): Um email por cliente por empresa
+ * - Permite que mesmo cliente tenha conta em múltiplas empresas
+ * 
+ * INTEGRAÇÃO GOOGLE:
+ * - googleId: ID único do Google (não muda)
+ * - email: Pode ser atualizado se cliente mudar email Google
+ * 
+ * QUERIES:
+ * - Cliente por Google ID: findUnique({where: {companyId_googleId}})
+ * - Cliente por email: findUnique({where: {companyId_email}})
+ * - Clientes de uma empresa: company.customers
+ * - Agendamentos de um cliente: customer.appointments (com datas, status)
+ * 
+ * @table customers (banco de dados)
+ */
 model Customer {
   id           String        @id @default(cuid())
-  companyId    String        @map("company_id")
+  companyId    String        @map("company_id")                 // FK para Company
   name         String        @db.VarChar(255)
-  email        String        @db.VarChar(255)
-  googleId     String        @map("google_id") @db.VarChar(255)
-  active       Boolean       @default(true)
+  email        String        @db.VarChar(255)                   // Email Google
+  googleId     String        @map("google_id") @db.VarChar(255) // ID único Google
+  active       Boolean       @default(true)                     // true = cliente ativo
   createdAt    DateTime      @default(now()) @map("created_at")
   updatedAt    DateTime      @updatedAt @map("updated_at")
+  
+  // RELAÇÕES
   company      Company       @relation(fields: [companyId], references: [id])
-  appointments Appointment[]
+  appointments Appointment[] // Todos os agendamentos do cliente
 
-  @@unique([companyId, googleId])
-  @@unique([companyId, email])
+  // CONSTRAINTS DE UNICIDADE
+  @@unique([companyId, googleId])  // Mesmo Google ID não pode aparecer 2x na mesma empresa
+  @@unique([companyId, email])     // Mesmo email não pode aparecer 2x na mesma empresa
   @@map("customers")
 }
 
+/**
+ * APPOINTMENT - Agendamento de Serviço
+ * 
+ * Reserva de um cliente para receber serviços em data/hora específica.
+ * Centro das operações: conecta cliente, empresa, serviços e pagamento.
+ * 
+ * RELAÇÕES:
+ * - company (N:1): Qual empresa
+ *   Acesso: appointment.company → Company
+ * 
+ * - customer (N:1): Quem agendou
+ *   Acesso: appointment.customer → Customer
+ * 
+ * - services (N:M via AppointmentService): Quais serviços serão prestados
+ *   Acesso: appointment.services → AppointmentService[]
+ *   Uso: Múltiplos serviços em um agendamento (ex: corte + tintura)
+ * 
+ * - payment (1:1 opcional): Pagamento associado
+ *   Acesso: appointment.payment → Payment (pode ser null)
+ * 
+ * CICLO DE VIDA:
+ * 1. status: "scheduled" - Cliente confirmou
+ * 2. status: "waiting" - Cliente checado, aguardando
+ * 3. status: "completed" - Serviço finalizado com sucesso
+ * 4. status: "cancelled" - Cancelado (verificar cancellationReason)
+ * 
+ * CAMPOS IMPORTANTES:
+ * - startAt / endAt: Horários do agendamento
+ * - totalAmount: Valor total (sum dos serviços)
+ * - reminderSent: Flag para evitar duplicar notificações
+ * - cancellationReason: Por que foi cancelado (opcional)
+ * 
+ * QUERIES COMUNS:
+ * - Agendamentos de uma empresa (hoje em diante):
+ *   findMany({where: {companyId, startAt: {gte: today}}})
+ * 
+ * - Agendamento completo com detalhes:
+ *   findUnique({where: {id}, include: {
+ *     customer: true,
+ *     company: true,
+ *     services: {include: {service: true}},
+ *     payment: true
+ *   }})
+ * 
+ * - Agendamentos de um cliente:
+ *   findMany({where: {customerId}})
+ * 
+ * @table appointments (banco de dados)
+ */
 model Appointment {
   id                 String               @id @default(cuid())
-  companyId          String               @map("company_id")
-  customerId         String               @map("customer_id")
-  startAt            DateTime             @map("start_at")
-  endAt              DateTime             @map("end_at")
-  status             AppointmentStatus    @default(scheduled)
-  totalAmount        Decimal?             @map("total_amount") @db.Decimal(10, 2)
-  cancellationReason String?              @map("cancellation_reason")
-  reminderSent       Boolean              @default(false) @map("reminder_sent")
-  reminderSentAt     DateTime?            @map("reminder_sent_at")
+  companyId          String               @map("company_id")                 // FK para Company
+  customerId         String               @map("customer_id")                // FK para Customer
+  startAt            DateTime             @map("start_at")                   // Início do agendamento
+  endAt              DateTime             @map("end_at")                     // Fim do agendamento
+  status             AppointmentStatus    @default(scheduled)                // Estado do agendamento
+  totalAmount        Decimal?             @map("total_amount") @db.Decimal(10, 2)  // Valor total
+  cancellationReason String?              @map("cancellation_reason")        // Se cancelado, por quê?
+  reminderSent       Boolean              @default(false) @map("reminder_sent")    // Lembrete enviado?
+  reminderSentAt     DateTime?            @map("reminder_sent_at")           // Quando foi enviado
   createdAt          DateTime             @default(now()) @map("created_at")
   updatedAt          DateTime             @updatedAt @map("updated_at")
+  
+  // RELAÇÕES
   company            Company              @relation(fields: [companyId], references: [id])
   customer           Customer             @relation(fields: [customerId], references: [id])
-  services           AppointmentService[]
-  payment            Payment?
+  services           AppointmentService[] // M:N com Service via AppointmentService
+  payment            Payment?             // 1:1 opcional - pagamento do agendamento
 
   @@map("appointments")
 }
 
+
+/**
+ * APPOINTMENT SERVICE - Serviço em um Agendamento (Tabela de Junção M:N)
+ * 
+ * Tabela de associação entre Appointment e Service.
+ * Um agendamento pode ter múltiplos serviços, um serviço pode ser em múltiplos agendamentos.
+ * 
+ * PROPÓSITO:
+ * - Armazenar quais serviços foram agendados em um appointment específico
+ * - Manter histórico de preço e duração NO MOMENTO do agendamento (imutável)
+ * - Permite que Service original possa mudar sem afetar agendamentos passados
+ * 
+ * RELAÇÕES:
+ * - appointment (N:1): Qual agendamento
+ *   Acesso: appointmentService.appointment → Appointment
+ * 
+ * - service (N:1): Qual serviço
+ *   Acesso: appointmentService.service → Service
+ * 
+ * DADOS HISTÓRICOS IMPORTANTES:
+ * - priceAtBooking: Preço do serviço NA DATA do agendamento (não muda)
+ * - durationAtBooking: Duração do serviço NA DATA do agendamento (não muda)
+ * - Permite recuperar quanto cliente pagou e quanto tempo levou
+ * 
+ * EXEMPLOS DE ACESSO:
+ * - Serviços de um agendamento:
+ *   appointment.services → AppointmentService[]
+ *   appointment.services.map(as => as.service.name)
+ * 
+ * - Valor total de um agendamento:
+ *   appointment.services.reduce((sum, as) => sum + as.priceAtBooking, 0)
+ * 
+ * - Tempo total de um agendamento:
+ *   appointment.services.reduce((sum, as) => sum + as.durationAtBooking, 0)
+ * 
+ * CONSTRAINTS:
+ * - @@unique([appointmentId, serviceId]): Mesmo serviço não pode aparecer 2x no mesmo agendamento
+ * 
+ * @table appointment_services (banco de dados)
+ */
 model AppointmentService {
   id                String      @id @default(cuid())
-  appointmentId     String      @map("appointment_id")
-  serviceId         String      @map("service_id")
-  priceAtBooking    Decimal     @map("price_at_booking") @db.Decimal(10, 2)
-  durationAtBooking Int         @map("duration_at_booking")
+  appointmentId     String      @map("appointment_id")               // FK para Appointment
+  serviceId         String      @map("service_id")                   // FK para Service
+  priceAtBooking    Decimal     @map("price_at_booking") @db.Decimal(10, 2)  // Preço histórico
+  durationAtBooking Int         @map("duration_at_booking")          // Duração em minutos (histórico)
   createdAt         DateTime    @default(now()) @map("created_at")
+  
+  // RELAÇÕES
   appointment       Appointment @relation(fields: [appointmentId], references: [id])
   service           Service     @relation(fields: [serviceId], references: [id])
 
-  @@unique([appointmentId, serviceId])
+  // CONSTRAINT
+  @@unique([appointmentId, serviceId])  // Mesmo serviço não 2x no mesmo agendamento
   @@map("appointment_services")
 }
 
+/**
+ * PAYMENT - Pagamento de Agendamento
+ * 
+ * Registro de pagamento de um agendamento específico.
+ * Conecta Appointment com fluxo financeiro (FinancialTransaction, Usuario processador).
+ * 
+ * RELAÇÕES:
+ * - appointment (1:1): Qual agendamento foi pago
+ *   Acesso: payment.appointment → Appointment
+ *   Constraint: appointmentId é UNIQUE (um pagamento por agendamento)
+ * 
+ * - company (N:1): Qual empresa recebe o pagamento
+ *   Acesso: payment.company → Company
+ * 
+ * - processor (N:1): Qual usuário processou o pagamento
+ *   Acesso: payment.processor → Usuario
+ *   Uso: Auditoria - quem registrou este pagamento
+ * 
+ * - transaction (1:1 opcional): Transação financeira associada
+ *   Acesso: payment.transaction → FinancialTransaction
+ * 
+ * CICLO DE VIDA DO PAGAMENTO:
+ * 1. status: "pending" - Criado, aguardando processamento/confirmação gateway
+ * 2. status: "paid" - Confirmado recebimento
+ * 3. status: "failed" - Falha na transação (tentar novamente)
+ * 4. status: "refunded" - Reembolso total processado
+ * 5. status: "partially_refunded" - Reembolso parcial
+ * 
+ * CAMPOS IMPORTANTES:
+ * - method: Como foi pago (cash, credit_card, debit_card, pix)
+ * - installments: Se credit_card, quantas parcelas (padrão 1)
+ * - cardBrand: Bandeira do cartão (ex: "VISA", "MASTERCARD") se credit_card
+ * - transactionId: ID retornado pelo gateway de pagamento
+ * - paidAt: Quando foi confirmado o recebimento
+ * - processedBy: ID do usuário que registrou
+ * 
+ * QUERIES:
+ * - Pagamentos de uma empresa em período:
+ *   findMany({where: {companyId, paidAt: {gte: startDate, lte: endDate}}})
+ * 
+ * - Pagamento de um agendamento:
+ *   findUnique({where: {appointmentId}})
+ * 
+ * - Pagamentos processados por usuário:
+ *   findMany({where: {processedBy: usuarioId}})
+ * 
+ * @table payments (banco de dados)
+ */
 model Payment {
   id            String                @id @default(cuid())
-  appointmentId String                @unique @map("appointment_id")
-  companyId     String                @map("company_id")
-  amount        Decimal               @db.Decimal(10, 2)
-  method        PaymentMethod
-  cardBrand     String?               @map("card_brand") @db.VarChar(50)
-  installments  Int                   @default(1)
-  status        PaymentStatus         @default(pending)
-  transactionId String?               @map("transaction_id") @db.VarChar(255)
-  paidAt        DateTime?             @map("paid_at")
-  processedBy   String                @map("processed_by")
-  notes         String?
+  appointmentId String                @unique @map("appointment_id")      // FK único para Appointment
+  companyId     String                @map("company_id")                  // FK para Company
+  amount        Decimal               @db.Decimal(10, 2)                  // Valor pago em R$
+  method        PaymentMethod                                              // Método (cash, card, pix, etc)
+  cardBrand     String?               @map("card_brand") @db.VarChar(50)  // Ex: VISA, MASTERCARD
+  installments  Int                   @default(1)                         // Parcelamento (padrão 1x)
+  status        PaymentStatus         @default(pending)                   // Estado do pagamento
+  transactionId String?               @map("transaction_id") @db.VarChar(255)  // ID do gateway
+  paidAt        DateTime?             @map("paid_at")                     // Quando foi confirmado
+  processedBy   String                @map("processed_by")                // FK para Usuario (quem processou)
+  notes         String?                                                    // Notas adicionais
   createdAt     DateTime              @default(now()) @map("created_at")
   updatedAt     DateTime              @updatedAt @map("updated_at")
+  
+  // RELAÇÕES
   appointment   Appointment           @relation(fields: [appointmentId], references: [id])
   company       Company               @relation(fields: [companyId], references: [id])
-  processor     Usuario               @relation(fields: [processedBy], references: [id])
-  transaction   FinancialTransaction?
+  processor     Usuario               @relation(fields: [processedBy], references: [id])  // Auditoria
+  transaction   FinancialTransaction?  // Link opcional com transação contábil
 
   @@map("payments")
 }
 
+/**
+ * FINANCIAL TRANSACTION - Transação Financeira
+ * 
+ * Registro de todas as movimentações financeiras de uma empresa.
+ * Usada para relatórios contábeis, fluxo de caixa, etc.
+ * 
+ * RELAÇÕES:
+ * - company (N:1): Qual empresa
+ *   Acesso: transaction.company → Company
+ * 
+ * - payment (1:1 opcional): Se vem de um pagamento
+ *   Acesso: transaction.payment → Payment
+ *   Uso: Ligação com o agendamento original
+ * 
+ * USO:
+ * - Pode registrar entrada (venda de serviço)
+ * - Pode registrar saída (despesa, refund, taxa)
+ * - category define o tipo de transação
+ * 
+ * CAMPOS:
+ * - category: Tipo (ex: "venda_serviço", "refund", "despesa_aluguel", etc)
+ * - description: Detalhes adicionais
+ * - amount: Valor em R$ (sempre positivo, category define se entrada/saída)
+ * - transactionDate: Data da transação (pode ser diferente de createdAt)
+ * 
+ * QUERIES:
+ * - Fluxo de caixa de uma empresa em período:
+ *   findMany({where: {companyId, transactionDate: {gte, lte}}})
+ * 
+ * - Total de receitas por categoria:
+ *   findMany({where: {companyId}})
+ *   Depois agrupar por category
+ * 
+ * @table financial_transactions (banco de dados)
+ */
 model FinancialTransaction {
   id              String          @id @default(cuid())
-  companyId       String          @map("company_id")
-  paymentId       String?         @unique @map("payment_id")
-  category        String          @db.VarChar(100)
-  description     String?
-  amount          Decimal         @db.Decimal(10, 2)
-  transactionDate DateTime        @map("transaction_date") @db.Date
+  companyId       String          @map("company_id")                 // FK para Company
+  paymentId       String?         @unique @map("payment_id")         // FK opcional para Payment
+  category        String          @db.VarChar(100)                   // Tipo: venda, refund, despesa, etc
+  description     String?                                             // Detalhes
+  amount          Decimal         @db.Decimal(10, 2)                 // Valor em R$
+  transactionDate DateTime        @map("transaction_date") @db.Date  // Data do evento
   createdAt       DateTime        @default(now()) @map("created_at")
   updatedAt       DateTime        @updatedAt @map("updated_at")
+  
+  // RELAÇÕES
   company         Company         @relation(fields: [companyId], references: [id])
   payment         Payment?        @relation(fields: [paymentId], references: [id])
 
   @@map("financial_transactions")
 }
 
+/**
+ * SUBSCRIPTION PLAN - Plano de Assinatura
+ * 
+ * Define os planos oferecidos pelo sistema.
+ * Não é específico de uma empresa, é global para o sistema.
+ * 
+ * RELAÇÕES:
+ * - subscriptions (N:1): Quais usuários têm este plano
+ *   Acesso: plan.subscriptions → Subscription[]
+ * 
+ * CAMPOS:
+ * - monthlyPrice: Custo mensal
+ * - annualPrice: Custo anual (pode ser um desconto)
+ * - maxCustomers: Limite de clientes que podem ser cadastrados
+ * - maxAppointmentsPerMonth: Limite de agendamentos/mês
+ * - features: JSON com features do plano (ex: integração google, relatórios avançados)
+ * 
+ * EXEMPLOS DE PLANOS:
+ * 1. Starter: R$ 99/mês, 50 clientes, 100 agendamentos/mês
+ * 2. Professional: R$ 299/mês, ilimitado
+ * 3. Trial: R$ 0/mês, 10 clientes, 20 agendamentos/mês (14 dias)
+ * 
+ * QUERIES:
+ * - Plano com subscriptions:
+ *   findUnique({where: {id}, include: {subscriptions: true}})
+ * 
+ * @table subscription_plans (banco de dados)
+ */
 model SubscriptionPlan {
   id                      String         @id @default(cuid())
-  name                    String         @db.VarChar(100)
-  description             String?
-  monthlyPrice            Decimal        @map("monthly_price") @db.Decimal(10, 2)
-  annualPrice             Decimal?       @map("annual_price") @db.Decimal(10, 2)
-  maxCustomers            Int?           @map("max_customers")
-  maxAppointmentsPerMonth Int?           @map("max_appointments_per_month")
-  features                Json?
-  active                  Boolean        @default(true)
+  name                    String         @db.VarChar(100)               // Ex: "Starter", "Professional"
+  description             String?                                       // Descrição do plano
+  monthlyPrice            Decimal        @map("monthly_price") @db.Decimal(10, 2)  // Valor mensal
+  annualPrice             Decimal?       @map("annual_price") @db.Decimal(10, 2)   // Valor anual (desconto)
+  maxCustomers            Int?           @map("max_customers")          // Limite de clientes (null = sem limite)
+  maxAppointmentsPerMonth Int?           @map("max_appointments_per_month")  // Limite agendamentos/mês
+  features                Json?                                         // Features em JSON
+  active                  Boolean        @default(true)                 // true = plano disponível
   createdAt               DateTime       @default(now()) @map("created_at")
   updatedAt               DateTime       @updatedAt @map("updated_at")
-  subscriptions           Subscription[]
+  
+  // RELAÇÕES
+  subscriptions           Subscription[] // Usuários com este plano
 
   @@map("subscription_plans")
 }
 
+/**
+ * SUBSCRIPTION - Assinatura de Usuário
+ * 
+ * Registro de qual plano um usuário tem contratado.
+ * Controla acesso às features do sistema.
+ * 
+ * RELAÇÕES:
+ * - user (N:1): Qual usuário
+ *   Acesso: subscription.user → Usuario
+ * 
+ * - plan (N:1): Qual plano está ativo
+ *   Acesso: subscription.plan → SubscriptionPlan
+ * 
+ * CICLO DE VIDA:
+ * 1. status: "trial" - Período de teste (verificar trialEndsAt)
+ * 2. status: "active" - Ativo e pago
+ * 3. status: "inactive" - Usuário não renovou
+ * 4. status: "cancelled" - Usuário cancelou
+ * 5. status: "expired" - Período se encerrou
+ * 
+ * CAMPOS:
+ * - startDate: Quando começou
+ * - endDate: Quando expira (null se período indefinido)
+ * - trialEndsAt: Quando trial se encerra (null se não é trial)
+ * - paymentMethodId: ID do método de pagamento (ex: ID do cartão no Stripe)
+ * 
+ * VALIDAÇÃO:
+ * - Se status === "trial", checar se trialEndsAt já passou
+ * - Se status === "active" e endDate passou, mudar para "expired"
+ * 
+ * QUERIES:
+ * - Assinatura ativa de um usuário:
+ *   findFirst({where: {userId, status: "active"}})
+ * 
+ * - Com detalhes do plano:
+ *   findFirst({where: {userId}, include: {plan: true}})
+ * 
+ * @table subscriptions (banco de dados)
+ */
 model Subscription {
   id              String             @id @default(cuid())
-  userId          String             @map("user_id")
-  planId          String             @map("plan_id")
-  status          SubscriptionStatus @default(trial)
-  startDate       DateTime           @map("start_date") @db.Date
-  endDate         DateTime?          @map("end_date") @db.Date
-  trialEndsAt     DateTime?          @map("trial_ends_at")
-  paymentMethodId String?            @map("payment_method_id") @db.VarChar(255)
+  userId          String             @map("user_id")                  // FK para Usuario
+  planId          String             @map("plan_id")                  // FK para SubscriptionPlan
+  status          SubscriptionStatus @default(trial)                  // Estado da assinatura
+  startDate       DateTime           @map("start_date") @db.Date      // Início
+  endDate         DateTime?          @map("end_date") @db.Date        // Fim (null = indefinido)
+  trialEndsAt     DateTime?          @map("trial_ends_at")            // Quando trial expira
+  paymentMethodId String?            @map("payment_method_id") @db.VarChar(255)  // ID método pagamento
   createdAt       DateTime           @default(now()) @map("created_at")
   updatedAt       DateTime           @updatedAt @map("updated_at")
+  
+  // RELAÇÕES
   user            Usuario            @relation(fields: [userId], references: [id])
   plan            SubscriptionPlan   @relation(fields: [planId], references: [id])
 
   @@map("subscriptions")
 }
 
+/**
+ * BUSINESS HOUR - Horário de Funcionamento
+ * 
+ * Define os horários de funcionamento de uma empresa por dia da semana.
+ * Usada para validar disponibilidade de agendamentos.
+ * 
+ * RELAÇÕES:
+ * - company (N:1): Qual empresa
+ *   Acesso: businessHour.company → Company
+ * 
+ * CAMPOS:
+ * - weekday: Dia da semana (monday, tuesday, ... sunday)
+ * - opensAt: Hora de abertura (ex: 09:00)
+ * - closesAt: Hora de fechamento (ex: 18:00)
+ * - closed: true = dia de funcionário (não abre)
+ * 
+ * EXEMPLOS:
+ * - Segunda a sexta: 09:00 às 18:00
+ * - Sábado: 09:00 às 13:00
+ * - Domingo: closed = true (não abre)
+ * 
+ * CONSTRAINT:
+ * - @@unique([companyId, weekday]): Apenas um registro por dia por empresa
+ * 
+ * VALIDAÇÃO DE AGENDAMENTO:
+ * 1. Pegar businessHour para o dia do agendamento
+ * 2. Se closed === true, erro (fechado)
+ * 3. Verificar se startAt >= opensAt e endAt <= closesAt
+ * 4. Verificar se não há conflito com outros agendamentos
+ * 
+ * QUERIES:
+ * - Horários de uma empresa:
+ *   company.businessHours
+ * 
+ * - Horários de um dia específico:
+ *   findUnique({where: {companyId_weekday}})
+ * 
+ * @table business_hours (banco de dados)
+ */
 model BusinessHour {
   id        String    @id @default(cuid())
-  companyId String    @map("company_id")
-  weekday   DayOfWeek
-  opensAt   DateTime? @map("opens_at") @db.Time(0)
-  closesAt  DateTime? @map("closes_at") @db.Time(0)
-  closed    Boolean   @default(false)
+  companyId String    @map("company_id")               // FK para Company
+  weekday   DayOfWeek                                  // Dia da semana
+  opensAt   DateTime? @map("opens_at") @db.Time(0)    // Hora abertura (HH:MM:SS)
+  closesAt  DateTime? @map("closes_at") @db.Time(0)   // Hora fechamento (HH:MM:SS)
+  closed    Boolean   @default(false)                  // true = dia fechado
   createdAt DateTime  @default(now()) @map("created_at")
   updatedAt DateTime  @updatedAt @map("updated_at")
+  
+  // RELAÇÕES
   company   Company   @relation(fields: [companyId], references: [id])
 
-  @@unique([companyId, weekday])
+  // CONSTRAINT
+  @@unique([companyId, weekday])  // Um registro por dia por empresa
   @@map("business_hours")
 }

@@ -99,8 +99,15 @@ async function main() {
     // CLIENTES
     // =========================================================
 
-    const customer1 = await prisma.customer.create({
-        data: {
+    const customer1 = await prisma.customer.upsert({
+        where: {
+            companyId_googleId: {
+                companyId: company.id,
+                googleId: "google-test-001",
+            },
+        },
+        update: {},
+        create: {
             companyId: company.id,
             name: "João Silva",
             email: "joao@gmail.com",
@@ -109,8 +116,15 @@ async function main() {
         },
     });
 
-    const customer2 = await prisma.customer.create({
-        data: {
+    const customer2 = await prisma.customer.upsert({
+        where: {
+            companyId_googleId: {
+                companyId: company.id,
+                googleId: "google-test-002",
+            },
+        },
+        update: {},
+        create: {
             companyId: company.id,
             name: "Maria Oliveira",
             email: "maria@gmail.com",
@@ -119,8 +133,15 @@ async function main() {
         },
     });
 
-    const customer3 = await prisma.customer.create({
-        data: {
+    const customer3 = await prisma.customer.upsert({
+        where: {
+            companyId_googleId: {
+                companyId: company.id,
+                googleId: "google-test-003",
+            },
+        },
+        update: {},
+        create: {
             companyId: company.id,
             name: "Pedro Santos",
             email: "pedro@gmail.com",
@@ -136,8 +157,15 @@ async function main() {
     const weekdays = [DayOfWeek.monday, DayOfWeek.tuesday, DayOfWeek.wednesday, DayOfWeek.thursday, DayOfWeek.friday];
 
     for (const weekday of weekdays) {
-        await prisma.businessHour.create({
-            data: {
+        await prisma.businessHour.upsert({
+            where: {
+                companyId_weekday: {
+                    companyId: company.id,
+                    weekday,
+                },
+            },
+            update: {},
+            create: {
                 companyId: company.id,
                 weekday,
                 opensAt: new Date("1970-01-01T08:00:00"),
@@ -147,8 +175,15 @@ async function main() {
         });
     }
 
-    await prisma.businessHour.create({
-        data: {
+    await prisma.businessHour.upsert({
+        where: {
+            companyId_weekday: {
+                companyId: company.id,
+                weekday: DayOfWeek.saturday,
+            },
+        },
+        update: {},
+        create: {
             companyId: company.id,
             weekday: DayOfWeek.saturday,
             opensAt: new Date("1970-01-01T08:00:00"),
@@ -157,8 +192,15 @@ async function main() {
         },
     });
 
-    await prisma.businessHour.create({
-        data: {
+    await prisma.businessHour.upsert({
+        where: {
+            companyId_weekday: {
+                companyId: company.id,
+                weekday: DayOfWeek.sunday,
+            },
+        },
+        update: {},
+        create: {
             companyId: company.id,
             weekday: DayOfWeek.sunday,
             closed: true,
@@ -255,8 +297,9 @@ async function main() {
             paymentId: payment.id,
             category: "Serviço",
             description: "Pagamento Corte + Barba",
-            amount: 45.0,
-            transactionDate: new Date("2026-08-29"),
+            amount: 45,
+            transactionDate: new Date("2026-08-29T00:00:00.000Z"),
+            type: "income",
         },
     });
 

@@ -21,15 +21,6 @@ body {
     box-shadow: 4px 4px 64px rgba(0, 0, 0, 0.25);
     padding: 20px;
 }
-
-.notes {
-    width: 400px;
-    background-color: #f6f4e8;
-    border-radius: 25px;
-    box-shadow: 4px 4px 64px rgba(0, 0, 0, 0.25);
-    padding: 20px;
-}
-
 .calendar-header {
     display: flex;
     flex-direction: column;
@@ -127,5 +118,91 @@ body {
 
     &:hover {
         background-color: #e4e1cc;
+    }
+}
+
+.notes {
+    width: 500px;
+    background-color: #f6f4e8;
+    border-radius: 25px;
+    box-shadow: 4px 4px 30px rgba(0, 0, 0, 0.25);
+    padding: 20px;
+
+    h2 {
+        text-align: center;
+        font-size: 32px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+
+    .notes-body {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        .noted {
+            background-color: #f6f4e8;
+            color: #525965;
+            display: flex;
+            align-items: start;
+            justify-content: space-between;
+            padding: 35px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            border-radius: 25px;
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.25);
+            margin-bottom: 20px;
+
+            .hour {
+                h1 {
+                    font-size: 32px;
+                    font-weight: normal;
+                }
+                p {
+                    font-size: 24px;
+                    font-weight: lighter;
+                }
+            }
+
+            &.scheduled {
+                background-color: #e4e1cc;
+                color: #525965;
+            }
+            &.waiting {
+                background-color: #f6f4e8;
+                color: #525965;
+            }
+            &.completed {
+                background-color: #f6f4e8;
+                color: #525965;
+            }
+            &.canceled {
+                background-color: #f6f4e8;
+                color: #525965;
+            }
+        }
+
+        .noted-info {
+            min-width: 50%;
+            border-left: 1px dashed #525965;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 10px;
+            margin-top: 5px;
+            padding-left: 45px;
+
+            p {
+                font-size: 24px;
+                font-weight: regular;
+            }
+
+            i {
+                font-size: 28px;
+                font-weight: regular;
+                padding-right: 10px;
+            }
+        }
     }
 }

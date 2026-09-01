@@ -8,13 +8,10 @@ function Calendar() {
     async function fetchData() {
         try {
             const response = await api.get("/appointments");
-            console.log("Data fetched successfully:", response.data);
 
-            console.log("RESPONSE:", response);
             console.log("DATA:", response.data);
             console.log("É array?", Array.isArray(response.data));
 
-            setAppointments(response.data);
             setAppointments(response.data);
         } catch (error) {
             console.error("Error fetching data:", error);
@@ -42,12 +39,29 @@ function Calendar() {
 
     // notes ---------------------------------------------------
 
+    const selectedAppointments = appointments
+        .filter(appointment => {
+            const appointmentDate = new Date(appointment.startAt);
+
+            return (
+                appointmentDate.getDate() === selectedDate &&
+                appointmentDate.getMonth() === currentMonth &&
+                appointmentDate.getFullYear() === currentYear
+            );
+        })
+        .sort((a, b) => {
+            const statusOrder = ["scheduled", "waiting", "completed", "canceled"];
+            if (a.status === b.status) {
+                return new Date(a.startAt).getTime() - new Date(b.startAt).getTime();
+            }
+            return statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
+        });
+
     return (
         <div className="calendar-notes">
             <div className="calendar">
                 <div className="calendar-header">
                     <div className="calendar-header month">
-                        <h1>{appointments.length} appointments</h1>
                         <button
                             className="calendar-header_button"
                             onClick={() => {
@@ -139,7 +153,49 @@ function Calendar() {
                     <h2>Agenda do dia {selectedDate}</h2>
                 </div>
                 <div className="notes-body">
-                    <p>Agenda vazia</p>
+                    {selectedAppointments.length === 0 ? (
+                        <p>Agenda vazia</p>
+                    ) : (
+                        selectedAppointments.map(appointment => (
+                            <div key={appointment.id} className={"noted " + appointment.status}>
+                                <div className="hour">
+                                    <h1>
+                                        {new Date(appointment.startAt).toLocaleTimeString("pt-BR", {
+                                            hour: "2-digit",
+                                            minute: "2-digit",
+                                            timeZone: "UTC",
+                                        })}
+                                    h</h1>
+                                    <p>R$ {appointment.totalAmount},00</p>
+                                </div>
+                                <div className="noted-info">
+                                    {appointment.status === "scheduled" ? (
+                                        <>
+                                            <i className="ti ti-message-2-exclamation"></i>
+                                            <p>Agendado</p>
+                                        </>
+                                    ) : appointment.status === "completed" ? (
+                                        <>
+                                            <i className="ti ti-check"></i>
+                                            <p>Concluído</p>
+                                        </>
+                                    ) : appointment.status === "cancelled" ? (
+                                        <>
+                                            <i className="ti ti-x"></i>
+                                            <p>Cancelado</p>
+                                        </>
+                                    ) : appointment.status === "waiting" ? (
+                                        <>
+                                            <i className="ti ti-clock"></i>
+                                            <p>Aguardando</p>
+                                        </>
+                                    ) : (
+                                        <p>Desconhecido</p>
+                                    )}
+                                </div>
+                            </div>
+                        ))
+                    )}
                 </div>
             </div>
         </div>
