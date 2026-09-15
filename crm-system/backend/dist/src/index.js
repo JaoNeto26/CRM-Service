@@ -26,12 +26,31 @@ app.get("/", (req, res) => {
 });
 app.get("/appointments", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const appointments = yield prisma.appointment.findMany();
+        const appointments = yield prisma.appointment.findMany({
+            include: {
+                customer: {
+                    select: {
+                        name: true,
+                    },
+                },
+                services: {
+                    include: {
+                        service: {
+                            select: {
+                                name: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
         res.json(appointments);
     }
     catch (error) {
         console.error("Error fetching appointments:", error);
-        res.status(500).json({ error: "An error occurred while fetching appointments." });
+        res.status(500).json({
+            error: "An error occurred while fetching appointments.",
+        });
     }
 }));
 app.get("/users", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
