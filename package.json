@@ -30,5 +30,8 @@
         "prisma:generate": "docker exec -it crm_backend npx prisma generate",
         "prisma:reset": "docker exec -it crm_backend npx prisma migrate reset",
         "db:deploy": "npx -w backend db:deploy"
+    },
+    "dependencies": {
+        "react-router-dom": "^7.18.3"
     }
 }

@@ -22,11 +22,31 @@ app.get("/", (req, res) => {
 
 app.get("/appointments", async (req, res) => {
     try {
-        const appointments = await prisma.appointment.findMany();
+        const appointments = await prisma.appointment.findMany({
+            include: {
+                customer: {
+                    select: {
+                        name: true,
+                    },
+                },
+                services: {
+                    include: {
+                        service: {
+                            select: {
+                                name: true,
+                            },
+                        },
+                    },
+                },
+            },
+        });
+
         res.json(appointments);
     } catch (error) {
         console.error("Error fetching appointments:", error);
-        res.status(500).json({ error: "An error occurred while fetching appointments." });
+        res.status(500).json({
+            error: "An error occurred while fetching appointments.",
+        });
     }
 });
 
