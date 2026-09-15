@@ -1,12 +1,36 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: "Manrope", sans-serif;
-    font-size: 24px;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: 48 38% 91%;
+        --foreground: 220 14% 35%;
+        --card: 48 45% 96%;
+        --card-foreground: 220 14% 35%;
+        --primary: 221 16% 29%;
+        --primary-foreground: 48 45% 96%;
+        --secondary: 48 30% 87%;
+        --secondary-foreground: 220 14% 35%;
+        --muted: 48 28% 84%;
+        --muted-foreground: 220 10% 46%;
+        --accent: 48 25% 78%;
+        --accent-foreground: 220 14% 35%;
+        --destructive: 3 72% 51%;
+        --destructive-foreground: 48 45% 96%;
+        --border: 48 22% 84%;
+        --input: 48 22% 84%;
+        --ring: 221 16% 29%;
+        --radius: 1rem;
+    }
 }
 
-body {
-    background-color: #f6f4e8;
-    color: #525965;
+@layer base {
+    * {
+        @apply border-border;
+    }
+    body {
+        @apply bg-background text-foreground;
+        font-family: "Manrope", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
 }

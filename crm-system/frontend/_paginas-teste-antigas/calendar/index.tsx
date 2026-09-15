@@ -165,8 +165,18 @@ function Calendar() {
                                             minute: "2-digit",
                                             timeZone: "UTC",
                                         })}
-                                    h</h1>
-                                    <p>R$ {appointment.totalAmount},00</p>
+                                    </h1>
+                                    <div className="noted-price">
+                                        <p>R$ {appointment.totalAmount},00</p>
+                                    </div>
+                                </div>
+                                <div className="noted-client">
+                                    <h1>{appointment.customer.name}</h1>
+                                    {Array.from({ length: appointment.services.length }, (_, index) => (
+                                        <div className="noted-service">
+                                            <p>{appointment.services[index].service.name}</p>
+                                        </div>
+                                    ))}
                                 </div>
                                 <div className="noted-info">
                                     {appointment.status === "scheduled" ? (

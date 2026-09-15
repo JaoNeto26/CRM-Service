@@ -32,6 +32,7 @@
         "db:deploy": "npx -w backend db:deploy"
     },
     "dependencies": {
-        "react-router-dom": "^7.18.3"
+        "lucide-react": "^1.46.0",
+        "react-router-dom": "^7.18.4"
     }
 }

@@ -1,19 +1,34 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Calendar from "./pages/calendar";
-import Home from "./pages/home";
-import Login from "./pages/login";
+import { Navigate, Route, Routes } from "react-router";
 
-function App() {
+import { AgendaPage } from "frontend/src/pages/Agenda/AgendaPage";
+import { CadastroPage } from "frontend/src/pages/Cadastro/CadastroPage";
+import { DashboardPage } from "frontend/src/pages/Dashboard/DashboardPage";
+import { LoginPage } from "frontend/src/pages/login/LoginPage";
+import { RotaProtegida } from "frontend/src/routes/RotaProtegida";
+
+export function App() {
     return (
-        <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Login />} />
-                <Route path="/calendar" element={<Calendar />} />
-                <Route path="/home" element={<Home />} />
-                <Route path="*" element={<h1>404 - Page Not Found</h1>} />
-            </Routes>
-        </BrowserRouter>
+        <Routes>
+            <Route path="/" element={<Navigate to="/login" replace />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path="/cadastro" element={<CadastroPage />} />
+            <Route
+                path="/dashboard"
+                element={
+                    <RotaProtegida>
+                        <DashboardPage />
+                    </RotaProtegida>
+                }
+            />
+            <Route
+                path="/agenda"
+                element={
+                    <RotaProtegida>
+                        <AgendaPage />
+                    </RotaProtegida>
+                }
+            />
+            <Route path="*" element={<Navigate to="/login" replace />} />
+        </Routes>
     );
 }
-
-export default App;
