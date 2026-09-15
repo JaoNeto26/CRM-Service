@@ -230,6 +230,27 @@ body {
                     border-radius: 25px;
                     color: #e4e1cc;
                 }
+                .noted-info {
+                    border-left: 1px dashed #f6f4e8;
+                }
+                .noted-client {
+                    border-left: 1px dashed #f6f4e8;
+
+                    h1 {
+                        color: #f6f4e8;
+                    }
+                    p {
+                        color: #f6f4e8;
+                    }
+                }
+                .hour {
+                    h1 {
+                        color: #f6f4e8;
+                    }
+                    p {
+                        color: #f6f4e8;
+                    }
+                }
             }
             &.waiting {
                 background-color: #f6f4e8;
