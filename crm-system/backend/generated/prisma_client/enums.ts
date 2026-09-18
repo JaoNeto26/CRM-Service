@@ -9,22 +9,81 @@
 * 🟢 You can import this file directly.
 */
 
-export const statusCliente = {
-  LEAD: 'LEAD',
-  ATIVO: 'ATIVO',
-  INATIVO: 'INATIVO'
+export const SubscriptionStatus = {
+  active: 'active',
+  inactive: 'inactive',
+  trial: 'trial',
+  cancelled: 'cancelled',
+  expired: 'expired'
 } as const
 
-export type statusCliente = (typeof statusCliente)[keyof typeof statusCliente]
+export type SubscriptionStatus = (typeof SubscriptionStatus)[keyof typeof SubscriptionStatus]
 
 
-export const EtapaNegociacao = {
-  PROSPECCAO: 'PROSPECCAO',
-  QUALIFICACAO: 'QUALIFICACAO',
-  PROPOSTA: 'PROPOSTA',
-  NEGOCIACAO: 'NEGOCIACAO',
-  FECHADO_GANHO: 'FECHADO_GANHO',
-  FECHADO_PERDIDO: 'FECHADO_PERDIDO'
+export const AppointmentStatus = {
+  scheduled: 'scheduled',
+  confirmed: 'confirmed',
+  in_progress: 'in_progress',
+  completed: 'completed',
+  cancelled: 'cancelled',
+  no_show: 'no_show',
+  waiting: 'waiting'
 } as const
 
+<<<<<<< Updated upstream
+export type AppointmentStatus = (typeof AppointmentStatus)[keyof typeof AppointmentStatus]
+
+
+export const PaymentMethod = {
+  cash: 'cash',
+  credit_card: 'credit_card',
+  debit_card: 'debit_card',
+  pix: 'pix',
+  bank_transfer: 'bank_transfer'
+} as const
+
+export type PaymentMethod = (typeof PaymentMethod)[keyof typeof PaymentMethod]
+
+
+export const PaymentStatus = {
+  pending: 'pending',
+  paid: 'paid',
+  failed: 'failed',
+  refunded: 'refunded',
+  partially_refunded: 'partially_refunded'
+} as const
+
+export type PaymentStatus = (typeof PaymentStatus)[keyof typeof PaymentStatus]
+
+
+export const TransactionType = {
+  income: 'income',
+  expense: 'expense'
+} as const
+
+export type TransactionType = (typeof TransactionType)[keyof typeof TransactionType]
+
+
+export const DayOfWeek = {
+  monday: 'monday',
+  tuesday: 'tuesday',
+  wednesday: 'wednesday',
+  thursday: 'thursday',
+  friday: 'friday',
+  saturday: 'saturday',
+  sunday: 'sunday'
+} as const
+
+export type DayOfWeek = (typeof DayOfWeek)[keyof typeof DayOfWeek]
+=======
 export type EtapaNegociacao = (typeof EtapaNegociacao)[keyof typeof EtapaNegociacao]
+
+
+export const statusAgendamento = {
+  AGENDADO: 'AGENDADO',
+  CONCLUIDO: 'CONCLUIDO',
+  CANCELADO: 'CANCELADO'
+} as const
+
+export type statusAgendamento = (typeof statusAgendamento)[keyof typeof statusAgendamento]
+>>>>>>> Stashed changes
