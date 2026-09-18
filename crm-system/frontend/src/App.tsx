@@ -1,10 +1,10 @@
 import { Navigate, Route, Routes } from "react-router";
 
-import { AgendaPage } from "frontend/src/pages/Agenda/AgendaPage";
-import { CadastroPage } from "frontend/src/pages/Cadastro/CadastroPage";
-import { DashboardPage } from "frontend/src/pages/Dashboard/DashboardPage";
-import { LoginPage } from "frontend/src/pages/login/LoginPage";
-import { RotaProtegida } from "frontend/src/routes/RotaProtegida";
+import { AgendaPage } from "@/pages/Agenda/AgendaPage";
+import { CadastroPage } from "@/pages/Cadastro/CadastroPage";
+import { DashboardPage } from "@/pages/Dashboard/DashboardPage";
+import { LoginPage } from "@/pages/login/LoginPage";
+import { RotaProtegida } from "@/routes/RotaProtegida";
 
 export function App() {
     return (

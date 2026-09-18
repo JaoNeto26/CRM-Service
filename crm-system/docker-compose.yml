@@ -11,7 +11,7 @@ services:
             POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
             POSTGRES_DB: ${POSTGRES_DB}
         ports:
-            - "${POSTGRES_PORT}:5432"
+            - "${POSTGRES_PORT:-5433}:5432"
         volumes:
             - postgres_data:/var/lib/postgresql/data
         networks:
@@ -37,7 +37,7 @@ services:
         environment:
             NODE_OPTIONS: "--max-old-space-size=512"
         ports:
-            - "${BACKEND_PORT}:3001"
+            - "${BACKEND_PORT:-3001}:3001"
         depends_on:
             postgres:
                 condition: service_healthy
@@ -71,7 +71,9 @@ services:
         env_file:
             - ./frontend/.env
         ports:
-            - "${FRONTEND_PORT}:3000"
+            - "${FRONTEND_PORT:-3000}:3000"
+        environment:
+            VITE_API_PROXY_TARGET: http://backend:3001
         depends_on:
             - backend
         volumes:

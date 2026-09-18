@@ -15,57 +15,452 @@ export type PrismaPromise<T> = $Public.PrismaPromise<T>
 
 /**
  * Model Usuario
- * 
+ * *
+ *  * USUARIO - Usuário do Sistema
+ *  * 
+ *  * Entidade raiz: representa um usuário/proprietário de empresa que acessa o sistema.
+ *  * 
+ *  * RELAÇÕES:
+ *  * - company (1:1): Uma empresa criada por este usuário
+ *  *   Acesso: usuario.company → Company
+ *  * 
+ *  * - subscriptions (1:N): Planos de assinatura do usuário
+ *  *   Acesso: usuario.subscriptions → Subscription[]
+ *  *   Exemplo: usuario.subscriptions[0].plan.name
+ *  * 
+ *  * - payments (1:N): Pagamentos processados por este usuário
+ *  *   Acesso: usuario.payments → Payment[]
+ *  *   Uso: Rastrear quem processou cada pagamento
+ *  * 
+ *  * EXCLUSÃO:
+ *  * - Ao deletar usuario: Company será deletada (cascade)
+ *  * - Subscriptions e Payments serão deletadas (cascade)
+ *  * 
+ *  * QUERIES COMUNS:
+ *  * - Encontrar usuário com sua empresa: findUnique({where: {id}, include: {company: true}})
+ *  * - Usuário com todos seus pagamentos: findUnique({where: {id}, include: {payments: true}})
+ *  * 
+ *  * @table users (banco de dados)
  */
 export type Usuario = $Result.DefaultSelection<Prisma.$UsuarioPayload>
 /**
  * Model Company
- * 
+ * *
+ *  * COMPANY - Empresa/Negócio
+ *  * 
+ *  * Representa um negócio registrado no sistema (salão, clínica, consultório, etc).
+ *  * Cada empresa é propriedade de um usuário único.
+ *  * 
+ *  * RELAÇÕES:
+ *  * - user (1:1): Proprietário da empresa (Usuario)
+ *  *   Acesso: company.user → Usuario
+ *  *   Constraint: company.userId é UNIQUE (uma empresa por usuário)
+ *  * 
+ *  * - services (1:N): Serviços oferecidos pela empresa
+ *  *   Acesso: company.services → Service[]
+ *  *   Exemplo: company.services.map(s => s.name)
+ *  * 
+ *  * - customers (1:N): Clientes cadastrados para esta empresa
+ *  *   Acesso: company.customers → Customer[]
+ *  * 
+ *  * - appointments (1:N): Agendamentos feitos na empresa
+ *  *   Acesso: company.appointments → Appointment[]
+ *  *   Com dados: appointments(include: {customer: true, services: true})
+ *  * 
+ *  * - payments (1:N): Pagamentos recebidos pela empresa
+ *  *   Acesso: company.payments → Payment[]
+ *  * 
+ *  * - transactions (1:N): Transações financeiras da empresa
+ *  *   Acesso: company.transactions → FinancialTransaction[]
+ *  * 
+ *  * - businessHours (1:N): Horários de funcionamento por dia da semana
+ *  *   Acesso: company.businessHours → BusinessHour[]
+ *  *   Uso: Validar disponibilidade para agendamentos
+ *  * 
+ *  * FILTROS IMPORTANTES:
+ *  * - active: true - Apenas empresas ativas
+ *  * - Dados em banco: campos como postalCode são armazenados com underscores
+ *  * 
+ *  * QUERIES COMUNS:
+ *  * - Empresa com todos os seus dados: findUnique({
+ *  *     where: {id},
+ *  *     include: {
+ *  *       user: true,
+ *  *       services: true,
+ *  *       customers: true,
+ *  *       appointments: {include: {customer: true, services: true}},
+ *  *       businessHours: true
+ *  *     }
+ *  *   })
+ *  * 
+ *  * - Buscar por usuário: findUnique({where: {userId}})
+ *  * 
+ *  * @table companies (banco de dados)
  */
 export type Company = $Result.DefaultSelection<Prisma.$CompanyPayload>
 /**
  * Model Service
- * 
+ * *
+ *  * SERVICE - Serviço Oferecido
+ *  * 
+ *  * Catálogo de serviços que uma empresa oferece (corte cabelo, manicure, consulta, etc).
+ *  * Será usado em agendamentos via AppointmentService (relação M:N).
+ *  * 
+ *  * RELAÇÕES:
+ *  * - company (N:1): Qual empresa oferece este serviço
+ *  *   Acesso: service.company → Company
+ *  * 
+ *  * - appointmentServices (N:M): Agendamentos que usam este serviço
+ *  *   Acesso: service.appointmentServices → AppointmentService[]
+ *  *   Uso: Histórico de quando este serviço foi agendado
+ *  * 
+ *  * CONSULTAS RELACIONADAS:
+ *  * - Serviços de uma empresa: company.services
+ *  * - Agendamentos que usam este serviço: service.appointmentServices
+ *  * - Quantas vezes foi agendado: service.appointmentServices.length
+ *  * 
+ *  * PREÇOS E DURAÇÕES:
+ *  * - price: Preço atual (pode mudar no tempo)
+ *  * - duration: Duração em minutos
+ *  * - Preço histórico fica em AppointmentService.priceAtBooking (imutável)
+ *  * 
+ *  * QUERIES:
+ *  * - Serviços de uma empresa com seus agendamentos:
+ *  *   findMany({where: {companyId}, include: {appointmentServices: true}})
+ *  * 
+ *  * @table services (banco de dados)
  */
 export type Service = $Result.DefaultSelection<Prisma.$ServicePayload>
 /**
  * Model Customer
- * 
+ * *
+ *  * CUSTOMER - Cliente/Paciente
+ *  * 
+ *  * Pessoas que agendam serviços na empresa.
+ *  * Cadastro feito geralmente via Google (OAuth).
+ *  * 
+ *  * RELAÇÕES:
+ *  * - company (N:1): Qual empresa este cliente frequenta
+ *  *   Acesso: customer.company → Company
+ *  * 
+ *  * - appointments (1:N): Todos os agendamentos deste cliente
+ *  *   Acesso: customer.appointments → Appointment[]
+ *  *   Uso: Histórico de serviços agendados
+ *  * 
+ *  * UNICIDADE:
+ *  * - @@unique([companyId, googleId]): Um Google ID por cliente por empresa
+ *  * - @@unique([companyId, email]): Um email por cliente por empresa
+ *  * - Permite que mesmo cliente tenha conta em múltiplas empresas
+ *  * 
+ *  * INTEGRAÇÃO GOOGLE:
+ *  * - googleId: ID único do Google (não muda)
+ *  * - email: Pode ser atualizado se cliente mudar email Google
+ *  * 
+ *  * QUERIES:
+ *  * - Cliente por Google ID: findUnique({where: {companyId_googleId}})
+ *  * - Cliente por email: findUnique({where: {companyId_email}})
+ *  * - Clientes de uma empresa: company.customers
+ *  * - Agendamentos de um cliente: customer.appointments (com datas, status)
+ *  * 
+ *  * @table customers (banco de dados)
  */
 export type Customer = $Result.DefaultSelection<Prisma.$CustomerPayload>
 /**
  * Model Appointment
- * 
+ * *
+ *  * APPOINTMENT - Agendamento de Serviço
+ *  * 
+ *  * Reserva de um cliente para receber serviços em data/hora específica.
+ *  * Centro das operações: conecta cliente, empresa, serviços e pagamento.
+ *  * 
+ *  * RELAÇÕES:
+ *  * - company (N:1): Qual empresa
+ *  *   Acesso: appointment.company → Company
+ *  * 
+ *  * - customer (N:1): Quem agendou
+ *  *   Acesso: appointment.customer → Customer
+ *  * 
+ *  * - services (N:M via AppointmentService): Quais serviços serão prestados
+ *  *   Acesso: appointment.services → AppointmentService[]
+ *  *   Uso: Múltiplos serviços em um agendamento (ex: corte + tintura)
+ *  * 
+ *  * - payment (1:1 opcional): Pagamento associado
+ *  *   Acesso: appointment.payment → Payment (pode ser null)
+ *  * 
+ *  * CICLO DE VIDA:
+ *  * 1. status: "scheduled" - Cliente confirmou
+ *  * 2. status: "waiting" - Cliente checado, aguardando
+ *  * 3. status: "completed" - Serviço finalizado com sucesso
+ *  * 4. status: "cancelled" - Cancelado (verificar cancellationReason)
+ *  * 
+ *  * CAMPOS IMPORTANTES:
+ *  * - startAt / endAt: Horários do agendamento
+ *  * - totalAmount: Valor total (sum dos serviços)
+ *  * - reminderSent: Flag para evitar duplicar notificações
+ *  * - cancellationReason: Por que foi cancelado (opcional)
+ *  * 
+ *  * QUERIES COMUNS:
+ *  * - Agendamentos de uma empresa (hoje em diante):
+ *  *   findMany({where: {companyId, startAt: {gte: today}}})
+ *  * 
+ *  * - Agendamento completo com detalhes:
+ *  *   findUnique({where: {id}, include: {
+ *  *     customer: true,
+ *  *     company: true,
+ *  *     services: {include: {service: true}},
+ *  *     payment: true
+ *  *   }})
+ *  * 
+ *  * - Agendamentos de um cliente:
+ *  *   findMany({where: {customerId}})
+ *  * 
+ *  * @table appointments (banco de dados)
  */
 export type Appointment = $Result.DefaultSelection<Prisma.$AppointmentPayload>
 /**
  * Model AppointmentService
- * 
+ * *
+ *  * APPOINTMENT SERVICE - Serviço em um Agendamento (Tabela de Junção M:N)
+ *  * 
+ *  * Tabela de associação entre Appointment e Service.
+ *  * Um agendamento pode ter múltiplos serviços, um serviço pode ser em múltiplos agendamentos.
+ *  * 
+ *  * PROPÓSITO:
+ *  * - Armazenar quais serviços foram agendados em um appointment específico
+ *  * - Manter histórico de preço e duração NO MOMENTO do agendamento (imutável)
+ *  * - Permite que Service original possa mudar sem afetar agendamentos passados
+ *  * 
+ *  * RELAÇÕES:
+ *  * - appointment (N:1): Qual agendamento
+ *  *   Acesso: appointmentService.appointment → Appointment
+ *  * 
+ *  * - service (N:1): Qual serviço
+ *  *   Acesso: appointmentService.service → Service
+ *  * 
+ *  * DADOS HISTÓRICOS IMPORTANTES:
+ *  * - priceAtBooking: Preço do serviço NA DATA do agendamento (não muda)
+ *  * - durationAtBooking: Duração do serviço NA DATA do agendamento (não muda)
+ *  * - Permite recuperar quanto cliente pagou e quanto tempo levou
+ *  * 
+ *  * EXEMPLOS DE ACESSO:
+ *  * - Serviços de um agendamento:
+ *  *   appointment.services → AppointmentService[]
+ *  *   appointment.services.map(as => as.service.name)
+ *  * 
+ *  * - Valor total de um agendamento:
+ *  *   appointment.services.reduce((sum, as) => sum + as.priceAtBooking, 0)
+ *  * 
+ *  * - Tempo total de um agendamento:
+ *  *   appointment.services.reduce((sum, as) => sum + as.durationAtBooking, 0)
+ *  * 
+ *  * CONSTRAINTS:
+ *  * - @@unique([appointmentId, serviceId]): Mesmo serviço não pode aparecer 2x no mesmo agendamento
+ *  * 
+ *  * @table appointment_services (banco de dados)
  */
 export type AppointmentService = $Result.DefaultSelection<Prisma.$AppointmentServicePayload>
 /**
  * Model Payment
- * 
+ * *
+ *  * PAYMENT - Pagamento de Agendamento
+ *  * 
+ *  * Registro de pagamento de um agendamento específico.
+ *  * Conecta Appointment com fluxo financeiro (FinancialTransaction, Usuario processador).
+ *  * 
+ *  * RELAÇÕES:
+ *  * - appointment (1:1): Qual agendamento foi pago
+ *  *   Acesso: payment.appointment → Appointment
+ *  *   Constraint: appointmentId é UNIQUE (um pagamento por agendamento)
+ *  * 
+ *  * - company (N:1): Qual empresa recebe o pagamento
+ *  *   Acesso: payment.company → Company
+ *  * 
+ *  * - processor (N:1): Qual usuário processou o pagamento
+ *  *   Acesso: payment.processor → Usuario
+ *  *   Uso: Auditoria - quem registrou este pagamento
+ *  * 
+ *  * - transaction (1:1 opcional): Transação financeira associada
+ *  *   Acesso: payment.transaction → FinancialTransaction
+ *  * 
+ *  * CICLO DE VIDA DO PAGAMENTO:
+ *  * 1. status: "pending" - Criado, aguardando processamento/confirmação gateway
+ *  * 2. status: "paid" - Confirmado recebimento
+ *  * 3. status: "failed" - Falha na transação (tentar novamente)
+ *  * 4. status: "refunded" - Reembolso total processado
+ *  * 5. status: "partially_refunded" - Reembolso parcial
+ *  * 
+ *  * CAMPOS IMPORTANTES:
+ *  * - method: Como foi pago (cash, credit_card, debit_card, pix)
+ *  * - installments: Se credit_card, quantas parcelas (padrão 1)
+ *  * - cardBrand: Bandeira do cartão (ex: "VISA", "MASTERCARD") se credit_card
+ *  * - transactionId: ID retornado pelo gateway de pagamento
+ *  * - paidAt: Quando foi confirmado o recebimento
+ *  * - processedBy: ID do usuário que registrou
+ *  * 
+ *  * QUERIES:
+ *  * - Pagamentos de uma empresa em período:
+ *  *   findMany({where: {companyId, paidAt: {gte: startDate, lte: endDate}}})
+ *  * 
+ *  * - Pagamento de um agendamento:
+ *  *   findUnique({where: {appointmentId}})
+ *  * 
+ *  * - Pagamentos processados por usuário:
+ *  *   findMany({where: {processedBy: usuarioId}})
+ *  * 
+ *  * @table payments (banco de dados)
  */
 export type Payment = $Result.DefaultSelection<Prisma.$PaymentPayload>
 /**
  * Model FinancialTransaction
- * 
+ * *
+ *  * FINANCIAL TRANSACTION - Transação Financeira
+ *  * 
+ *  * Registro de todas as movimentações financeiras de uma empresa.
+ *  * Usada para relatórios contábeis, fluxo de caixa, etc.
+ *  * 
+ *  * RELAÇÕES:
+ *  * - company (N:1): Qual empresa
+ *  *   Acesso: transaction.company → Company
+ *  * 
+ *  * - payment (1:1 opcional): Se vem de um pagamento
+ *  *   Acesso: transaction.payment → Payment
+ *  *   Uso: Ligação com o agendamento original
+ *  * 
+ *  * USO:
+ *  * - Pode registrar entrada (venda de serviço)
+ *  * - Pode registrar saída (despesa, refund, taxa)
+ *  * - category define o tipo de transação
+ *  * 
+ *  * CAMPOS:
+ *  * - category: Tipo (ex: "venda_serviço", "refund", "despesa_aluguel", etc)
+ *  * - description: Detalhes adicionais
+ *  * - amount: Valor em R$ (sempre positivo, category define se entrada/saída)
+ *  * - transactionDate: Data da transação (pode ser diferente de createdAt)
+ *  * 
+ *  * QUERIES:
+ *  * - Fluxo de caixa de uma empresa em período:
+ *  *   findMany({where: {companyId, transactionDate: {gte, lte}}})
+ *  * 
+ *  * - Total de receitas por categoria:
+ *  *   findMany({where: {companyId}})
+ *  *   Depois agrupar por category
+ *  * 
+ *  * @table financial_transactions (banco de dados)
  */
 export type FinancialTransaction = $Result.DefaultSelection<Prisma.$FinancialTransactionPayload>
 /**
  * Model SubscriptionPlan
- * 
+ * *
+ *  * SUBSCRIPTION PLAN - Plano de Assinatura
+ *  * 
+ *  * Define os planos oferecidos pelo sistema.
+ *  * Não é específico de uma empresa, é global para o sistema.
+ *  * 
+ *  * RELAÇÕES:
+ *  * - subscriptions (N:1): Quais usuários têm este plano
+ *  *   Acesso: plan.subscriptions → Subscription[]
+ *  * 
+ *  * CAMPOS:
+ *  * - monthlyPrice: Custo mensal
+ *  * - annualPrice: Custo anual (pode ser um desconto)
+ *  * - maxCustomers: Limite de clientes que podem ser cadastrados
+ *  * - maxAppointmentsPerMonth: Limite de agendamentos/mês
+ *  * - features: JSON com features do plano (ex: integração google, relatórios avançados)
+ *  * 
+ *  * EXEMPLOS DE PLANOS:
+ *  * 1. Starter: R$ 99/mês, 50 clientes, 100 agendamentos/mês
+ *  * 2. Professional: R$ 299/mês, ilimitado
+ *  * 3. Trial: R$ 0/mês, 10 clientes, 20 agendamentos/mês (14 dias)
+ *  * 
+ *  * QUERIES:
+ *  * - Plano com subscriptions:
+ *  *   findUnique({where: {id}, include: {subscriptions: true}})
+ *  * 
+ *  * @table subscription_plans (banco de dados)
  */
 export type SubscriptionPlan = $Result.DefaultSelection<Prisma.$SubscriptionPlanPayload>
 /**
  * Model Subscription
- * 
+ * *
+ *  * SUBSCRIPTION - Assinatura de Usuário
+ *  * 
+ *  * Registro de qual plano um usuário tem contratado.
+ *  * Controla acesso às features do sistema.
+ *  * 
+ *  * RELAÇÕES:
+ *  * - user (N:1): Qual usuário
+ *  *   Acesso: subscription.user → Usuario
+ *  * 
+ *  * - plan (N:1): Qual plano está ativo
+ *  *   Acesso: subscription.plan → SubscriptionPlan
+ *  * 
+ *  * CICLO DE VIDA:
+ *  * 1. status: "trial" - Período de teste (verificar trialEndsAt)
+ *  * 2. status: "active" - Ativo e pago
+ *  * 3. status: "inactive" - Usuário não renovou
+ *  * 4. status: "cancelled" - Usuário cancelou
+ *  * 5. status: "expired" - Período se encerrou
+ *  * 
+ *  * CAMPOS:
+ *  * - startDate: Quando começou
+ *  * - endDate: Quando expira (null se período indefinido)
+ *  * - trialEndsAt: Quando trial se encerra (null se não é trial)
+ *  * - paymentMethodId: ID do método de pagamento (ex: ID do cartão no Stripe)
+ *  * 
+ *  * VALIDAÇÃO:
+ *  * - Se status === "trial", checar se trialEndsAt já passou
+ *  * - Se status === "active" e endDate passou, mudar para "expired"
+ *  * 
+ *  * QUERIES:
+ *  * - Assinatura ativa de um usuário:
+ *  *   findFirst({where: {userId, status: "active"}})
+ *  * 
+ *  * - Com detalhes do plano:
+ *  *   findFirst({where: {userId}, include: {plan: true}})
+ *  * 
+ *  * @table subscriptions (banco de dados)
  */
 export type Subscription = $Result.DefaultSelection<Prisma.$SubscriptionPayload>
 /**
  * Model BusinessHour
- * 
+ * *
+ *  * BUSINESS HOUR - Horário de Funcionamento
+ *  * 
+ *  * Define os horários de funcionamento de uma empresa por dia da semana.
+ *  * Usada para validar disponibilidade de agendamentos.
+ *  * 
+ *  * RELAÇÕES:
+ *  * - company (N:1): Qual empresa
+ *  *   Acesso: businessHour.company → Company
+ *  * 
+ *  * CAMPOS:
+ *  * - weekday: Dia da semana (monday, tuesday, ... sunday)
+ *  * - opensAt: Hora de abertura (ex: 09:00)
+ *  * - closesAt: Hora de fechamento (ex: 18:00)
+ *  * - closed: true = dia de funcionário (não abre)
+ *  * 
+ *  * EXEMPLOS:
+ *  * - Segunda a sexta: 09:00 às 18:00
+ *  * - Sábado: 09:00 às 13:00
+ *  * - Domingo: closed = true (não abre)
+ *  * 
+ *  * CONSTRAINT:
+ *  * - @@unique([companyId, weekday]): Apenas um registro por dia por empresa
+ *  * 
+ *  * VALIDAÇÃO DE AGENDAMENTO:
+ *  * 1. Pegar businessHour para o dia do agendamento
+ *  * 2. Se closed === true, erro (fechado)
+ *  * 3. Verificar se startAt >= opensAt e endAt <= closesAt
+ *  * 4. Verificar se não há conflito com outros agendamentos
+ *  * 
+ *  * QUERIES:
+ *  * - Horários de uma empresa:
+ *  *   company.businessHours
+ *  * 
+ *  * - Horários de um dia específico:
+ *  *   findUnique({where: {companyId_weekday}})
+ *  * 
+ *  * @table business_hours (banco de dados)
  */
 export type BusinessHour = $Result.DefaultSelection<Prisma.$BusinessHourPayload>
 
@@ -2137,6 +2532,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     email: string | null
+    senha: string | null
     phone: string | null
     active: boolean | null
     createdAt: Date | null
@@ -2147,6 +2543,7 @@ export namespace Prisma {
     id: string | null
     name: string | null
     email: string | null
+    senha: string | null
     phone: string | null
     active: boolean | null
     createdAt: Date | null
@@ -2157,6 +2554,7 @@ export namespace Prisma {
     id: number
     name: number
     email: number
+    senha: number
     phone: number
     active: number
     createdAt: number
@@ -2169,6 +2567,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    senha?: true
     phone?: true
     active?: true
     createdAt?: true
@@ -2179,6 +2578,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    senha?: true
     phone?: true
     active?: true
     createdAt?: true
@@ -2189,6 +2589,7 @@ export namespace Prisma {
     id?: true
     name?: true
     email?: true
+    senha?: true
     phone?: true
     active?: true
     createdAt?: true
@@ -2272,6 +2673,7 @@ export namespace Prisma {
     id: string
     name: string
     email: string
+    senha: string | null
     phone: string | null
     active: boolean
     createdAt: Date
@@ -2299,6 +2701,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    senha?: boolean
     phone?: boolean
     active?: boolean
     createdAt?: boolean
@@ -2313,6 +2716,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    senha?: boolean
     phone?: boolean
     active?: boolean
     createdAt?: boolean
@@ -2323,6 +2727,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    senha?: boolean
     phone?: boolean
     active?: boolean
     createdAt?: boolean
@@ -2333,13 +2738,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     email?: boolean
+    senha?: boolean
     phone?: boolean
     active?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["usuario"]>
+  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "email" | "senha" | "phone" | "active" | "createdAt" | "updatedAt", ExtArgs["result"]["usuario"]>
   export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | Usuario$companyArgs<ExtArgs>
     subscriptions?: boolean | Usuario$subscriptionsArgs<ExtArgs>
@@ -2360,6 +2766,7 @@ export namespace Prisma {
       id: string
       name: string
       email: string
+      senha: string | null
       phone: string | null
       active: boolean
       createdAt: Date
@@ -2793,6 +3200,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Usuario", 'String'>
     readonly name: FieldRef<"Usuario", 'String'>
     readonly email: FieldRef<"Usuario", 'String'>
+    readonly senha: FieldRef<"Usuario", 'String'>
     readonly phone: FieldRef<"Usuario", 'String'>
     readonly active: FieldRef<"Usuario", 'Boolean'>
     readonly createdAt: FieldRef<"Usuario", 'DateTime'>
@@ -6953,10 +7361,12 @@ export namespace Prisma {
   }
 
   export type AppointmentAvgAggregateOutputType = {
+    durationMinutes: number | null
     totalAmount: Decimal | null
   }
 
   export type AppointmentSumAggregateOutputType = {
+    durationMinutes: number | null
     totalAmount: Decimal | null
   }
 
@@ -6964,6 +7374,9 @@ export namespace Prisma {
     id: string | null
     companyId: string | null
     customerId: string | null
+    title: string | null
+    description: string | null
+    durationMinutes: number | null
     startAt: Date | null
     endAt: Date | null
     status: $Enums.AppointmentStatus | null
@@ -6979,6 +7392,9 @@ export namespace Prisma {
     id: string | null
     companyId: string | null
     customerId: string | null
+    title: string | null
+    description: string | null
+    durationMinutes: number | null
     startAt: Date | null
     endAt: Date | null
     status: $Enums.AppointmentStatus | null
@@ -6994,6 +7410,9 @@ export namespace Prisma {
     id: number
     companyId: number
     customerId: number
+    title: number
+    description: number
+    durationMinutes: number
     startAt: number
     endAt: number
     status: number
@@ -7008,10 +7427,12 @@ export namespace Prisma {
 
 
   export type AppointmentAvgAggregateInputType = {
+    durationMinutes?: true
     totalAmount?: true
   }
 
   export type AppointmentSumAggregateInputType = {
+    durationMinutes?: true
     totalAmount?: true
   }
 
@@ -7019,6 +7440,9 @@ export namespace Prisma {
     id?: true
     companyId?: true
     customerId?: true
+    title?: true
+    description?: true
+    durationMinutes?: true
     startAt?: true
     endAt?: true
     status?: true
@@ -7034,6 +7458,9 @@ export namespace Prisma {
     id?: true
     companyId?: true
     customerId?: true
+    title?: true
+    description?: true
+    durationMinutes?: true
     startAt?: true
     endAt?: true
     status?: true
@@ -7049,6 +7476,9 @@ export namespace Prisma {
     id?: true
     companyId?: true
     customerId?: true
+    title?: true
+    description?: true
+    durationMinutes?: true
     startAt?: true
     endAt?: true
     status?: true
@@ -7151,6 +7581,9 @@ export namespace Prisma {
     id: string
     companyId: string
     customerId: string
+    title: string | null
+    description: string | null
+    durationMinutes: number | null
     startAt: Date
     endAt: Date
     status: $Enums.AppointmentStatus
@@ -7185,6 +7618,9 @@ export namespace Prisma {
     id?: boolean
     companyId?: boolean
     customerId?: boolean
+    title?: boolean
+    description?: boolean
+    durationMinutes?: boolean
     startAt?: boolean
     endAt?: boolean
     status?: boolean
@@ -7205,6 +7641,9 @@ export namespace Prisma {
     id?: boolean
     companyId?: boolean
     customerId?: boolean
+    title?: boolean
+    description?: boolean
+    durationMinutes?: boolean
     startAt?: boolean
     endAt?: boolean
     status?: boolean
@@ -7222,6 +7661,9 @@ export namespace Prisma {
     id?: boolean
     companyId?: boolean
     customerId?: boolean
+    title?: boolean
+    description?: boolean
+    durationMinutes?: boolean
     startAt?: boolean
     endAt?: boolean
     status?: boolean
@@ -7239,6 +7681,9 @@ export namespace Prisma {
     id?: boolean
     companyId?: boolean
     customerId?: boolean
+    title?: boolean
+    description?: boolean
+    durationMinutes?: boolean
     startAt?: boolean
     endAt?: boolean
     status?: boolean
@@ -7250,7 +7695,7 @@ export namespace Prisma {
     updatedAt?: boolean
   }
 
-  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyId" | "customerId" | "startAt" | "endAt" | "status" | "totalAmount" | "cancellationReason" | "reminderSent" | "reminderSentAt" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
+  export type AppointmentOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "companyId" | "customerId" | "title" | "description" | "durationMinutes" | "startAt" | "endAt" | "status" | "totalAmount" | "cancellationReason" | "reminderSent" | "reminderSentAt" | "createdAt" | "updatedAt", ExtArgs["result"]["appointment"]>
   export type AppointmentInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     company?: boolean | CompanyDefaultArgs<ExtArgs>
     customer?: boolean | CustomerDefaultArgs<ExtArgs>
@@ -7279,6 +7724,9 @@ export namespace Prisma {
       id: string
       companyId: string
       customerId: string
+      title: string | null
+      description: string | null
+      durationMinutes: number | null
       startAt: Date
       endAt: Date
       status: $Enums.AppointmentStatus
@@ -7718,6 +8166,9 @@ export namespace Prisma {
     readonly id: FieldRef<"Appointment", 'String'>
     readonly companyId: FieldRef<"Appointment", 'String'>
     readonly customerId: FieldRef<"Appointment", 'String'>
+    readonly title: FieldRef<"Appointment", 'String'>
+    readonly description: FieldRef<"Appointment", 'String'>
+    readonly durationMinutes: FieldRef<"Appointment", 'Int'>
     readonly startAt: FieldRef<"Appointment", 'DateTime'>
     readonly endAt: FieldRef<"Appointment", 'DateTime'>
     readonly status: FieldRef<"Appointment", 'AppointmentStatus'>
@@ -15195,6 +15646,7 @@ export namespace Prisma {
     id: 'id',
     name: 'name',
     email: 'email',
+    senha: 'senha',
     phone: 'phone',
     active: 'active',
     createdAt: 'createdAt',
@@ -15257,6 +15709,9 @@ export namespace Prisma {
     id: 'id',
     companyId: 'companyId',
     customerId: 'customerId',
+    title: 'title',
+    description: 'description',
+    durationMinutes: 'durationMinutes',
     startAt: 'startAt',
     endAt: 'endAt',
     status: 'status',
@@ -15582,6 +16037,7 @@ export namespace Prisma {
     id?: StringFilter<"Usuario"> | string
     name?: StringFilter<"Usuario"> | string
     email?: StringFilter<"Usuario"> | string
+    senha?: StringNullableFilter<"Usuario"> | string | null
     phone?: StringNullableFilter<"Usuario"> | string | null
     active?: BoolFilter<"Usuario"> | boolean
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
@@ -15595,6 +16051,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    senha?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -15611,6 +16068,7 @@ export namespace Prisma {
     OR?: UsuarioWhereInput[]
     NOT?: UsuarioWhereInput | UsuarioWhereInput[]
     name?: StringFilter<"Usuario"> | string
+    senha?: StringNullableFilter<"Usuario"> | string | null
     phone?: StringNullableFilter<"Usuario"> | string | null
     active?: BoolFilter<"Usuario"> | boolean
     createdAt?: DateTimeFilter<"Usuario"> | Date | string
@@ -15624,6 +16082,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    senha?: SortOrderInput | SortOrder
     phone?: SortOrderInput | SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -15640,6 +16099,7 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Usuario"> | string
     name?: StringWithAggregatesFilter<"Usuario"> | string
     email?: StringWithAggregatesFilter<"Usuario"> | string
+    senha?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
     phone?: StringNullableWithAggregatesFilter<"Usuario"> | string | null
     active?: BoolWithAggregatesFilter<"Usuario"> | boolean
     createdAt?: DateTimeWithAggregatesFilter<"Usuario"> | Date | string
@@ -15926,6 +16386,9 @@ export namespace Prisma {
     id?: StringFilter<"Appointment"> | string
     companyId?: StringFilter<"Appointment"> | string
     customerId?: StringFilter<"Appointment"> | string
+    title?: StringNullableFilter<"Appointment"> | string | null
+    description?: StringNullableFilter<"Appointment"> | string | null
+    durationMinutes?: IntNullableFilter<"Appointment"> | number | null
     startAt?: DateTimeFilter<"Appointment"> | Date | string
     endAt?: DateTimeFilter<"Appointment"> | Date | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
@@ -15945,6 +16408,9 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     customerId?: SortOrder
+    title?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    durationMinutes?: SortOrderInput | SortOrder
     startAt?: SortOrder
     endAt?: SortOrder
     status?: SortOrder
@@ -15967,6 +16433,9 @@ export namespace Prisma {
     NOT?: AppointmentWhereInput | AppointmentWhereInput[]
     companyId?: StringFilter<"Appointment"> | string
     customerId?: StringFilter<"Appointment"> | string
+    title?: StringNullableFilter<"Appointment"> | string | null
+    description?: StringNullableFilter<"Appointment"> | string | null
+    durationMinutes?: IntNullableFilter<"Appointment"> | number | null
     startAt?: DateTimeFilter<"Appointment"> | Date | string
     endAt?: DateTimeFilter<"Appointment"> | Date | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
@@ -15986,6 +16455,9 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     customerId?: SortOrder
+    title?: SortOrderInput | SortOrder
+    description?: SortOrderInput | SortOrder
+    durationMinutes?: SortOrderInput | SortOrder
     startAt?: SortOrder
     endAt?: SortOrder
     status?: SortOrder
@@ -16009,6 +16481,9 @@ export namespace Prisma {
     id?: StringWithAggregatesFilter<"Appointment"> | string
     companyId?: StringWithAggregatesFilter<"Appointment"> | string
     customerId?: StringWithAggregatesFilter<"Appointment"> | string
+    title?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
+    description?: StringNullableWithAggregatesFilter<"Appointment"> | string | null
+    durationMinutes?: IntNullableWithAggregatesFilter<"Appointment"> | number | null
     startAt?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     endAt?: DateTimeWithAggregatesFilter<"Appointment"> | Date | string
     status?: EnumAppointmentStatusWithAggregatesFilter<"Appointment"> | $Enums.AppointmentStatus
@@ -16522,6 +16997,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -16535,6 +17011,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -16548,6 +17025,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16561,6 +17039,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16574,6 +17053,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -16584,6 +17064,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16594,6 +17075,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -16911,6 +17393,9 @@ export namespace Prisma {
 
   export type AppointmentCreateInput = {
     id?: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -16930,6 +17415,9 @@ export namespace Prisma {
     id?: string
     companyId: string
     customerId: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -16945,6 +17433,9 @@ export namespace Prisma {
 
   export type AppointmentUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -16964,6 +17455,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -16981,6 +17475,9 @@ export namespace Prisma {
     id?: string
     companyId: string
     customerId: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -16994,6 +17491,9 @@ export namespace Prisma {
 
   export type AppointmentUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -17009,6 +17509,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -17630,6 +18133,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    senha?: SortOrder
     phone?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -17640,6 +18144,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    senha?: SortOrder
     phone?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -17650,6 +18155,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     email?: SortOrder
+    senha?: SortOrder
     phone?: SortOrder
     active?: SortOrder
     createdAt?: SortOrder
@@ -17978,6 +18484,17 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type EnumAppointmentStatusFilter<$PrismaModel = never> = {
     equals?: $Enums.AppointmentStatus | EnumAppointmentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.AppointmentStatus[] | ListEnumAppointmentStatusFieldRefInput<$PrismaModel>
@@ -18021,6 +18538,9 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     customerId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    durationMinutes?: SortOrder
     startAt?: SortOrder
     endAt?: SortOrder
     status?: SortOrder
@@ -18033,6 +18553,7 @@ export namespace Prisma {
   }
 
   export type AppointmentAvgOrderByAggregateInput = {
+    durationMinutes?: SortOrder
     totalAmount?: SortOrder
   }
 
@@ -18040,6 +18561,9 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     customerId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    durationMinutes?: SortOrder
     startAt?: SortOrder
     endAt?: SortOrder
     status?: SortOrder
@@ -18055,6 +18579,9 @@ export namespace Prisma {
     id?: SortOrder
     companyId?: SortOrder
     customerId?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    durationMinutes?: SortOrder
     startAt?: SortOrder
     endAt?: SortOrder
     status?: SortOrder
@@ -18067,7 +18594,24 @@ export namespace Prisma {
   }
 
   export type AppointmentSumOrderByAggregateInput = {
+    durationMinutes?: SortOrder
     totalAmount?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type EnumAppointmentStatusWithAggregatesFilter<$PrismaModel = never> = {
@@ -18305,17 +18849,6 @@ export namespace Prisma {
   export type FinancialTransactionSumOrderByAggregateInput = {
     amount?: SortOrder
   }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
   export type JsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
         Either<Required<JsonNullableFilterBase<$PrismaModel>>, Exclude<keyof Required<JsonNullableFilterBase<$PrismaModel>>, 'path'>>,
@@ -18392,22 +18925,6 @@ export namespace Prisma {
     annualPrice?: SortOrder
     maxCustomers?: SortOrder
     maxAppointmentsPerMonth?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
   export type JsonNullableWithAggregatesFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -19116,6 +19633,14 @@ export namespace Prisma {
     connect?: PaymentWhereUniqueInput
   }
 
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
   export type EnumAppointmentStatusFieldUpdateOperationsInput = {
     set?: $Enums.AppointmentStatus
   }
@@ -19348,14 +19873,6 @@ export namespace Prisma {
     connectOrCreate?: SubscriptionCreateOrConnectWithoutPlanInput | SubscriptionCreateOrConnectWithoutPlanInput[]
     createMany?: SubscriptionCreateManyPlanInputEnvelope
     connect?: SubscriptionWhereUniqueInput | SubscriptionWhereUniqueInput[]
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type SubscriptionUpdateManyWithoutPlanNestedInput = {
@@ -19641,6 +20158,33 @@ export namespace Prisma {
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
   }
 
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedEnumAppointmentStatusWithAggregatesFilter<$PrismaModel = never> = {
     equals?: $Enums.AppointmentStatus | EnumAppointmentStatusFieldRefInput<$PrismaModel>
     in?: $Enums.AppointmentStatus[] | ListEnumAppointmentStatusFieldRefInput<$PrismaModel>
@@ -19713,33 +20257,6 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedEnumPaymentStatusFilter<$PrismaModel>
     _max?: NestedEnumPaymentStatusFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
   export type NestedJsonNullableFilter<$PrismaModel = never> =
     | PatchUndefined<
@@ -20057,6 +20574,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -20069,6 +20587,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -20148,6 +20667,9 @@ export namespace Prisma {
 
   export type AppointmentCreateWithoutCompanyInput = {
     id?: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -20165,6 +20687,9 @@ export namespace Prisma {
   export type AppointmentUncheckedCreateWithoutCompanyInput = {
     id?: string
     customerId: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -20309,6 +20834,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20321,6 +20847,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -20412,6 +20939,9 @@ export namespace Prisma {
     id?: StringFilter<"Appointment"> | string
     companyId?: StringFilter<"Appointment"> | string
     customerId?: StringFilter<"Appointment"> | string
+    title?: StringNullableFilter<"Appointment"> | string | null
+    description?: StringNullableFilter<"Appointment"> | string | null
+    durationMinutes?: IntNullableFilter<"Appointment"> | number | null
     startAt?: DateTimeFilter<"Appointment"> | Date | string
     endAt?: DateTimeFilter<"Appointment"> | Date | string
     status?: EnumAppointmentStatusFilter<"Appointment"> | $Enums.AppointmentStatus
@@ -20715,6 +21245,9 @@ export namespace Prisma {
 
   export type AppointmentCreateWithoutCustomerInput = {
     id?: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -20732,6 +21265,9 @@ export namespace Prisma {
   export type AppointmentUncheckedCreateWithoutCustomerInput = {
     id?: string
     companyId: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -21124,6 +21660,9 @@ export namespace Prisma {
 
   export type AppointmentCreateWithoutServicesInput = {
     id?: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -21142,6 +21681,9 @@ export namespace Prisma {
     id?: string
     companyId: string
     customerId: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -21199,6 +21741,9 @@ export namespace Prisma {
 
   export type AppointmentUpdateWithoutServicesInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -21217,6 +21762,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -21264,6 +21812,9 @@ export namespace Prisma {
 
   export type AppointmentCreateWithoutPaymentInput = {
     id?: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -21282,6 +21833,9 @@ export namespace Prisma {
     id?: string
     companyId: string
     customerId: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -21354,6 +21908,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -21366,6 +21921,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -21419,6 +21975,9 @@ export namespace Prisma {
 
   export type AppointmentUpdateWithoutPaymentInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -21437,6 +21996,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -21521,6 +22083,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21533,6 +22096,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21820,6 +22384,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -21832,6 +22397,7 @@ export namespace Prisma {
     id?: string
     name: string
     email: string
+    senha?: string | null
     phone?: string | null
     active?: boolean
     createdAt?: Date | string
@@ -21893,6 +22459,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -21905,6 +22472,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
+    senha?: NullableStringFieldUpdateOperationsInput | string | null
     phone?: NullableStringFieldUpdateOperationsInput | string | null
     active?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
@@ -22197,6 +22765,9 @@ export namespace Prisma {
   export type AppointmentCreateManyCompanyInput = {
     id?: string
     customerId: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -22311,6 +22882,9 @@ export namespace Prisma {
 
   export type AppointmentUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -22328,6 +22902,9 @@ export namespace Prisma {
   export type AppointmentUncheckedUpdateWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -22344,6 +22921,9 @@ export namespace Prisma {
   export type AppointmentUncheckedUpdateManyWithoutCompanyInput = {
     id?: StringFieldUpdateOperationsInput | string
     customerId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -22503,6 +23083,9 @@ export namespace Prisma {
   export type AppointmentCreateManyCustomerInput = {
     id?: string
     companyId: string
+    title?: string | null
+    description?: string | null
+    durationMinutes?: number | null
     startAt: Date | string
     endAt: Date | string
     status?: $Enums.AppointmentStatus
@@ -22516,6 +23099,9 @@ export namespace Prisma {
 
   export type AppointmentUpdateWithoutCustomerInput = {
     id?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -22533,6 +23119,9 @@ export namespace Prisma {
   export type AppointmentUncheckedUpdateWithoutCustomerInput = {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus
@@ -22549,6 +23138,9 @@ export namespace Prisma {
   export type AppointmentUncheckedUpdateManyWithoutCustomerInput = {
     id?: StringFieldUpdateOperationsInput | string
     companyId?: StringFieldUpdateOperationsInput | string
+    title?: NullableStringFieldUpdateOperationsInput | string | null
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    durationMinutes?: NullableIntFieldUpdateOperationsInput | number | null
     startAt?: DateTimeFieldUpdateOperationsInput | Date | string
     endAt?: DateTimeFieldUpdateOperationsInput | Date | string
     status?: EnumAppointmentStatusFieldUpdateOperationsInput | $Enums.AppointmentStatus

@@ -25,6 +25,21 @@
     }
 }
 
+@layer components {
+    .agenda-note-scheduled {
+        @apply bg-accent text-accent-foreground;
+    }
+    .agenda-note-confirmed {
+        @apply bg-secondary text-secondary-foreground;
+    }
+    .agenda-note-done {
+        @apply bg-primary text-primary-foreground;
+    }
+    .agenda-note-muted {
+        @apply bg-muted text-muted-foreground;
+    }
+}
+
 @layer base {
     * {
         @apply border-border;

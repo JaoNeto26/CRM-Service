@@ -26,6 +26,11 @@ export async function atualizarAgendamento(
     return data;
 }
 
+export async function atualizarStatusAgendamento(id: string, status: string): Promise<Agendamento> {
+    const { data } = await api.patch<Agendamento>(`/api/agenda/${id}/status`, { status });
+    return data;
+}
+
 export async function removerAgendamento(id: string): Promise<void> {
     await api.delete(`/api/agenda/${id}`);
 }

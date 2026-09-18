@@ -155,6 +155,7 @@ model Usuario {
   id            String         @id @default(cuid())
   name          String         @db.VarChar(255)
   email         String         @unique @db.VarChar(255)  // Email único por usuário
+  senha         String?        @db.VarChar(255)
   phone         String?        @db.VarChar(20)          // Contato opcional 
   active        Boolean        @default(true)           // Soft delete via ativação
   createdAt     DateTime       @default(now()) @map("created_at")
@@ -401,6 +402,9 @@ model Appointment {
   id                 String               @id @default(cuid())
   companyId          String               @map("company_id")                 // FK para Company
   customerId         String               @map("customer_id")                // FK para Customer
+  title              String?              @db.VarChar(160)
+  description        String?
+  durationMinutes    Int?                 @map("duration_minutes")
   startAt            DateTime             @map("start_at")                   // Início do agendamento
   endAt              DateTime             @map("end_at")                     // Fim do agendamento
   status             AppointmentStatus    @default(scheduled)                // Estado do agendamento

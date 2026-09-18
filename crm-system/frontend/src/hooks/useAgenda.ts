@@ -38,6 +38,18 @@ export function useAtualizarAgendamento() {
     });
 }
 
+export function useAtualizarStatusAgendamento() {
+    const queryClient = useQueryClient();
+
+    return useMutation({
+        mutationFn: ({ id, status }: { id: string; status: string }) =>
+            agendaService.atualizarStatusAgendamento(id, status),
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: agendaKeys.all });
+        },
+    });
+}
+
 export function useRemoverAgendamento() {
     const queryClient = useQueryClient();
 

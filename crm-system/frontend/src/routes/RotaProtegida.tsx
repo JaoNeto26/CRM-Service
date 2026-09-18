@@ -1,7 +1,7 @@
 import type { PropsWithChildren } from "react";
 import { Navigate } from "react-router";
 
-import { obterToken } from "frontend/src/services/api";
+import { obterToken } from "@/services/api";
 
 export function RotaProtegida({ children }: PropsWithChildren) {
     const token = obterToken();
