@@ -7,22 +7,22 @@
 
 */
 -- DropForeignKey
-ALTER TABLE "cliente" DROP CONSTRAINT "cliente_responsavelId_fkey";
+ALTER TABLE IF EXISTS "cliente" DROP CONSTRAINT IF EXISTS "cliente_responsavelId_fkey";
 
 -- DropForeignKey
-ALTER TABLE "negociacao" DROP CONSTRAINT "negociacao_clienteId_fkey";
+ALTER TABLE IF EXISTS "negociacao" DROP CONSTRAINT IF EXISTS "negociacao_clienteId_fkey";
 
 -- DropTable
-DROP TABLE "cliente";
+DROP TABLE IF EXISTS "cliente";
 
 -- DropTable
-DROP TABLE "negociacao";
+DROP TABLE IF EXISTS "negociacao";
 
 -- DropTable
-DROP TABLE "usuario";
+DROP TABLE IF EXISTS "usuario";
 
 -- DropEnum
-DROP TYPE "EtapaNegociacao";
+DROP TYPE IF EXISTS "EtapaNegociacao";
 
 -- DropEnum
-DROP TYPE "statusCliente";
+DROP TYPE IF EXISTS "statusCliente";

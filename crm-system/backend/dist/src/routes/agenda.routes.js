@@ -1,0 +1,12 @@
+import { Router } from "express";
+import { autenticar } from "../middlewares/auth";
+import { atualizar, atualizarStatus, buscarPorId, criar, listar, remover } from "../controllers/agenda.controller";
+const router = Router();
+router.use(autenticar);
+router.get("/", listar);
+router.post("/", criar);
+router.get("/:id", buscarPorId);
+router.put("/:id", atualizar);
+router.patch("/:id/status", atualizarStatus);
+router.delete("/:id", remover);
+export default router;

@@ -15,4 +15,4 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["npm", "run", "dev"]
+CMD ["sh", "-c", "npx prisma db push --accept-data-loss && npm run dev"]
