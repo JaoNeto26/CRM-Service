@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router";
 
 import { AgendaPage } from "@/pages/Agenda/AgendaPage";
 import { CadastroPage } from "@/pages/Cadastro/CadastroPage";
+import Calendar from "@/pages/calendar";
 import { DashboardPage } from "@/pages/Dashboard/DashboardPage";
 import { LoginPage } from "@/pages/login/LoginPage";
 import { RotaProtegida } from "@/routes/RotaProtegida";
@@ -25,6 +26,14 @@ export function App() {
                 element={
                     <RotaProtegida>
                         <AgendaPage />
+                    </RotaProtegida>
+                }
+            />
+            <Route
+                path="/calendar"
+                element={
+                    <RotaProtegida>
+                        <Calendar />
                     </RotaProtegida>
                 }
             />

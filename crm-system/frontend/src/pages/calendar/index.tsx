@@ -1,26 +1,11 @@
-import { useEffect, useState } from "react";
-import api from "../../services/api";
+import { useState } from "react";
+
+import { useAgendaLista } from "@/hooks/useAgenda";
+
 import "./style.css";
 
 function Calendar() {
-    const [appointments, setAppointments] = useState<any[]>([]);
-
-    async function fetchData() {
-        try {
-            const response = await api.get("/appointments");
-
-            console.log("DATA:", response.data);
-            console.log("É array?", Array.isArray(response.data));
-
-            setAppointments(response.data);
-        } catch (error) {
-            console.error("Error fetching data:", error);
-        }
-    }
-
-    useEffect(() => {
-        fetchData();
-    }, []);
+    const { data: appointments = [] } = useAgendaLista(true);
 
     // Calendar -------------------------------------------------
     const [currentDate, setCurrentDate] = useState(new Date());
@@ -41,7 +26,7 @@ function Calendar() {
 
     const selectedAppointments = appointments
         .filter(appointment => {
-            const appointmentDate = new Date(appointment.startAt);
+            const appointmentDate = new Date(appointment.dataHora);
 
             return (
                 appointmentDate.getDate() === selectedDate &&
@@ -52,7 +37,7 @@ function Calendar() {
         .sort((a, b) => {
             const statusOrder = ["scheduled", "waiting", "completed", "canceled"];
             if (a.status === b.status) {
-                return new Date(a.startAt).getTime() - new Date(b.startAt).getTime();
+                return new Date(a.dataHora).getTime() - new Date(b.dataHora).getTime();
             }
             return statusOrder.indexOf(a.status) - statusOrder.indexOf(b.status);
         });
@@ -160,13 +145,13 @@ function Calendar() {
                             <div key={appointment.id} className={"noted " + appointment.status}>
                                 <div className="hour">
                                     <h1>
-                                        {new Date(appointment.startAt).toLocaleTimeString("pt-BR", {
+                                        {new Date(appointment.dataHora).toLocaleTimeString("pt-BR", {
                                             hour: "2-digit",
                                             minute: "2-digit",
                                             timeZone: "UTC",
                                         })}
                                     h</h1>
-                                    <p>R$ {appointment.totalAmount},00</p>
+                                    <p>{appointment.duracaoMinutos} min</p>
                                 </div>
                                 <div className="noted-info">
                                     {appointment.status === "scheduled" ? (

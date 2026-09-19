@@ -10,7 +10,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import { PrismaPg } from "@prisma/adapter-pg";
 import cors from "cors";
 import express from "express";
-import { PrismaClient } from "../generated/prisma_client";
+import { PrismaClient } from "../generated/prisma_client/client.js";
 import authRoutes from "./routes/auth.routes";
 import relatoriosRoutes from "./routes/relatorios.routes";
 import agendaRoutes from "./routes/agenda.routes";

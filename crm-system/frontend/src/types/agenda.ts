@@ -1,5 +1,9 @@
-/** Enum real do backend: schemas/agendamento.schema.ts */
-export type StatusAgendamento = "AGENDADO" | "CONFIRMADO" | "CANCELADO" | "CONCLUIDO";
+/**
+ * Status reais do backend: AppointmentStatus no prisma/schema.prisma e
+ * STATUS_VALIDOS em services/agenda.service.ts. São minúsculos em inglês —
+ * as mesmas chaves que o CSS do calendar já usa nas classes .noted.
+ */
+export type StatusAgendamento = "scheduled" | "waiting" | "completed" | "cancelled";
 
 interface ResumoRelacionado {
     id: string;
@@ -7,10 +11,9 @@ interface ResumoRelacionado {
 }
 
 /**
- * Formato devolvido por GET /api/agenda (agenda.service.listar usa include
- * de cliente e responsavel com select { id, nome }).
- * Atencao: POST /api/agenda NAO faz include, entao o objeto recem-criado
- * vem sem cliente/responsavel — por isso sao opcionais.
+ * Formato devolvido por GET /api/agenda (o backend serializa Appointment
+ * para este shape em português via serializar()).
+ * Atenção: POST /api/agenda NÃO inclui cliente — por isso é opcional.
  */
 export interface Agendamento {
     id: string;
@@ -19,13 +22,10 @@ export interface Agendamento {
     dataHora: string; // ISO 8601
     duracaoMinutos: number;
     status: StatusAgendamento;
-    clienteId?: string | null;
-    responsavelId?: string | null;
     cliente?: ResumoRelacionado | null;
-    responsavel?: ResumoRelacionado | null;
 }
 
-/** Espelha criarAgendamentoSchema (.strict() — nao enviar campos extras) */
+/** Espelha criarAgendamentoSchema do backend */
 export interface CriarAgendamentoPayload {
     titulo: string;
     descricao?: string;
@@ -35,11 +35,18 @@ export interface CriarAgendamentoPayload {
     responsavelId?: string;
 }
 
-/** Espelha atualizarAgendamentoSchema */
+/** Espelha atualizarAgendamentoSchema do backend (PUT /api/agenda/:id) */
 export interface AtualizarAgendamentoPayload {
     titulo?: string;
     descricao?: string;
     dataHora?: string;
     duracaoMinutos?: number;
-    status?: StatusAgendamento;
 }
+
+/** Rótulos em português para exibição — o backend guarda em inglês. */
+export const ROTULO_STATUS: Record<StatusAgendamento, string> = {
+    scheduled: "Agendado",
+    waiting: "Aguardando",
+    completed: "Concluído",
+    cancelled: "Cancelado",
+};

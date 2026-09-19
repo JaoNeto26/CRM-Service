@@ -5,7 +5,7 @@ import {
     PaymentStatus,
     PrismaClient,
     SubscriptionStatus,
-} from "../generated/prisma_client";
+} from "../generated/prisma_client/client.js";
 
 import { PrismaPg } from "@prisma/adapter-pg";
 

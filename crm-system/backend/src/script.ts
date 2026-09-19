@@ -1,4 +1,4 @@
-import { Prisma } from '../generated/prisma_client';
+import { Prisma } from '../generated/prisma_client/client.js';
 import prisma from './lib/prisma';
 
 export const createUser = async (user: Prisma.UsuarioCreateInput) => {
